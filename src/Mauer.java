@@ -4,17 +4,14 @@ import javax.swing.JPanel;
 
 class Mauer extends JPanel {
 
-	public int x;
-	public int y;
-
-	public Mauer(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Mauer() {
 
 	}
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.fillRect(this.x, this.y, this.x, this.y);
+		for (int i = 0; i < 200; i = i + 20)
+			for (int j = 0; j < 200; j = j + 20)
+				g.fillRect(i, j, 10, 10);
 	}
 }
