@@ -1,12 +1,11 @@
 
-public class main {
-	//kaka
-	
-	// ich versuch das mal 
-	
-	//Booom Tokue
-	
-	// UA tot!!
-	
-	//Tobi leckt gerne und Tim hat fetisch auf TrackManiaNations
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Fenster();
+	}
+
 }
