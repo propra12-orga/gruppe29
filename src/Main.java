@@ -1,11 +1,10 @@
-
 public class Main {
+	private static int sizeX; // Breite des Fensters
+	private static int sizeY; // Hoehe des Fesnters
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		new Fenster();
+		sizeX = 640;
+		sizeY = 480;
+		new Fenster(sizeX, sizeY);
 	}
-
 }

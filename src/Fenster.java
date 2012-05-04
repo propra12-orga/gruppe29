@@ -3,17 +3,37 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Fenster {
+	private int width;
+	private int height;
 
-	public Fenster() {
+	// Constructor
+	public Fenster(int width, int height) {
+		width(width);
+		height(height);
 		JFrame f = new JFrame("Bomberman");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(600, 600);
+		f.setSize(width, height + 24);
 		JPanel p = new JPanel();
 		f.setContentPane(p);
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
-		p.add(new Mauer(10, 10));
-		p.add(new Mauer(200, 50));
-		p.add(new Mauer(1, 200));
+		p.add(new Mauer(width, height));
 		f.setVisible(true);
+	}
+
+	// getter and setter
+	public int width() {
+		return width;
+	}
+
+	public void width(int width) {
+		this.width = width;
+	}
+
+	public int height() {
+		return height;
+	}
+
+	public void height(int height) {
+		this.height = height;
 	}
 }
