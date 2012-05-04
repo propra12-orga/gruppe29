@@ -1,4 +1,6 @@
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Fenster {
 	private int width;
@@ -10,16 +12,12 @@ public class Fenster {
 		height(height);
 		JFrame f = new JFrame("Bomberman");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-<<<<<<< HEAD
 		f.setSize(width, height + 24);
 		JPanel p = new JPanel();
 		f.setContentPane(p);
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 		p.add(new Mauer(width, height));
-=======
-		f.setSize(200, 200);
-		f.add(new Mauer());
->>>>>>> a10cc734474e7797456bb44db863e52d31d47452
+		p.setSize(width, height);
 		f.setVisible(true);
 	}
 
