@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Fenster {
+
 	private int width;
 	private int height;
 
@@ -10,13 +11,19 @@ public class Fenster {
 	public Fenster(int width, int height) {
 		width(width);
 		height(height);
+		Spielfeld sp = new Spielfeld(width, height);
+
 		JFrame f = new JFrame("Bomberman");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(width, height + 24);
+
 		JPanel p = new JPanel();
 		f.setContentPane(p);
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
-		p.add(new Mauer(width, height));
+
+		p.add(sp);
+		f.addKeyListener(sp);
+
 		p.setSize(width, height);
 		f.setVisible(true);
 	}
