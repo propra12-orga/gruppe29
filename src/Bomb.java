@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Bomb extends GraphicObject {
-
+	// bombe
 	private int posX;
 	private int posY;
 	private int radius;
