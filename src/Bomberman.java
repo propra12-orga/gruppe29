@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Bomberman {
+public class Bomberman extends GraphicObject {
 
 	private int posX;
 	private int posY;
@@ -15,7 +15,7 @@ public class Bomberman {
 		setSteps(radius);
 	}
 
-	public void paintBomberman(Graphics g) {
+	public void paintObject(Graphics g) {
 		g.setColor(Color.red);
 		g.fillOval(this.posX, this.posY, radius, radius);
 	}

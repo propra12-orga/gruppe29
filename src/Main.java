@@ -5,6 +5,6 @@ public class Main {
 	public static void main(String[] args) {
 		sizeX = 640;
 		sizeY = 480;
-		new Fenster(sizeX, sizeY); // Fenster erstellen
+		new Fenster(sizeX, sizeY);
 	}
 }

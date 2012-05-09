@@ -10,37 +10,46 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-					- this.bm.getSteps()] != true) {
+			if ((this.bm.getPosY() - this.bm.getSteps() >= 0)
+					&& (this.raster[this.bm.getPosX()][this.bm.getPosY()
+							- this.bm.getSteps()] != true)) {
 				this.bm.moveUp();
 				repaint();
 				break;
 			} else
 				break;
 		case KeyEvent.VK_DOWN:
-			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-					+ this.bm.getSteps()] != true) {
+			if ((this.bm.getPosY() + this.bm.getSteps() < height - border)
+					&& (this.raster[this.bm.getPosX()][this.bm.getPosY()
+							+ this.bm.getSteps()] != true)) {
 				this.bm.moveDown();
 				repaint();
 				break;
 			} else
 				break;
 		case KeyEvent.VK_LEFT:
-			if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
-					.getPosY()] != true) {
+			if ((this.bm.getPosX() - this.bm.getSteps() >= 0)
+					&& (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
+							.getPosY()] != true)) {
 				this.bm.moveLeft();
 				repaint();
 				break;
 			} else
 				break;
 		case KeyEvent.VK_RIGHT:
-			if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
-					.getPosY()] != true) {
+			if ((this.bm.getPosX() + this.bm.getSteps() < width - border)
+					&& (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
+							.getPosY()] != true)) {
 				this.bm.moveRight();
 				repaint();
 				break;
 			} else
 				break;
+		case KeyEvent.VK_SPACE: {
+			this.bombs[0].setPosX(this.bm.getPosX());
+			this.bombs[0].setPosY(this.bm.getPosY());
+			this.bombs[0].setVisible(true);
+		}
 		default:
 			break;
 		}
@@ -66,6 +75,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	// Spielfeldobjekte
 	private Bomberman bm;
+	private Bomb[] bombs;
 
 	// Groesse der Bloecke
 	private int blockLength;
@@ -75,6 +85,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 		this.width = width;
 		findVariables();
 		this.bm = new Bomberman(width - border - field, border, blockLength);
+		this.bombs = new Bomb[10];
+		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 4);
 		this.raster = new boolean[width][height];
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
@@ -122,6 +134,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 		}
 
 		// Bomberman zeichnen
-		bm.paintBomberman(g);
+		bm.paintObject(g);
+		if (bombs[0].isVisible())
+			bombs[0].paintObject(g);
 	}
 }
