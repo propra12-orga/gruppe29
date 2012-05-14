@@ -83,7 +83,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public Spielfeld(int width, int height) {
 		this.height = height;
 		this.width = width;
-		findVariables();
+		findVariables(9);
 		this.bm = new Bomberman(width - border - field, border, blockLength);
 		this.bombs = new Bomb[10];
 		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 4);
@@ -93,34 +93,38 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.raster[i][j] = false;
 	}
 
-	private void findVariables() {
+	private void findVariables(int columns) {
 		int tmp = height;
-		while (tmp % 9 != 0) {
+		while (tmp % columns != 0) {
 			tmp -= 10;
 		}
 		field = tmp;
-		blockLength = field / 9;
+		blockLength = field / columns;
 		border = (height - field) / 2;
 	}
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// Rand zeichnen
+		// oben
 		g.fillRect(0, 0, width, border);
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < border; j++)
 				this.raster[i][j] = true;
+		// unten
 		g.fillRect(0, height - border, width, border);
 		for (int i = 0; i < width; i++)
 			for (int j = height - border; j < border; j++)
 				this.raster[i][j] = true;
+		// rechts
 		g.fillRect(width - border, border, border, height);
 		for (int i = width - border; i < border; i++)
 			for (int j = border; j < height; j++)
 				this.raster[i][j] = true;
-		g.fillRect(0, border, width - border - field, height - 2 * border);
+		// links
+		g.fillRect(0, border, width - border - field, height - border);
 		for (int i = 0; i < width - border - field; i++)
-			for (int j = border; j < height - 2 * border; j++)
+			for (int j = border; j < height - border; j++)
 				this.raster[i][j] = true;
 
 		// Blöcke zeichnen
