@@ -53,6 +53,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 			this.bombs[0].setPosX(this.bm.getPosX());
 			this.bombs[0].setPosY(this.bm.getPosY());
 			this.bombs[0].setVisible(true);
+			repaint();
+			break;
 		}
 		default:
 			break;
@@ -121,7 +123,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			for (int j = height - border; j < border; j++)
 				this.raster[i][j] = true;
 		// rechts
-		g.fillRect(width - border, border, border, height);
+		g.fillRect(width - border, border, border, height - border);
 		for (int i = width - border; i < border; i++)
 			for (int j = border; j < height; j++)
 				this.raster[i][j] = true;

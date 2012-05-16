@@ -18,7 +18,7 @@ public class Fenster {
 
 		JFrame f = new JFrame("Bomberman");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(width, height + 24);
+		f.setSize(width, height + 29 + 17);
 
 		JPanel p = new JPanel();
 		f.setContentPane(p);
@@ -31,7 +31,6 @@ public class Fenster {
 		f.setVisible(true);
 
 		// MENUEBAR
-
 		JMenuBar menueLeiste = new JMenuBar();
 		JMenu menue = new JMenu("Exit");
 		JMenuItem beenden = new JMenuItem("beenden");
