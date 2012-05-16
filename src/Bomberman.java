@@ -12,7 +12,7 @@ public class Bomberman extends JLabel {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
-		this.setIcon(new ImageIcon("Bomberman.png"));
+		this.setIcon(new ImageIcon("Bomberman.png")); // Bild laden
 		setSteps(radius);
 	}
 
