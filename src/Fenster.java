@@ -1,10 +1,5 @@
-import java.awt.BorderLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Fenster {
@@ -34,12 +29,12 @@ public class Fenster {
 
 		// MENUEBAR
 
-		JMenuBar menueLeiste = new JMenuBar();
-		JMenu menue = new JMenu("Exit");
-		JMenuItem beenden = new JMenuItem("beenden");
-		menueLeiste.add(menue, BorderLayout.NORTH);
-		menue.add(beenden);
-		f.add(menueLeiste, BorderLayout.NORTH);
+		// JMenuBar menueLeiste = new JMenuBar();
+		// JMenu menue = new JMenu("Exit");
+		// JMenuItem beenden = new JMenuItem("beenden");
+		// menueLeiste.add(menue, BorderLayout.NORTH);
+		// menue.add(beenden);
+		// f.add(menueLeiste, BorderLayout.NORTH);
 		// f.setJMenuBar(menueLeiste);
 	}
 
