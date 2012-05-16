@@ -1,7 +1,7 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-public class Bomberman extends GraphicObject {
+public class Bomberman extends JLabel {
 
 	private int posX;
 	private int posY;
@@ -12,12 +12,16 @@ public class Bomberman extends GraphicObject {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
+		this.setIcon(new ImageIcon("Bomberman.png"));
 		setSteps(radius);
 	}
 
-	public void paintObject(Graphics g) {
-		g.setColor(Color.red);
-		g.fillOval(this.posX, this.posY, radius, radius);
+	public void paintObject() {
+		this.setBounds(this.posX, this.posY, this.radius, this.radius);
+		/*
+		 * g.setColor(Color.red); g.fillOval(this.posX, this.posY, radius,
+		 * radius);
+		 */
 	}
 
 	public void moveUp() {

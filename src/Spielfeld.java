@@ -15,6 +15,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 							- this.bm.getSteps()] != true)) {
 				this.bm.moveUp();
 				repaint();
+				this.bm.paintObject();
 				break;
 			} else
 				break;
@@ -24,6 +25,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 							+ this.bm.getSteps()] != true)) {
 				this.bm.moveDown();
 				repaint();
+				this.bm.paintObject();
 				break;
 			} else
 				break;
@@ -33,6 +35,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 							.getPosY()] != true)) {
 				this.bm.moveLeft();
 				repaint();
+				this.bm.paintObject();
 				break;
 			} else
 				break;
@@ -42,6 +45,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 							.getPosY()] != true)) {
 				this.bm.moveRight();
 				repaint();
+				this.bm.paintObject();
 				break;
 			} else
 				break;
@@ -138,7 +142,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 		}
 
 		// Bomberman zeichnen
-		bm.paintObject(g);
+
+		bm.paintObject();
+		this.add(this.bm);
 		if (bombs[0].isVisible())
 			bombs[0].paintObject(g);
 	}
