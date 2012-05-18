@@ -79,7 +79,7 @@ public class Fenster implements ActionListener {
 		this.height = height;
 	}
 
-	private void restart() {
+	void restart() {
 		sp = new Spielfeld(width, height);
 		initFrame();
 	}
