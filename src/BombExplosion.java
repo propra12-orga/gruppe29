@@ -16,12 +16,12 @@ public class BombExplosion extends TimerTask {
 	public void run() {
 		bomb.setExploded(true);
 		System.out.println("Bombe gezündet!");
-		if ((this.bm.getPosX() + this.bm.getSteps() == this.bomb.getPosX())
-				|| ((this.bm.getPosX() - this.bm.getSteps() == this.bomb
+		if ((this.bm.getPosX() + this.bm.getSteps() - 1 == this.bomb.getPosX())
+				|| ((this.bm.getPosX() - this.bm.getSteps() + 1 == this.bomb
 						.getPosX()))
-				|| (this.bm.getPosY() + this.bm.getSteps() == this.bomb
+				|| (this.bm.getPosY() + this.bm.getSteps() - 1 == this.bomb
 						.getPosY())
-				|| (this.bm.getPosY() - this.bm.getSteps() == this.bomb
+				|| (this.bm.getPosY() - this.bm.getSteps() + 1 == this.bomb
 						.getPosY())
 				|| ((this.bm.getPosX() == this.bomb.getPosX()) && (this.bm
 						.getPosY() == this.bomb.getPosY()))) {
