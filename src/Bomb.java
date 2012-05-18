@@ -21,9 +21,12 @@ public class Bomb extends GraphicObject {
 		this.exploded = false;
 	}
 
-	public void explode() {
+	public void explode(Spielfeld sp) {
 		Timer t = new Timer();
-		t.schedule(new BombExplosion(this), 2000);
+		t.schedule(new BombExplosion(this, sp), 2000);
+
+		t.schedule(new BombUnExplosion(this, sp), 4000);
+
 	}
 
 	public boolean isExploded() {
@@ -70,6 +73,13 @@ public class Bomb extends GraphicObject {
 	public void paintObject(Graphics g) {
 		g.setColor(Color.black);
 		g.fillOval(posX, posY, radius, radius);
-	}
+		if (isExploded()) {
+			g.setColor(Color.orange);
+			g.fillOval(posX - explosionRadius, posY, radius, radius);
+			g.fillOval(posX + explosionRadius, posY, radius, radius);
+			g.fillOval(posX, posY - explosionRadius, radius, radius);
+			g.fillOval(posX, posY + explosionRadius, radius, radius);
+		}
 
+	}
 }

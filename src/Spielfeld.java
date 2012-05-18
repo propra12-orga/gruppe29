@@ -54,11 +54,12 @@ public class Spielfeld extends JPanel implements KeyListener {
 			} else
 				break;
 		case KeyEvent.VK_SPACE: {
-			if (!bombs[0].isVisible()) {
-				this.bombs[0].setPosX(this.bm.getPosX());
-				this.bombs[0].setPosY(this.bm.getPosY());
-				this.bombs[0].setVisible(true);
-				this.bombs[0].explode();
+			if (!this.bomb.isVisible()) {
+				this.bomb.setPosX(this.bm.getPosX());
+				this.bomb.setPosY(this.bm.getPosY());
+				this.bomb.setVisible(true);
+				repaint();
+				this.bomb.explode(this);
 				repaint();
 			}
 			break;
@@ -88,7 +89,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	// Spielfeldobjekte
 	private Bomberman bm;
-	private Bomb[] bombs;
+	private Bomb bomb;
 
 	// Groesse der Bloecke
 	private int blockLength;
@@ -98,8 +99,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		this.width = width;
 		findVariables(13);
 		this.bm = new Bomberman(width - border - field, border, blockLength);
-		this.bombs = new Bomb[10];
-		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 1);
+		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
 		this.raster = new boolean[width][height];
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
@@ -167,10 +167,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 		// - blockLength, blockLength - 1, blockLength - 1);
 
 		// Bomberman zeichnen
-
 		bm.paintObject();
 		this.add(this.bm);
-		if (bombs[0].isVisible())
-			bombs[0].paintObject(g);
+		if (bomb.isVisible())
+			this.bomb.paintObject(g);
 	}
 }
