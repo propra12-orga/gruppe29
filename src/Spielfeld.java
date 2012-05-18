@@ -150,6 +150,11 @@ public class Spielfeld extends JPanel implements KeyListener {
 		g.setColor(Color.blue);
 		g.drawOval(width - border - blockLength, height - border - blockLength,
 				blockLength - 1, blockLength - 1);
+		// JLabel ausgang = new JLabel();
+		// ausgang.setIcon(new ImageIcon("ausgang.png"));
+		// ausgang.paintImmediately(width - border - blockLength, height -
+		// border
+		// - blockLength, blockLength - 1, blockLength - 1);
 
 		// Bomberman zeichnen
 
