@@ -9,7 +9,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Fenster implements ActionListener {
-
+	private JFrame f;
+	private JPanel p;
+	private Spielfeld sp;
 	private int width;
 	private int height;
 
@@ -17,13 +19,16 @@ public class Fenster implements ActionListener {
 	public Fenster(int width, int height) {
 		width(width);
 		height(height);
-		Spielfeld sp = new Spielfeld(width, height);
+		sp = new Spielfeld(width, height);
+		initFrame();
+	}
 
-		JFrame f = new JFrame("Bomberman");
+	private void initFrame() {
+		f = new JFrame("Bomberman");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(width, height + 29 + 17);
 
-		JPanel p = new JPanel();
+		p = new JPanel();
 		f.setContentPane(p);
 		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 
@@ -31,11 +36,15 @@ public class Fenster implements ActionListener {
 		f.addKeyListener(sp);
 
 		p.setSize(width, height);
+		initMenue();
+		f.setVisible(true);
+	}
 
+	private void initMenue() {
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
-		JMenu menue = new JMenu("Exit");
-		JMenuItem beenden = new JMenuItem("beenden");
+		JMenu menue = new JMenu("NICHT DRUECKEN!!!!");
+		JMenuItem beenden = new JMenuItem("Beenden");
 		beenden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				System.exit(0);
@@ -44,13 +53,13 @@ public class Fenster implements ActionListener {
 		JMenuItem start = new JMenuItem("Neues Spiel");
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				restart();
 			}
 		});
 		menueLeiste.add(menue);
 		menue.add(start);
 		menue.add(beenden);
 		f.setJMenuBar(menueLeiste);
-		f.setVisible(true);
 	}
 
 	// getter and setter
@@ -68,6 +77,11 @@ public class Fenster implements ActionListener {
 
 	public void height(int height) {
 		this.height = height;
+	}
+
+	private void restart() {
+		sp = new Spielfeld(width, height);
+		initFrame();
 	}
 
 	@Override
