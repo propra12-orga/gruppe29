@@ -47,8 +47,8 @@ public class Fenster implements ActionListener {
 			}
 		});
 		menueLeiste.add(menue);
-		menue.add(beenden);
 		menue.add(start);
+		menue.add(beenden);
 		f.setJMenuBar(menueLeiste);
 		f.setVisible(true);
 	}
