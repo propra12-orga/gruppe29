@@ -27,9 +27,11 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.moveDown();
 				repaint();
 				this.bm.paintObject();
-				break;
-			} else
-				break;
+			} else if ((this.bm.getPosY() + this.bm.getSteps()) >= (height - border)) {
+				System.exit(0);
+			}
+			break;
+
 		case KeyEvent.VK_LEFT:
 			if ((this.bm.getPosX() - this.bm.getSteps() >= 0)
 					&& (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
@@ -146,10 +148,17 @@ public class Spielfeld extends JPanel implements KeyListener {
 						this.raster[i + k][j + l] = true;
 			}
 		}
-		// Ausgang zeichnen
-		g.setColor(Color.blue);
-		g.drawOval(width - border - blockLength, height - border - blockLength,
-				blockLength - 1, blockLength - 1);
+
+		// Ausgang
+		g.setColor(Color.BLUE);
+		g.fillRect(width - border - blockLength, height - border, blockLength,
+				border);
+
+		// // Ausgang zeichnen
+		// g.setColor(Color.blue);
+		// g.drawOval(width - border - blockLength, height - border -
+		// blockLength,
+		// blockLength - 1, blockLength - 1);
 		// JLabel ausgang = new JLabel();
 		// ausgang.setIcon(new ImageIcon("ausgang.png"));
 		// ausgang.paintImmediately(width - border - blockLength, height -
