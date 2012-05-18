@@ -59,7 +59,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bomb.setPosY(this.bm.getPosY());
 				this.bomb.setVisible(true);
 				repaint();
-				this.bomb.explode(this);
+				this.bomb.explode(this, this.bm);
 				repaint();
 			}
 			break;
