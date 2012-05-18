@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -5,7 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class Fenster {
+public class Fenster implements ActionListener {
 
 	private int width;
 	private int height;
@@ -34,8 +37,19 @@ public class Fenster {
 		JMenuBar menueLeiste = new JMenuBar();
 		JMenu menue = new JMenu("Exit");
 		JMenuItem beenden = new JMenuItem("beenden");
+		beenden.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				System.exit(0);
+			}
+		});
+		JMenuItem start = new JMenuItem("Neues Spiel");
+		start.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+			}
+		});
 		menueLeiste.add(menue);
 		menue.add(beenden);
+		menue.add(start);
 		f.setJMenuBar(menueLeiste);
 	}
 
@@ -54,5 +68,11 @@ public class Fenster {
 
 	public void height(int height) {
 		this.height = height;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
