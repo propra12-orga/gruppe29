@@ -31,7 +31,6 @@ public class Fenster implements ActionListener {
 		f.addKeyListener(sp);
 
 		p.setSize(width, height);
-		f.setVisible(true);
 
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
@@ -51,6 +50,7 @@ public class Fenster implements ActionListener {
 		menue.add(beenden);
 		menue.add(start);
 		f.setJMenuBar(menueLeiste);
+		f.setVisible(true);
 	}
 
 	// getter and setter

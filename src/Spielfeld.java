@@ -93,7 +93,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public Spielfeld(int width, int height) {
 		this.height = height;
 		this.width = width;
-		findVariables(9);
+		findVariables(13);
 		this.bm = new Bomberman(width - border - field, border, blockLength);
 		this.bombs = new Bomb[10];
 		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 1);
