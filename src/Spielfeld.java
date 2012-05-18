@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -142,6 +143,10 @@ public class Spielfeld extends JPanel implements KeyListener {
 						this.raster[i + k][j + l] = true;
 			}
 		}
+		// Ausgang zeichnen
+		g.setColor(Color.blue);
+		g.drawOval(width - border - blockLength, height - border - blockLength,
+				blockLength - 1, blockLength - 1);
 
 		// Bomberman zeichnen
 
