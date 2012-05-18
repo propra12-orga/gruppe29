@@ -28,6 +28,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 				repaint();
 				this.bm.paintObject();
 			} else if ((this.bm.getPosY() + this.bm.getSteps()) >= (height - border)) {
+				Main.f.dispose();
 				Main.f.restart();
 			}
 			break;

@@ -53,6 +53,7 @@ public class Fenster implements ActionListener {
 		JMenuItem start = new JMenuItem("Neues Spiel");
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				f.dispose();
 				restart();
 			}
 		});
@@ -82,6 +83,10 @@ public class Fenster implements ActionListener {
 	void restart() {
 		sp = new Spielfeld(width, height);
 		initFrame();
+	}
+
+	public void dispose() {
+		f.dispose();
 	}
 
 	@Override
