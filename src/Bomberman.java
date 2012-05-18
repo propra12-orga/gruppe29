@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,7 +14,10 @@ public class Bomberman extends JLabel {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
-		this.setIcon(new ImageIcon("Bomberman.png")); // Bild laden
+		ImageIcon ico = new ImageIcon("Bomberman.png");
+		ico.setImage(ico.getImage().getScaledInstance(radius, radius,
+				Image.SCALE_DEFAULT));
+		this.setIcon(ico);
 		setSteps(radius);
 	}
 

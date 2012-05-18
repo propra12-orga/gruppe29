@@ -3,8 +3,8 @@ public class Main {
 	private static int sizeY; // Hoehe des Fesnters
 
 	public static void main(String[] args) {
-		sizeX = 640;
-		sizeY = 480;
+		sizeX = 530;
+		sizeY = 531;
 		new Fenster(sizeX, sizeY);
 	}
 }
