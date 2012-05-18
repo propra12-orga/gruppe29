@@ -43,7 +43,7 @@ public class Fenster implements ActionListener {
 	private void initMenue() {
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
-		JMenu menue = new JMenu("NICHT DRUECKEN!!!!");
+		JMenu menue = new JMenu("Optionen");
 		JMenuItem beenden = new JMenuItem("Beenden");
 		beenden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
