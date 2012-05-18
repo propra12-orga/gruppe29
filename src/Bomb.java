@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Timer;
 
 public class Bomb extends GraphicObject {
 	// bombe
@@ -8,6 +9,7 @@ public class Bomb extends GraphicObject {
 	private int radius;
 	private int explosionRadius;
 	private boolean visible;
+	private boolean exploded;
 
 	public Bomb(int posX, int posY, int radius, int explosionRadius) {
 		super();
@@ -16,6 +18,20 @@ public class Bomb extends GraphicObject {
 		this.radius = radius;
 		this.explosionRadius = explosionRadius;
 		this.visible = false;
+		this.exploded = false;
+	}
+
+	public void explode() {
+		Timer t = new Timer();
+		t.schedule(new BombExplosion(this), 2000);
+	}
+
+	public boolean isExploded() {
+		return exploded;
+	}
+
+	public void setExploded(boolean exploded) {
+		this.exploded = exploded;
 	}
 
 	public boolean isVisible() {

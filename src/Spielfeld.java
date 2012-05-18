@@ -51,10 +51,13 @@ public class Spielfeld extends JPanel implements KeyListener {
 			} else
 				break;
 		case KeyEvent.VK_SPACE: {
-			this.bombs[0].setPosX(this.bm.getPosX());
-			this.bombs[0].setPosY(this.bm.getPosY());
-			this.bombs[0].setVisible(true);
-			repaint();
+			if (!bombs[0].isVisible()) {
+				this.bombs[0].setPosX(this.bm.getPosX());
+				this.bombs[0].setPosY(this.bm.getPosY());
+				this.bombs[0].setVisible(true);
+				this.bombs[0].explode();
+				repaint();
+			}
 			break;
 		}
 		default:
@@ -93,7 +96,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		findVariables(9);
 		this.bm = new Bomberman(width - border - field, border, blockLength);
 		this.bombs = new Bomb[10];
-		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 4);
+		this.bombs[0] = new Bomb(0, 0, this.bm.getRadius(), 1);
 		this.raster = new boolean[width][height];
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
