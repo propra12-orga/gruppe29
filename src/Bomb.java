@@ -69,6 +69,14 @@ public class Bomb extends GraphicObject {
 		this.radius = radius;
 	}
 
+	public int getExplosionRadius() {
+		return explosionRadius;
+	}
+
+	public void setExplosionRadius(int explosionRadius) {
+		this.explosionRadius = explosionRadius;
+	}
+
 	@Override
 	public void paintObject(Graphics g) {
 		g.setColor(Color.black);
