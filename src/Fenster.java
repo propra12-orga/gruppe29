@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -69,6 +70,14 @@ public class Fenster implements ActionListener {
 				JLabel marie = new JLabel(
 						"<html><body><br>Dieses unglaublich gute Projekt<br> wurde geschrieben von:<br><br>Marie Arsoy<br>Moritz Kanzler<br>Küps<br>Sascha Kuhnke<br>Tim Fischer</body></html>");
 				panel.add(marie);
+				JButton close = new JButton("Schließen");
+				close.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(
+							java.awt.event.ActionEvent object) {
+						f.dispose();
+					}
+				});
+				panel.add(close);
 				f.add(panel);
 				f.setVisible(true);
 			}
