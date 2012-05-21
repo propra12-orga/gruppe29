@@ -63,7 +63,7 @@ public class Fenster implements ActionListener {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f = new JFrame("Credits");
 				f.setLocation(150, 150);
-				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				f.setSize(300, 200);
 				JPanel panel = new JPanel();
 				JLabel marie = new JLabel(
