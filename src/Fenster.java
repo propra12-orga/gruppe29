@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -57,8 +58,24 @@ public class Fenster implements ActionListener {
 				restart();
 			}
 		});
+		JMenuItem credits = new JMenuItem("Credits");
+		credits.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				f = new JFrame("Credits");
+				f.setLocation(150, 150);
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(300, 200);
+				JPanel panel = new JPanel();
+				JLabel marie = new JLabel(
+						"<html><body><br>Dieses unglaublich gute Projekt<br> wurde geschrieben von:<br><br>Marie Arsoy<br>Moritz Kanzler<br>Küps<br>Sascha Kuhnke<br>Tim Fischer</body></html>");
+				panel.add(marie);
+				f.add(panel);
+				f.setVisible(true);
+			}
+		});
 		menueLeiste.add(menue);
 		menue.add(start);
+		menue.add(credits);
 		menue.add(beenden);
 		f.setJMenuBar(menueLeiste);
 	}
