@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 public class Fenster implements ActionListener {
 	private JFrame f;
+	private JFrame fc;
 	private JPanel p;
 	private Spielfeld sp;
 	private int width;
@@ -62,24 +63,25 @@ public class Fenster implements ActionListener {
 		JMenuItem credits = new JMenuItem("Credits");
 		credits.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				f = new JFrame("Credits");
-				f.setLocation(150, 150);
-				f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				f.setSize(300, 200);
+				fc = new JFrame("Credits");
+				fc.setLocation((f.getWidth() - fc.getSize().width) / 2,
+						(f.getHeight() - fc.getSize().height) / 2);
+				fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				fc.setSize(300, 200);
 				JPanel panel = new JPanel();
-				JLabel marie = new JLabel(
-						"<html><body><br>Dieses unglaublich gute Projekt<br> wurde geschrieben von:<br><br>Marie Arsoy<br>Moritz Kanzler<br>Küps<br>Sascha Kuhnke<br>Tim Fischer</body></html>");
-				panel.add(marie);
+				JLabel namen = new JLabel(
+						"<html><body><br>Dieses unglaublich gute Projekt<br> wurde geschrieben von:<br><br>Marie Arsoy<br>Moritz Kanzler<br>Tobias Küper<br>Sascha Kuhnke<br>Tim Fischer<br></body></html>");
+				panel.add(namen);
 				JButton close = new JButton("Schließen");
 				close.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(
 							java.awt.event.ActionEvent object) {
-						f.dispose();
+						fc.dispose();
 					}
 				});
 				panel.add(close);
-				f.add(panel);
-				f.setVisible(true);
+				fc.add(panel);
+				fc.setVisible(true);
 			}
 		});
 		menueLeiste.add(menue);
