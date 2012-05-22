@@ -23,9 +23,8 @@ public class Bomb extends GraphicObject {
 
 	public void explode(Spielfeld sp, Bomberman man) {
 		Timer t = new Timer();
-		t.schedule(new BombExplosion(this, sp, man), 2000);
-
-		t.schedule(new BombUnExplosion(this, sp), 4000);
+		t.schedule(new BombExplosion(this, sp, man), 1000);
+		t.schedule(new BombUnExplosion(this, sp), 1500);
 
 	}
 

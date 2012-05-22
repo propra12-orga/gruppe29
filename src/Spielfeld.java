@@ -58,6 +58,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			if (!this.bomb.isVisible()) {
 				this.bomb.setPosX(this.bm.getPosX());
 				this.bomb.setPosY(this.bm.getPosY());
+				this.raster[this.bomb.getPosX()][this.bomb.getPosY()] = true;
 				this.bomb.setVisible(true);
 				repaint();
 				this.bomb.explode(this, this.bm);
@@ -86,7 +87,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	private int field; // laenge des spielfelds
 
 	// Spielraster
-	private boolean[][] raster;
+	public boolean[][] raster;
 
 	// Spielfeldobjekte
 	private Bomberman bm;

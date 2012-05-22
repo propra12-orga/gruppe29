@@ -15,6 +15,7 @@ public class BombUnExplosion extends TimerTask {
 		bomb.setExploded(false);
 		bomb.setVisible(false);
 		System.out.println("Bombe abgefackelt!");
+		sp.raster[bomb.getPosX()][bomb.getPosY()] = false;
 		sp.repaint();
 	}
 
