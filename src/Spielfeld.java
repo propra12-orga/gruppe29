@@ -158,6 +158,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	// 2-Spielermodus
 	public boolean two_player;
 
+	// konstruktor
 	public Spielfeld(int width, int height) {
 		this.height = height;
 		this.width = width;
