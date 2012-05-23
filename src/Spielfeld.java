@@ -55,15 +55,73 @@ public class Spielfeld extends JPanel implements KeyListener {
 			} else
 				break;
 		case KeyEvent.VK_SPACE: {
-			if (!this.bomb.isVisible()) {
-				this.bomb.setPosX(this.bm.getPosX());
-				this.bomb.setPosY(this.bm.getPosY());
-				this.raster[this.bomb.getPosX()][this.bomb.getPosY()] = true;
-				this.bomb.setVisible(true);
+			int n = this.bm.getNewBombIndex();
+			this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs.get(n)
+					.getPosY()] = true;
+			this.bm.bombs.get(n).setVisible(true);
+			repaint();
+			if (two_player)
+				this.bm.bombs.get(n).explode(this, this.bm, this.bm2);
+			else
+				this.bm.bombs.get(n).explode(this, this.bm);
+			repaint();
+			break;
+		}
+		case KeyEvent.VK_W: {
+			if ((this.bm2.getPosY() - this.bm2.getSteps() >= 0)
+					&& (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+							- this.bm2.getSteps()] != true)) {
+				this.bm2.moveUp();
 				repaint();
-				this.bomb.explode(this, this.bm);
+				this.bm2.paintObject();
+				break;
+			} else
+				break;
+		}
+		case KeyEvent.VK_S: {
+			if ((this.bm2.getPosY() + this.bm2.getSteps() < height - border)
+					&& (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+							+ this.bm2.getSteps()] != true)) {
+				this.bm2.moveDown();
 				repaint();
+				this.bm2.paintObject();
+			} else if ((this.bm2.getPosY() + this.bm2.getSteps()) >= (height - border)
+					&& this.bm2.getPosX() + this.bm2.getSteps() >= (width - border)) {
+				Main.f.dispose();
+				Main.f.restart();
 			}
+			break;
+		}
+		case KeyEvent.VK_A: {
+			if ((this.bm2.getPosX() - this.bm2.getSteps() >= 0)
+					&& (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
+							.getPosY()] != true)) {
+				this.bm2.moveLeft();
+				repaint();
+				this.bm2.paintObject();
+				break;
+			} else
+				break;
+		}
+		case KeyEvent.VK_D: {
+			if ((this.bm2.getPosX() + this.bm2.getSteps() < width - border)
+					&& (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
+							.getPosY()] != true)) {
+				this.bm2.moveRight();
+				repaint();
+				this.bm2.paintObject();
+				break;
+			} else
+				break;
+		}
+		case KeyEvent.VK_Q: {
+			int n = this.bm2.getNewBombIndex();
+			this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs.get(n)
+					.getPosY()] = true;
+			this.bm2.bombs.get(n).setVisible(true);
+			repaint();
+			this.bm2.bombs.get(n).explode(this, this.bm2, this.bm);
+			repaint();
 			break;
 		}
 		default:
@@ -91,14 +149,19 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	// Spielfeldobjekte
 	private Bomberman bm;
+	private Bomberman bm2;
 	private Bomb bomb;
 
 	// Groesse der Bloecke
 	private int blockLength;
 
+	// 2-Spielermodus
+	public boolean two_player;
+
 	public Spielfeld(int width, int height) {
 		this.height = height;
 		this.width = width;
+		this.two_player = false;
 		findVariables(13);
 		this.bm = new Bomberman(width - border - field, border, blockLength);
 		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
@@ -106,6 +169,12 @@ public class Spielfeld extends JPanel implements KeyListener {
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
 				this.raster[i][j] = false;
+	}
+
+	public void mehrspielermodus() {
+		this.bm2 = new Bomberman(width - border - blockLength, height - border
+				- blockLength, blockLength);
+		this.two_player = true;
 	}
 
 	private void findVariables(int columns) {
@@ -171,7 +240,22 @@ public class Spielfeld extends JPanel implements KeyListener {
 		// Bomberman zeichnen
 		bm.paintObject();
 		this.add(this.bm);
-		if (bomb.isVisible())
-			this.bomb.paintObject(g);
+
+		if (bm2 != null) {
+			bm2.paintObject();
+			this.add(this.bm2);
+		}
+
+		for (int i = 0; i < this.bm.bombs.size(); i++)
+			if (this.bm.bombs.get(i) != null
+					&& this.bm.bombs.get(i).isVisible())
+				this.bm.bombs.get(i).paintObject(g);
+
+		if (bm2 != null) {
+			for (int i = 0; i < this.bm2.bombs.size(); i++)
+				if (this.bm2.bombs.get(i) != null
+						&& this.bm2.bombs.get(i).isVisible())
+					this.bm2.bombs.get(i).paintObject(g);
+		}
 	}
 }

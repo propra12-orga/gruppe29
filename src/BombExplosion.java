@@ -4,12 +4,19 @@ public class BombExplosion extends TimerTask {
 
 	private Bomb bomb;
 	private Spielfeld sp;
-	Bomberman bm;
+	Bomberman bm, bm2;
 
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man) {
 		this.bomb = b;
 		this.sp = sp;
 		this.bm = man;
+	}
+
+	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man, Bomberman man2) {
+		this.bomb = b;
+		this.sp = sp;
+		this.bm = man;
+		this.bm2 = man2;
 	}
 
 	@Override
@@ -38,6 +45,32 @@ public class BombExplosion extends TimerTask {
 			// .getPosY() == this.bomb.getPosY())))
 			Main.f.dispose();
 			Main.f.restart();
+		}
+		if (this.bm2 != null) {
+			if ((this.bm2.getPosX() >= (this.bomb.getPosX() - this.bomb
+					.getExplosionRadius()))
+					&& (this.bm2.getPosX() <= (this.bomb.getPosX() + this.bomb
+							.getExplosionRadius()) && (this.bm2.getPosY() == this.bomb
+							.getPosY()))
+					|| ((this.bm2.getPosY() >= (this.bomb.getPosY() - this.bomb
+							.getExplosionRadius()))
+							&& (this.bm2.getPosY() <= (this.bomb.getPosY() + this.bomb
+									.getExplosionRadius())) && (this.bm2
+							.getPosX() == this.bomb.getPosX()))) {
+				// (this.bm2.getPosX() + this.bm2.getSteps() - 1 ==
+				// this.bomb.getPosX())
+				// || ((this.bm2.getPosX() - this.bm2.getSteps() + 1 ==
+				// this.bomb
+				// .getPosX()))
+				// || (this.bm2.getPosY() + this.bm2.getSteps() - 1 == this.bomb
+				// .getPosY())
+				// || (this.bm2.getPosY() - this.bm2.getSteps() + 1 == this.bomb
+				// .getPosY())
+				// || ((this.bm2.getPosX() == this.bomb.getPosX()) && (this.bm2
+				// .getPosY() == this.bomb.getPosY())))
+				Main.f.dispose();
+				Main.f.restart();
+			}
 		}
 		sp.repaint();
 	}

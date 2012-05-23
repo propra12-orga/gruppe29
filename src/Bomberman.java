@@ -1,4 +1,6 @@
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -10,15 +12,26 @@ public class Bomberman extends JLabel {
 	private int radius;
 	private int steps;
 
+	public List<Bomb> bombs;
+	public int counter;
+
 	public Bomberman(int posX, int posY, int radius) {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
+		this.bombs = new ArrayList<Bomb>();// (0, 0, this.radius, this.radius);
+		this.counter = 0;
 		ImageIcon ico = new ImageIcon("Bomberman.png");
 		ico.setImage(ico.getImage().getScaledInstance(radius, radius,
 				Image.SCALE_DEFAULT));
 		this.setIcon(ico);
 		setSteps(radius);
+	}
+
+	public int getNewBombIndex() {
+		Bomb bomb = new Bomb(this.posX, this.posY, this.radius, this.radius);
+		this.bombs.add(bomb);
+		return this.bombs.lastIndexOf(bomb);
 	}
 
 	public void paintObject() {

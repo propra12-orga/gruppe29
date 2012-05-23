@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -84,8 +85,17 @@ public class Fenster implements ActionListener {
 				fc.setVisible(true);
 			}
 		});
+		JMenuItem mehrspieler = new JMenuItem("2-Spieler-Modus");
+		mehrspieler.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				f.dispose();
+				restart();
+				sp.mehrspielermodus();
+			}
+		});
 		menueLeiste.add(menue);
 		menue.add(start);
+		menue.add(mehrspieler);
 		menue.add(credits);
 		menue.add(beenden);
 		f.setJMenuBar(menueLeiste);
@@ -114,6 +124,13 @@ public class Fenster implements ActionListener {
 	}
 
 	public void dispose() {
+		f.dispose();
+	}
+
+	public void dispose(boolean two_player) {
+		JDialog dialog = new JDialog(f);
+		dialog.setTitle("Gay Over");
+		dialog.setVisible(true);
 		f.dispose();
 	}
 

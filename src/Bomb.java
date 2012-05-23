@@ -28,6 +28,13 @@ public class Bomb extends GraphicObject {
 
 	}
 
+	public void explode(Spielfeld sp, Bomberman man, Bomberman man2) {
+		Timer t = new Timer();
+		t.schedule(new BombExplosion(this, sp, man, man2), 1000);
+		t.schedule(new BombUnExplosion(this, sp), 1500);
+
+	}
+
 	public boolean isExploded() {
 		return exploded;
 	}
