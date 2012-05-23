@@ -3,7 +3,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -18,11 +17,13 @@ public class Fenster implements ActionListener {
 	private Spielfeld sp;
 	private int width;
 	private int height;
+	private int mode;
 
 	// Constructor
 	public Fenster(int width, int height) {
 		width(width);
 		height(height);
+		mode = 1;
 		sp = new Spielfeld(width, height);
 		initFrame();
 	}
@@ -85,19 +86,32 @@ public class Fenster implements ActionListener {
 				fc.setVisible(true);
 			}
 		});
-		JMenuItem mehrspieler = new JMenuItem("2-Spieler-Modus");
+		JMenu mp = new JMenu("2-Spieler-Modus");
+		JMenuItem mehrspieler = new JMenuItem("Starten");
 		mehrspieler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				mode = 2;
 				f.dispose();
 				restart();
+				sp.two_player = true;
 				sp.mehrspielermodus();
+			}
+		});
+		JMenuItem mehrspielerExit = new JMenuItem("Beenden");
+		mehrspielerExit.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				mode = 1;
+				f.dispose();
+				restart();
 			}
 		});
 		menueLeiste.add(menue);
 		menue.add(start);
-		menue.add(mehrspieler);
 		menue.add(credits);
 		menue.add(beenden);
+		menueLeiste.add(mp);
+		mp.add(mehrspieler);
+		mp.add(mehrspielerExit);
 		f.setJMenuBar(menueLeiste);
 	}
 
@@ -119,18 +133,20 @@ public class Fenster implements ActionListener {
 	}
 
 	void restart() {
-		sp = new Spielfeld(width, height);
+		if (mode == 1)
+			sp = new Spielfeld(width, height);
+		else
+			sp = new Spielfeld(width, height, true);
 		initFrame();
 	}
 
 	public void dispose() {
+		System.out.println(mode);
 		f.dispose();
 	}
 
-	public void dispose(boolean two_player) {
-		JDialog dialog = new JDialog(f);
-		dialog.setTitle("Gay Over");
-		dialog.setVisible(true);
+	public void dispose(int mode) {
+		this.mode = mode;
 		f.dispose();
 	}
 

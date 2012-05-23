@@ -68,7 +68,7 @@ public class BombExplosion extends TimerTask {
 				// .getPosY())
 				// || ((this.bm2.getPosX() == this.bomb.getPosX()) && (this.bm2
 				// .getPosY() == this.bomb.getPosY())))
-				Main.f.dispose();
+				Main.f.dispose(2);
 				Main.f.restart();
 			}
 		}

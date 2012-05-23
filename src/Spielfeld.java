@@ -171,6 +171,13 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.raster[i][j] = false;
 	}
 
+	public Spielfeld(int width, int height, boolean mode) {
+		this(width, height);
+		if (mode)
+			this.two_player = true;
+		mehrspielermodus();
+	}
+
 	public void mehrspielermodus() {
 		this.bm2 = new Bomberman(width - border - blockLength, height - border
 				- blockLength, blockLength);
