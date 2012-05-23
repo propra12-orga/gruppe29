@@ -43,7 +43,9 @@ public class BombExplosion extends TimerTask {
 			// .getPosY())
 			// || ((this.bm.getPosX() == this.bomb.getPosX()) && (this.bm
 			// .getPosY() == this.bomb.getPosY())))
-			Main.f.dispose();
+			Main.f.dispose(
+					"Die Bombe ist explodiert und hat dich mitgerissen!", true,
+					1);
 			Main.f.restart();
 		}
 		if (this.bm2 != null) {
@@ -68,7 +70,7 @@ public class BombExplosion extends TimerTask {
 				// .getPosY())
 				// || ((this.bm2.getPosX() == this.bomb.getPosX()) && (this.bm2
 				// .getPosY() == this.bomb.getPosY())))
-				Main.f.dispose(2);
+				Main.f.dispose("Dein Gegenspieler hat dich erledigt!", true, 2);
 				Main.f.restart();
 			}
 		}

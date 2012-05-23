@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Fenster implements ActionListener {
@@ -140,14 +141,36 @@ public class Fenster implements ActionListener {
 		initFrame();
 	}
 
-	public void dispose() {
+	public void dispose(String messageDialog, boolean renew) {
 		System.out.println(mode);
-		f.dispose();
+		if (renew) {
+			int answer = JOptionPane.showConfirmDialog(f, messageDialog
+					+ " Möchtest du Neustarten?", "Game Over",
+					JOptionPane.YES_NO_OPTION);
+			if (answer == JOptionPane.YES_OPTION)
+				f.dispose();
+			else
+				System.exit(0);
+		} else {
+			JOptionPane.showMessageDialog(f, messageDialog);
+			f.dispose();
+		}
 	}
 
-	public void dispose(int mode) {
+	public void dispose(String messageDialog, boolean renew, int mode) {
 		this.mode = mode;
-		f.dispose();
+		if (renew) {
+			int answer = JOptionPane.showConfirmDialog(f, messageDialog
+					+ " Möchtest du Neustarten?", "Game Over",
+					JOptionPane.YES_NO_OPTION);
+			if (answer == JOptionPane.YES_OPTION)
+				f.dispose();
+			else
+				System.exit(0);
+		} else {
+			JOptionPane.showMessageDialog(f, messageDialog);
+			f.dispose();
+		}
 	}
 
 	@Override
