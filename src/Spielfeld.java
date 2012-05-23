@@ -30,7 +30,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			} else if ((this.bm.getPosY() + this.bm.getSteps()) >= (height - border)
 					&& this.bm.getPosX() + this.bm.getSteps() >= (width - border)) {
 				Main.f.dispose("Geschafft!", false);
-				Main.f.restart();
+				Main.f.restart(1);
 			}
 			break;
 
@@ -88,7 +88,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			} else if ((this.bm2.getPosY() + this.bm2.getSteps()) >= (height - border)
 					&& this.bm2.getPosX() + this.bm2.getSteps() >= (width - border)) {
 				Main.f.dispose("Geschafft!", false);
-				Main.f.restart();
+				Main.f.restart(2);
 			}
 			break;
 		}

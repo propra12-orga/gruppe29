@@ -24,7 +24,6 @@ public class Fenster implements ActionListener {
 	public Fenster(int width, int height) {
 		width(width);
 		height(height);
-		mode = 1;
 		sp = new Spielfeld(width, height);
 		initFrame();
 	}
@@ -60,7 +59,7 @@ public class Fenster implements ActionListener {
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
-				restart();
+				restart(1);
 			}
 		});
 		JMenuItem credits = new JMenuItem("Credits");
@@ -88,22 +87,23 @@ public class Fenster implements ActionListener {
 			}
 		});
 		JMenu mp = new JMenu("2-Spieler-Modus");
-		JMenuItem mehrspieler = new JMenuItem("Starten");
+		JMenuItem mehrspieler;
+		if (this.mode == 2)
+			mehrspieler = new JMenuItem("Neues Spiel");
+		else
+			mehrspieler = new JMenuItem("Starten");
 		mehrspieler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				mode = 2;
 				f.dispose();
-				restart();
-				sp.two_player = true;
-				sp.mehrspielermodus();
+				restart(2);
+
 			}
 		});
 		JMenuItem mehrspielerExit = new JMenuItem("Beenden");
 		mehrspielerExit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				mode = 1;
 				f.dispose();
-				restart();
+				restart(1);
 			}
 		});
 		menueLeiste.add(menue);
@@ -133,32 +133,21 @@ public class Fenster implements ActionListener {
 		this.height = height;
 	}
 
-	void restart() {
-		if (mode == 1)
-			sp = new Spielfeld(width, height);
-		else
+	public void restart(int mode) {
+		this.mode = mode;
+		if (mode == 2) {
 			sp = new Spielfeld(width, height, true);
+			sp.two_player = true;
+			sp.mehrspielermodus();
+			System.out.println("Neustart im 2 Spielermodus");
+		} else {
+			sp = new Spielfeld(width, height);
+			System.out.println("Neustart im 1 Spielermodus");
+		}
 		initFrame();
 	}
 
 	public void dispose(String messageDialog, boolean renew) {
-		System.out.println(mode);
-		if (renew) {
-			int answer = JOptionPane.showConfirmDialog(f, messageDialog
-					+ " Möchtest du Neustarten?", "Game Over",
-					JOptionPane.YES_NO_OPTION);
-			if (answer == JOptionPane.YES_OPTION)
-				f.dispose();
-			else
-				System.exit(0);
-		} else {
-			JOptionPane.showMessageDialog(f, messageDialog);
-			f.dispose();
-		}
-	}
-
-	public void dispose(String messageDialog, boolean renew, int mode) {
-		this.mode = mode;
 		if (renew) {
 			int answer = JOptionPane.showConfirmDialog(f, messageDialog
 					+ " Möchtest du Neustarten?", "Game Over",
