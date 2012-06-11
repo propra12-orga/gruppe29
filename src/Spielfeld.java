@@ -153,14 +153,13 @@ public class Spielfeld extends JPanel implements KeyListener {
 				* blockLength);
 
 		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
-		this.raster = new int[width][height];
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < height; j++)
-				this.raster[i][j] = 0;
+
+		this.raster = Main.raster;
 	}
 
 	public Spielfeld(int width, int height, int col, int length, boolean mode) {
 		this(width, height, col, length);
+		this.raster = Main.raster;
 		if (mode)
 			this.two_player = true;
 		mehrspielermodus();
@@ -174,45 +173,63 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		/*
-		 * for (int i = 0; i < this.raster[0].length; i++) { for (int j = 0; i <
-		 * this.raster.length; i++) { switch (this.raster[i][j]) { case 0: {
-		 * 
-		 * } case 1: { g.drawLine(i, j, i, j); } case 2: {
-		 * g.setColor(Color.ORANGE); g.drawLine(i, j, i, j); } } } }
-		 */
-		// Rand zeichnen
-		// oben
-		g.fillRect(0, 0, width, blockLength);
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < blockLength; j++)
-				this.raster[i][j] = 1;
-		// unten
-		g.fillRect(0, height - blockLength, width, blockLength);
-		for (int i = 0; i < width; i++)
-			for (int j = height - blockLength; j < height; j++)
-				this.raster[i][j] = 1;
-		// rechts
-		g.fillRect(width - blockLength, blockLength, blockLength, height
-				- (2 * blockLength));
-		for (int i = width - blockLength; i < width; i++)
-			for (int j = blockLength; j < height - blockLength; j++)
-				this.raster[i][j] = 1;
-		// links
-		g.fillRect(0, blockLength, blockLength, height - (2 * blockLength));
-		for (int i = 0; i < blockLength; i++)
-			for (int j = blockLength; j < height - blockLength; j++)
-				this.raster[i][j] = 1;
 
-		// Blöcke zeichnen
-		for (int i = 2 * blockLength; i < width - (2 * blockLength); i += 2 * blockLength) {
-			for (int j = 2 * blockLength; j < height - (2 * blockLength); j += 2 * blockLength) {
-				g.fillRect(i, j, blockLength, blockLength);
-				for (int k = 0; k < blockLength; k++)
-					for (int l = 0; l < blockLength; l++)
-						this.raster[i + k][j + l] = 1;
+		for (int i = 0; i < this.raster[0].length; i++) {
+			for (int j = 0; j < this.raster.length; j++) {
+				switch (this.raster[i][j]) {
+				case 0: {
+					g.setColor(Color.WHITE);
+					g.drawLine(i, j, i, j);
+					break;
+				}
+				case 1: {
+					g.setColor(Color.BLACK);
+					g.drawLine(i, j, i, j);
+					break;
+				}
+				case 2: {
+					g.setColor(Color.ORANGE);
+					g.drawLine(i, j, i, j);
+					break;
+				}
+				}
 			}
 		}
+
+		// Rand zeichnen
+		// // oben
+		// g.fillRect(0, 0, width, blockLength);
+		// for (int i = 0; i < width; i++)
+		// for (int j = 0; j < blockLength; j++)
+		// this.raster[i][j] = 1;
+		// // unten
+		// g.fillRect(0, height - blockLength, width, blockLength);
+		// for (int i = 0; i < width; i++)
+		// for (int j = height - blockLength; j < height; j++)
+		// this.raster[i][j] = 1;
+		// // rechts
+		// g.fillRect(width - blockLength, blockLength, blockLength, height
+		// - (2 * blockLength));
+		// for (int i = width - blockLength; i < width; i++)
+		// for (int j = blockLength; j < height - blockLength; j++)
+		// this.raster[i][j] = 1;
+		// // links
+		// g.fillRect(0, blockLength, blockLength, height - (2 * blockLength));
+		// for (int i = 0; i < blockLength; i++)
+		// for (int j = blockLength; j < height - blockLength; j++)
+		// this.raster[i][j] = 1;
+		//
+		// // Blöcke zeichnen
+		// for (int i = 2 * blockLength; i < width - (2 * blockLength); i += 2 *
+		// blockLength) {
+		// for (int j = 2 * blockLength; j < height - (2 * blockLength); j += 2
+		// * blockLength) {
+		// g.fillRect(i, j, blockLength, blockLength);
+		// for (int k = 0; k < blockLength; k++)
+		// for (int l = 0; l < blockLength; l++)
+		// this.raster[i + k][j + l] = 1;
+		// }
+		// }
 
 		// Ausgang
 		g.setColor(Color.BLUE);

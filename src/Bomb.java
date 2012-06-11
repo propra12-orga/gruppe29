@@ -89,10 +89,12 @@ public class Bomb extends GraphicObject {
 		g.fillOval(posX, posY, radius, radius);
 		if (isExploded()) {
 			g.setColor(Color.orange);
-			g.fillOval(posX - explosionRadius, posY, radius, radius);
-			g.fillOval(posX + explosionRadius, posY, radius, radius);
-			g.fillOval(posX, posY - explosionRadius, radius, radius);
-			g.fillOval(posX, posY + explosionRadius, radius, radius);
+			for (int i = radius; i <= explosionRadius; i += radius) {
+				g.fillOval(posX - i, posY, radius, radius);
+				g.fillOval(posX + i, posY, radius, radius);
+				g.fillOval(posX, posY - i, radius, radius);
+				g.fillOval(posX, posY + i, radius, radius);
+			}
 		}
 
 	}
