@@ -9,29 +9,26 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent ke) {
-		int n;
 		switch (ke.getKeyCode()) {
-		// std-steuerung
 		case KeyEvent.VK_UP:
 			if ((this.bm.getPosY() - this.bm.getSteps() >= 0)
 					&& (this.raster[this.bm.getPosX()][this.bm.getPosY()
-							- this.bm.getSteps()] != true)) {
+							- this.bm.getSteps()] < 1)) {
 				this.bm.moveUp();
 				repaint();
 				this.bm.paintObject();
 				break;
 			} else
 				break;
-
 		case KeyEvent.VK_DOWN:
-			if ((this.bm.getPosY() + this.bm.getSteps() < height - blockLength)
+			if ((this.bm.getPosY() + this.bm.getSteps() < height - border)
 					&& (this.raster[this.bm.getPosX()][this.bm.getPosY()
-							+ this.bm.getSteps()] != true)) {
+							+ this.bm.getSteps()] < 1)) {
 				this.bm.moveDown();
 				repaint();
 				this.bm.paintObject();
-			} else if ((this.bm.getPosY() + this.bm.getSteps()) >= (height - blockLength)
-					&& this.bm.getPosX() + this.bm.getSteps() >= (width - blockLength)) {
+			} else if ((this.bm.getPosY() + this.bm.getSteps()) >= (height - border)
+					&& this.bm.getPosX() + this.bm.getSteps() >= (width - border)) {
 				Main.f.dispose("Geschafft!", false);
 				Main.f.restart(1);
 			}
@@ -40,29 +37,27 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_LEFT:
 			if ((this.bm.getPosX() - this.bm.getSteps() >= 0)
 					&& (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
-							.getPosY()] != true)) {
+							.getPosY()] < 1)) {
 				this.bm.moveLeft();
 				repaint();
 				this.bm.paintObject();
 				break;
 			} else
 				break;
-
 		case KeyEvent.VK_RIGHT:
-			if ((this.bm.getPosX() + this.bm.getSteps() < width - blockLength)
+			if ((this.bm.getPosX() + this.bm.getSteps() < width - border)
 					&& (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
-							.getPosY()] != true)) {
+							.getPosY()] < 1)) {
 				this.bm.moveRight();
 				repaint();
 				this.bm.paintObject();
 				break;
 			} else
 				break;
-
-		case KeyEvent.VK_SPACE:
-			n = this.bm.getNewBombIndex();
+		case KeyEvent.VK_SPACE: {
+			int n = this.bm.getNewBombIndex();
 			this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs.get(n)
-					.getPosY()] = true;
+					.getPosY()] = 3;
 			this.bm.bombs.get(n).setVisible(true);
 			repaint();
 			if (two_player)
@@ -71,66 +66,64 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.bombs.get(n).explode(this, this.bm);
 			repaint();
 			break;
-
-		// steuerung 2ter spieler
-		case KeyEvent.VK_W:
+		}
+		case KeyEvent.VK_W: {
 			if ((this.bm2.getPosY() - this.bm2.getSteps() >= 0)
 					&& (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-							- this.bm2.getSteps()] != true)) {
+							- this.bm2.getSteps()] < 1)) {
 				this.bm2.moveUp();
 				repaint();
 				this.bm2.paintObject();
 				break;
 			} else
 				break;
-
-		case KeyEvent.VK_S:
-			if ((this.bm2.getPosY() + this.bm2.getSteps() < height
-					- blockLength)
+		}
+		case KeyEvent.VK_S: {
+			if ((this.bm2.getPosY() + this.bm2.getSteps() < height - border)
 					&& (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-							+ this.bm2.getSteps()] != true)) {
+							+ this.bm2.getSteps()] < 1)) {
 				this.bm2.moveDown();
 				repaint();
 				this.bm2.paintObject();
-			} else if ((this.bm2.getPosY() + this.bm2.getSteps()) >= (height - blockLength)
-					&& this.bm2.getPosX() + this.bm2.getSteps() >= (width - blockLength)) {
+			} else if ((this.bm2.getPosY() + this.bm2.getSteps()) >= (height - border)
+					&& this.bm2.getPosX() + this.bm2.getSteps() >= (width - border)) {
 				Main.f.dispose("Geschafft!", false);
 				Main.f.restart(2);
 			}
 			break;
-
-		case KeyEvent.VK_A:
+		}
+		case KeyEvent.VK_A: {
 			if ((this.bm2.getPosX() - this.bm2.getSteps() >= 0)
 					&& (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
-							.getPosY()] != true)) {
+							.getPosY()] < 1)) {
 				this.bm2.moveLeft();
 				repaint();
 				this.bm2.paintObject();
 				break;
 			} else
 				break;
-
-		case KeyEvent.VK_D:
-			if ((this.bm2.getPosX() + this.bm2.getSteps() < width - blockLength)
+		}
+		case KeyEvent.VK_D: {
+			if ((this.bm2.getPosX() + this.bm2.getSteps() < width - border)
 					&& (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
-							.getPosY()] != true)) {
+							.getPosY()] < 1)) {
 				this.bm2.moveRight();
 				repaint();
 				this.bm2.paintObject();
 				break;
 			} else
 				break;
-
-		case KeyEvent.VK_Q:
-			n = this.bm2.getNewBombIndex();
+		}
+		case KeyEvent.VK_Q: {
+			int n = this.bm2.getNewBombIndex();
 			this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs.get(n)
-					.getPosY()] = true;
+					.getPosY()] = 3;
 			this.bm2.bombs.get(n).setVisible(true);
 			repaint();
 			this.bm2.bombs.get(n).explode(this, this.bm2, this.bm);
 			repaint();
 			break;
-
+		}
 		default:
 			break;
 		}
@@ -148,17 +141,19 @@ public class Spielfeld extends JPanel implements KeyListener {
 	private int width;
 	private int height;
 
-	private int columns; // anzahl an reihen
-	private int blockLength;// Groesse der Bloecke
+	private int border; // rand unten&rechts
+	private int field; // laenge des spielfelds
 
 	// Spielraster
-	public boolean[][] raster;
+	public int[][] raster;
 
 	// Spielfeldobjekte
 	private Bomberman bm;
 	private Bomberman bm2;
 	private Bomb bomb;
 
+	private int columns; // anzahl an reihen
+	private int blockLength;// Groesse der Bloecke
 	private int expRad; // Explosionsradius
 
 	// 2-Spielermodus
@@ -176,11 +171,11 @@ public class Spielfeld extends JPanel implements KeyListener {
 				- ((columns - 1) * blockLength), blockLength, expRad
 				* blockLength);
 
-		this.bomb = new Bomb(0, 0, this.bm.getRadius(), expRad * blockLength);
-		this.raster = new boolean[width][height];
+		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
+		this.raster = new int[width][height];
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
-				this.raster[i][j] = false;
+				this.raster[i][j] = 0;
 	}
 
 	public Spielfeld(int width, int height, int col, int length, boolean mode) {
@@ -191,9 +186,19 @@ public class Spielfeld extends JPanel implements KeyListener {
 	}
 
 	public void mehrspielermodus() {
-		this.bm2 = new Bomberman(width - (2 * blockLength), height
-				- (2 * blockLength), blockLength, expRad * blockLength, 2);
+		this.bm2 = new Bomberman(width - border - blockLength, height - border
+				- blockLength, blockLength, 2);
 		this.two_player = true;
+	}
+
+	private void findVariables(int columns) {
+		int tmp = height;
+		while (tmp % columns != 0) {
+			tmp -= 10;
+		}
+		field = tmp;
+		blockLength = field / columns;
+		border = (height - field) / 2;
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -203,23 +208,23 @@ public class Spielfeld extends JPanel implements KeyListener {
 		g.fillRect(0, 0, width, blockLength);
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < blockLength; j++)
-				this.raster[i][j] = true;
+				this.raster[i][j] = 1;
 		// unten
 		g.fillRect(0, height - blockLength, width, blockLength);
 		for (int i = 0; i < width; i++)
 			for (int j = height - blockLength; j < blockLength; j++)
-				this.raster[i][j] = true;
+				this.raster[i][j] = 1;
 		// rechts
 		g.fillRect(width - blockLength, blockLength, blockLength, height
 				- (2 * blockLength));
 		for (int i = width - blockLength; i < width; i++)
 			for (int j = blockLength; j < height - blockLength; j++)
-				this.raster[i][j] = true;
+				this.raster[i][j] = 1;
 		// links
 		g.fillRect(0, blockLength, blockLength, height - (2 * blockLength));
 		for (int i = 0; i < blockLength; i++)
 			for (int j = blockLength; j < height - blockLength; j++)
-				this.raster[i][j] = true;
+				this.raster[i][j] = 1;
 
 		// Blöcke zeichnen
 		for (int i = 2 * blockLength; i < width - (2 * blockLength); i += 2 * blockLength) {
@@ -227,14 +232,16 @@ public class Spielfeld extends JPanel implements KeyListener {
 				g.fillRect(i, j, blockLength, blockLength);
 				for (int k = 0; k < blockLength; k++)
 					for (int l = 0; l < blockLength; l++)
-						this.raster[i + k][j + l] = true;
+						this.raster[i + k][j + l] = 1;
 			}
 		}
 
 		// Ausgang
 		g.setColor(Color.BLUE);
-		g.fillRect(width - (2 * blockLength), height - blockLength,
-				blockLength, blockLength);
+		g.fillRect(width - border - blockLength, height - border, blockLength,
+				border);
+
+		// zerstörbare Mauern
 
 		// // Ausgang zeichnen
 		// g.setColor(Color.blue);
@@ -257,14 +264,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		}
 
 		for (int i = 0; i < this.bm.bombs.size(); i++)
-			if ((this.bm.bombs.get(i) != null)
-					&& (this.bm.bombs.get(i).isVisible()))
+			if (this.bm.bombs.get(i) != null
+					&& this.bm.bombs.get(i).isVisible())
 				this.bm.bombs.get(i).paintObject(g);
 
 		if (bm2 != null) {
 			for (int i = 0; i < this.bm2.bombs.size(); i++)
-				if ((this.bm2.bombs.get(i) != null)
-						&& (this.bm2.bombs.get(i).isVisible()))
+				if (this.bm2.bombs.get(i) != null
+						&& this.bm2.bombs.get(i).isVisible())
 					this.bm2.bombs.get(i).paintObject(g);
 		}
 	}
