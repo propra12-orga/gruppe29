@@ -13,12 +13,14 @@ public class Bomberman extends JLabel {
 	private int steps;
 
 	public List<Bomb> bombs;
+	private int expRad;
 	public int counter;
 
-	public Bomberman(int posX, int posY, int radius) {
+	public Bomberman(int posX, int posY, int radius, int expRad) {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
+		this.expRad = expRad;
 		this.bombs = new ArrayList<Bomb>();// (0, 0, this.radius, this.radius);
 		this.counter = 0;
 		ImageIcon ico = new ImageIcon("Bomberman.png");
@@ -28,15 +30,16 @@ public class Bomberman extends JLabel {
 		setSteps(radius);
 	}
 
-	public Bomberman(int posX, int posY, int radius, int color) {
+	public Bomberman(int posX, int posY, int radius, int expRad, int color) {
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
+		this.expRad = expRad;
 		this.bombs = new ArrayList<Bomb>();// (0, 0, this.radius, this.radius);
 		this.counter = 0;
 		String path_to_Image;
 		if (color > 1) // Bomberman Farbwahl
-			path_to_Image = "Bomberman2.png";
+			path_to_Image = "Bomberman_red.png";
 		else
 			path_to_Image = "Bomberman.png";
 		ImageIcon ico = new ImageIcon(path_to_Image);

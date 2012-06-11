@@ -18,20 +18,25 @@ public class Fenster implements ActionListener {
 	private Spielfeld sp;
 	private int width;
 	private int height;
+	private int columns;
+	private int length;
 	private int mode;
 
 	// Constructor
-	public Fenster(int width, int height) {
-		width(width);
-		height(height);
-		sp = new Spielfeld(width, height);
+	public Fenster(int width, int height, int col, int blockLength) {
+		this.width = width;
+		this.height = height;
+		columns = col;
+		length = blockLength;
+		sp = new Spielfeld(width, height, columns, length);
 		initFrame();
 	}
 
 	private void initFrame() {
 		f = new JFrame("Bomberman");
+		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(width, height + 29 + 17);
+		f.setSize(width, height + length);
 
 		p = new JPanel();
 		f.setContentPane(p);
@@ -136,12 +141,12 @@ public class Fenster implements ActionListener {
 	public void restart(int mode) {
 		this.mode = mode;
 		if (mode == 2) {
-			sp = new Spielfeld(width, height, true);
+			sp = new Spielfeld(width, height, columns, length, true);
 			sp.two_player = true;
 			sp.mehrspielermodus();
 			System.out.println("Neustart im 2 Spielermodus");
 		} else {
-			sp = new Spielfeld(width, height);
+			sp = new Spielfeld(width, height, columns, length);
 			System.out.println("Neustart im 1 Spielermodus");
 		}
 		initFrame();
