@@ -134,7 +134,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	private Bomb bomb;
 
 	private int columns; // anzahl an reihen
-	private int blockLength;// Groesse der Bloecke
+	public int blockLength;// Groesse der Bloecke
 	private int expRad; // Explosionsradius
 
 	// 2-Spielermodus
@@ -174,6 +174,13 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		/*
+		 * for (int i = 0; i < this.raster[0].length; i++) { for (int j = 0; i <
+		 * this.raster.length; i++) { switch (this.raster[i][j]) { case 0: {
+		 * 
+		 * } case 1: { g.drawLine(i, j, i, j); } case 2: {
+		 * g.setColor(Color.ORANGE); g.drawLine(i, j, i, j); } } } }
+		 */
 		// Rand zeichnen
 		// oben
 		g.fillRect(0, 0, width, blockLength);
@@ -183,7 +190,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		// unten
 		g.fillRect(0, height - blockLength, width, blockLength);
 		for (int i = 0; i < width; i++)
-			for (int j = height - blockLength; j < blockLength; j++)
+			for (int j = height - blockLength; j < height; j++)
 				this.raster[i][j] = 1;
 		// rechts
 		g.fillRect(width - blockLength, blockLength, blockLength, height

@@ -77,6 +77,61 @@ public class BombExplosion extends TimerTask {
 				Main.f.restart(2);
 			}
 		}
+		// Zerstörung der Mauern
+		// nach links
+		if (this.sp.raster[this.bomb.getPosX() - this.bomb.getRadius()][this.bomb
+				.getPosY()] == 2) {
+			int x = this.bomb.getPosX() - this.bomb.getRadius();
+			int y = this.bomb.getPosY();
+			while (this.sp.raster[(x - 1)][this.bomb.getPosY()] == 2)
+				x -= 1;
+			while (this.sp.raster[this.bomb.getPosX() - this.bomb.getRadius()][y - 1] == 2)
+				y -= 1;
+			for (int i = 0; i < this.sp.blockLength; i++)
+				for (int j = 0; i < this.sp.blockLength; j++)
+					this.sp.raster[x + i][y + j] = 0;
+		}
+		// nach rechts
+		else if (this.sp.raster[this.bomb.getPosX() + this.bomb.getRadius()][this.bomb
+				.getPosY()] == 2) {
+			int x = this.bomb.getPosX() + this.bomb.getRadius();
+			int y = this.bomb.getPosY();
+			while (this.sp.raster[(x - 1)][this.bomb.getPosY()] == 2)
+				x -= 1;
+			while (this.sp.raster[this.bomb.getPosX() + this.bomb.getRadius()][y - 1] == 2)
+				y -= 1;
+			for (int i = 0; i < this.sp.blockLength; i++)
+				for (int j = 0; i < this.sp.blockLength; j++)
+					this.sp.raster[x + i][y + j] = 0;
+		}
+		// nach oben
+		else if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY()
+				- this.bomb.getRadius()] == 2) {
+			int x = this.bomb.getPosX();
+			int y = this.bomb.getPosY() - this.bomb.getRadius();
+			while (this.sp.raster[(x - 1)][this.bomb.getPosY()
+					- this.bomb.getRadius()] == 2)
+				x -= 1;
+			while (this.sp.raster[this.bomb.getPosX()][y - 1] == 2)
+				y -= 1;
+			for (int i = 0; i < this.sp.blockLength; i++)
+				for (int j = 0; i < this.sp.blockLength; j++)
+					this.sp.raster[x + i][y + j] = 0;
+		}
+		// nach unten
+		else if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY()
+				+ this.bomb.getRadius()] == 2) {
+			int x = this.bomb.getPosX();
+			int y = this.bomb.getPosY() + this.bomb.getRadius();
+			while (this.sp.raster[(x - 1)][this.bomb.getPosY()
+					+ this.bomb.getRadius()] == 2)
+				x -= 1;
+			while (this.sp.raster[this.bomb.getPosX()][y - 1] == 2)
+				y -= 1;
+			for (int i = 0; i < this.sp.blockLength; i++)
+				for (int j = 0; i < this.sp.blockLength; j++)
+					this.sp.raster[x + i][y + j] = 0;
+		}
 		sp.repaint();
 	}
 }
