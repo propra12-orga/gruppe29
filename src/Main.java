@@ -19,6 +19,9 @@ public class Main {
 	/** Fenster für das Spiel */
 	public static Fenster f;
 
+	private static Document doc;
+	private static Element root;
+
 	/**
 	 * main-Methode des Spiels, hier fängt Alles an. Raster werden eingelsen und
 	 * erzeugt, anschließend damit das Fenster erstellt.
@@ -27,12 +30,15 @@ public class Main {
 	 *                , JDOMException
 	 */
 	public static void main(String[] args) {
-		columns = 13;
-		length = 50;
-		sizeX = sizeY = columns * length;
-		raster = new int[sizeX][sizeY];
-		raster2 = new int[columns][columns];
 		try {
+			doc = new SAXBuilder().build("Bomberman.xml");
+			root = doc.getRootElement();
+			columns = Integer.parseInt(root.getChild("header")
+					.getChild("dimension").getValue());
+			length = 50;
+			sizeX = sizeY = columns * length;
+			raster = new int[sizeX][sizeY];
+			raster2 = new int[columns][columns];
 			feldEinlesen();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,9 +55,6 @@ public class Main {
 	 *             , JDOMException
 	 */
 	private static void feldEinlesen() throws Exception {
-		String filename = "Bomberman.xml";
-		Document doc = new SAXBuilder().build(filename);
-		Element root = doc.getRootElement();
 		for (int i = 0; i < columns; i++)
 			for (int j = 0; j < columns; j++) {
 				Element col = root.getChild("Column" + i);
