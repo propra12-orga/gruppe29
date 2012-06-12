@@ -399,60 +399,6 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 		}
 
-		// Rand zeichnen
-		// // oben
-		// g.fillRect(0, 0, width, blockLength);
-		// for (int i = 0; i < width; i++)
-		// for (int j = 0; j < blockLength; j++)
-		// this.raster[i][j] = 1;
-		// // unten
-		// g.fillRect(0, height - blockLength, width, blockLength);
-		// for (int i = 0; i < width; i++)
-		// for (int j = height - blockLength; j < height; j++)
-		// this.raster[i][j] = 1;
-		// // rechts
-		// g.fillRect(width - blockLength, blockLength, blockLength, height
-		// - (2 * blockLength));
-		// for (int i = width - blockLength; i < width; i++)
-		// for (int j = blockLength; j < height - blockLength; j++)
-		// this.raster[i][j] = 1;
-		// // links
-		// g.fillRect(0, blockLength, blockLength, height - (2 * blockLength));
-		// for (int i = 0; i < blockLength; i++)
-		// for (int j = blockLength; j < height - blockLength; j++)
-		// this.raster[i][j] = 1;
-		//
-		// // Blöcke zeichnen
-		// for (int i = 2 * blockLength; i < width - (2 * blockLength); i += 2 *
-		// blockLength) {
-		// for (int j = 2 * blockLength; j < height - (2 * blockLength); j += 2
-		// * blockLength) {
-		// g.fillRect(i, j, blockLength, blockLength);
-		// for (int k = 0; k < blockLength; k++)
-		// for (int l = 0; l < blockLength; l++)
-		// this.raster[i + k][j + l] = 1;
-		// }
-		// }
-
-		// Ausgang
-		g.setColor(Color.BLUE);
-		// g.fillRect(width - border - blockLength, height - border,
-		// blockLength,border);
-
-		// zerstörbare Mauern
-		g.setColor(Color.ORANGE);
-
-		// // Ausgang zeichnen
-		// g.setColor(Color.blue);
-		// g.drawOval(width - border - blockLength, height - border -
-		// blockLength,
-		// blockLength - 1, blockLength - 1);
-		// JLabel ausgang = new JLabel();
-		// ausgang.setIcon(new ImageIcon("ausgang.png"));
-		// ausgang.paintImmediately(width - border - blockLength, height -
-		// border
-		// - blockLength, blockLength - 1, blockLength - 1);
-
 		// Bomberman zeichnen
 		bm.paintObject();
 		this.add(this.bm);
