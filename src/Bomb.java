@@ -1,8 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Timer;
 
-public class Bomb extends GraphicObject {
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+public class Bomb extends JLabel {
 	// bombe
 	private int posX;
 	private int posY;
@@ -36,6 +40,7 @@ public class Bomb extends GraphicObject {
 		this.explosionRadius = explosionRadius;
 		this.visible = false;
 		this.exploded = false;
+
 	}
 
 	/**
@@ -171,13 +176,15 @@ public class Bomb extends GraphicObject {
 		this.explosionRadius = explosionRadius;
 	}
 
-	@Override
 	/**
 	 * zeichnet die Bombe
 	 */
 	public void paintObject(Graphics g) {
-		g.setColor(Color.black);
-		g.fillOval(posX, posY, radius, radius);
+		ImageIcon ico = new ImageIcon("bombew.png");
+		ico.setImage(ico.getImage().getScaledInstance(this.radius, this.radius,
+				Image.SCALE_DEFAULT));
+		this.setIcon(ico);
+		this.setBounds(this.posX, this.posY, this.radius, this.radius);
 		if (isExploded()) {
 			g.setColor(Color.orange);
 			for (int i = radius; i <= explosionRadius; i += radius) {

@@ -67,7 +67,7 @@ public class Bomberman extends JLabel {
 		this(posX, posY, radius, expRad);
 		String path_to_Image;
 		if (color > 1) // Bomberman Farbwahl
-			path_to_Image = "Bomberman_red.png";
+			path_to_Image = "Bomberman2.png";
 		else
 			path_to_Image = "Bomberman.png";
 		ImageIcon ico = new ImageIcon(path_to_Image);

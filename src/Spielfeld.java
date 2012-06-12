@@ -126,6 +126,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs.get(n)
 					.getPosY()] = 3;
 			this.bm.bombs.get(n).setVisible(true);
+			this.add(this.bm.bombs.get(n));
 			repaint();
 			if (two_player)
 				this.bm.bombs.get(n).explode(this, this.bm, this.bm2);
