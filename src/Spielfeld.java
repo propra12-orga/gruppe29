@@ -15,6 +15,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- this.bm.getSteps()] < 1) {
 				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
 						- this.bm.getSteps()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -32,6 +35,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					+ this.bm.getSteps()] < 1) {
 				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
 						+ this.bm.getSteps()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -49,6 +55,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					.getPosY()] < 1) {
 				if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
 						.getPosY()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -66,6 +75,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					.getPosY()] < 1) {
 				if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
 						.getPosY()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -96,6 +108,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- this.bm2.getSteps()] < 1) {
 				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 						- this.bm2.getSteps()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -114,6 +129,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					+ this.bm2.getSteps()] < 1) {
 				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 						+ this.bm2.getSteps()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -131,6 +149,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					.getPosY()] < 1) {
 				if (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
 						.getPosY()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
@@ -149,6 +170,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					.getPosY()] < 1) {
 				if (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
 						.getPosY()] == -1) {
+					Main.f.dispose(
+							"Du hast dich bis zum Ausgang durchgeschlagen!",
+							true);
 					if (two_player == true) {
 						Main.f.restart(2);
 					} else {
