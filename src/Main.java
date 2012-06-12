@@ -13,7 +13,7 @@ public class Main {
 	public static Fenster f;
 
 	public static void main(String[] args) {
-		columns = 9;
+		columns = 13;
 		length = 50;
 		sizeX = columns * length;
 		sizeY = columns * length;
