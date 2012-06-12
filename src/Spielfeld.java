@@ -213,6 +213,10 @@ public class Spielfeld extends JPanel implements KeyListener {
 	private int width;
 	private int height;
 
+	public int getBreite() {
+		return width;
+	}
+
 	// Spielraster
 	public int[][] raster;
 
