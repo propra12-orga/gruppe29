@@ -275,12 +275,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
 
-		this.raster = Main.raster;
+		this.raster = new int[width][height];
+		for (int i = 0; i < width; i++)
+			for (int j = 0; j < height; j++)
+				this.raster[i][j] = Main.raster[i][j];
 	}
 
 	public Spielfeld(int width, int height, int col, int length, boolean mode) {
 		this(width, height, col, length);
-		this.raster = Main.raster;
 		if (mode)
 			this.two_player = true;
 		mehrspielermodus();
