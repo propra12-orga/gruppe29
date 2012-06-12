@@ -13,6 +13,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_UP:
 			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
 					- this.bm.getSteps()] < 1) {
+				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
+						- this.bm.getSteps()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm.moveUp();
 				repaint();
 				this.bm.paintObject();
@@ -22,6 +30,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_DOWN:
 			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
 					+ this.bm.getSteps()] < 1) {
+				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
+						+ this.bm.getSteps()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm.moveDown();
 				repaint();
 				this.bm.paintObject();
@@ -31,6 +47,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_LEFT:
 			if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
 					.getPosY()] < 1) {
+				if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
+						.getPosY()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm.moveLeft();
 				repaint();
 				this.bm.paintObject();
@@ -40,6 +64,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_RIGHT:
 			if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
 					.getPosY()] < 1) {
+				if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
+						.getPosY()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm.moveRight();
 				repaint();
 				this.bm.paintObject();
@@ -62,6 +94,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_W: {
 			if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 					- this.bm2.getSteps()] < 1) {
+				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+						- this.bm2.getSteps()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm2.moveUp();
 				repaint();
 				this.bm2.paintObject();
@@ -72,6 +112,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_S: {
 			if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 					+ this.bm2.getSteps()] < 1) {
+				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+						+ this.bm2.getSteps()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm2.moveDown();
 				repaint();
 				this.bm2.paintObject();
@@ -81,6 +129,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_A: {
 			if (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
 					.getPosY()] < 1) {
+				if (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
+						.getPosY()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm2.moveLeft();
 				repaint();
 				this.bm2.paintObject();
@@ -91,6 +147,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 		case KeyEvent.VK_D: {
 			if (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
 					.getPosY()] < 1) {
+				if (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
+						.getPosY()] == -1) {
+					if (two_player == true) {
+						Main.f.restart(2);
+					} else {
+						Main.f.restart(1);
+					}
+				}
 				this.bm2.moveRight();
 				repaint();
 				this.bm2.paintObject();
@@ -189,6 +253,11 @@ public class Spielfeld extends JPanel implements KeyListener {
 				}
 				case 2: {
 					g.setColor(Color.ORANGE);
+					g.drawLine(i, j, i, j);
+					break;
+				}
+				case -1: {
+					g.setColor(Color.BLUE);
 					g.drawLine(i, j, i, j);
 					break;
 				}
