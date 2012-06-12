@@ -6,13 +6,30 @@ public class Bomb extends GraphicObject {
 	// bombe
 	private int posX;
 	private int posY;
+	/** Radius der Bombe */
 	private int radius;
+	/** Explosionsradius der Bombe */
 	private int explosionRadius;
+	/** Sichtbarkeit der Bombe */
 	private boolean visible;
+	/** Bombe explodiert nicht explodiert */
 	private boolean exploded;
 
+	/**
+	 * Die Methode Bomb übernimmt die Parameter und setzt die Bombe auf
+	 * unsichtbar und auf nicht explodiert
+	 * 
+	 * @param posX
+	 *            x Position der Bombe
+	 * @param posY
+	 *            y Position der Bombe
+	 * @param radius
+	 *            Radius der Bombe
+	 * @param explosionRadius
+	 *            Explosionsradius der Bombe
+	 * */
 	public Bomb(int posX, int posY, int radius, int explosionRadius) {
-		super(); // Konstruktor von GraphicObject
+		super();
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
@@ -21,6 +38,14 @@ public class Bomb extends GraphicObject {
 		this.exploded = false;
 	}
 
+	/**
+	 * Die Methode explode erstellt einen Timer t und setzt den Timer
+	 * 
+	 * @param sp
+	 *            übergibt das Spielfeld
+	 * @param man
+	 *            übergibt den Bomberman
+	 */
 	public void explode(Spielfeld sp, Bomberman man) {
 		Timer t = new Timer();
 		t.schedule(new BombExplosion(this, sp, man), 1000);
@@ -28,6 +53,16 @@ public class Bomb extends GraphicObject {
 
 	}
 
+	/**
+	 * Die Methode explode erstellt einen Timer t und setzt den Timer
+	 * 
+	 * @param sp
+	 *            übergibt das Spielfeld
+	 * @param man
+	 *            übergibt den 1. Bomberman
+	 * @param man2
+	 *            übergibt den 2. Bomberman
+	 */
 	public void explode(Spielfeld sp, Bomberman man, Bomberman man2) {
 		Timer t = new Timer();
 		t.schedule(new BombExplosion(this, sp, man, man2), 1000);
@@ -35,55 +70,111 @@ public class Bomb extends GraphicObject {
 
 	}
 
+	/**
+	 * 
+	 * @return gibt zurück, ob die Bombe explodiert ist
+	 */
 	public boolean isExploded() {
 		return exploded;
 	}
 
+	/**
+	 * @param exploded
+	 *            gibt an, ob die Bombe explodiert ist
+	 */
 	public void setExploded(boolean exploded) {
 		this.exploded = exploded;
 	}
 
+	/**
+	 * 
+	 * @return gibt zurück, ob die Bombe sichtbar ist oder unsichtbar ist
+	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
+	/**
+	 * 
+	 * @param visible
+	 *            Die Bombe wird auf sichtbar bzw. unsichtbar gesetzt
+	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 
+	/**
+	 * 
+	 * @return gibt die x Position der Bombe zurück
+	 */
 	public int getPosX() {
 		return posX;
 	}
 
+	/**
+	 * 
+	 * @param posX
+	 *            setzt die Position von x
+	 */
 	public void setPosX(int posX) {
 		this.posX = posX;
 	}
 
+	/**
+	 * 
+	 * @return gibt die y Position der Bombe zurück
+	 */
 	public int getPosY() {
 		return posY;
 	}
 
+	/**
+	 * 
+	 * @param posY
+	 *            setzt die Position von y
+	 */
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
 
+	/**
+	 * 
+	 * @return gibt den Radius den Radius der Bombe zurück
+	 */
 	public int getRadius() {
 		return radius;
 	}
 
+	/**
+	 * 
+	 * @param radius
+	 *            setzt den Radius der Bombe
+	 */
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}
 
+	/**
+	 * 
+	 * @return gibt den Explosionsradius der Bombe zurück
+	 */
 	public int getExplosionRadius() {
 		return explosionRadius;
 	}
 
+	/**
+	 * 
+	 * @param explosionRadius
+	 *            setzt den Explosionsradius der Bombe
+	 */
 	public void setExplosionRadius(int explosionRadius) {
 		this.explosionRadius = explosionRadius;
 	}
 
 	@Override
+	/**
+	 * zeichnet die Bombe
+	 */
 	public void paintObject(Graphics g) {
 		g.setColor(Color.black);
 		g.fillOval(posX, posY, radius, radius);
