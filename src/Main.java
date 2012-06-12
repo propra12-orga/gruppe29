@@ -1,9 +1,5 @@
 import java.io.IOException;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
-
 public class Main {
 	/** Pixelraster */
 	public static int[][] raster;
@@ -27,7 +23,7 @@ public class Main {
 	 *                , JDOMException
 	 */
 	public static void main(String[] args) {
-		columns = 9;
+		columns = 13;
 		length = 50;
 		sizeX = sizeY = columns * length;
 		raster = new int[sizeX][sizeY];
