@@ -12,7 +12,7 @@ public class Bomb extends GraphicObject {
 	private boolean exploded;
 
 	public Bomb(int posX, int posY, int radius, int explosionRadius) {
-		super();
+		super(); // Konstruktor von GraphicObject
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
