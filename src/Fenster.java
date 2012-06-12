@@ -15,6 +15,7 @@ public class Fenster implements ActionListener {
 	private JFrame f;
 	private JFrame fc;
 	private JPanel p;
+	/** Erstellung eines Spielfeldes sp */
 	private Spielfeld sp;
 	private int width;
 	private int height;
@@ -22,7 +23,14 @@ public class Fenster implements ActionListener {
 	private int length;
 	private int mode;
 
-	// Constructor
+	/**
+	 * Fenster erstellen
+	 * 
+	 * @param width
+	 * @param height
+	 * @param col
+	 * @param blockLength
+	 */
 	public Fenster(int width, int height, int col, int blockLength) {
 		this.width = width;
 		this.height = height;
@@ -32,6 +40,7 @@ public class Fenster implements ActionListener {
 		initFrame();
 	}
 
+	/** Frame und Panel erstellen */
 	private void initFrame() {
 		f = new JFrame("Bomberman");
 		f.setResizable(false);
@@ -50,6 +59,7 @@ public class Fenster implements ActionListener {
 		f.setVisible(true);
 	}
 
+	/** Menüleiste */
 	private void initMenue() {
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
@@ -121,7 +131,7 @@ public class Fenster implements ActionListener {
 		f.setJMenuBar(menueLeiste);
 	}
 
-	// getter and setter
+	/** getter and setter */
 	public int width() {
 		return width;
 	}
@@ -138,6 +148,11 @@ public class Fenster implements ActionListener {
 		this.height = height;
 	}
 
+	/**
+	 * Neustarten des Spieles
+	 * 
+	 * @param mode
+	 */
 	public void restart(int mode) {
 		this.mode = mode;
 		if (mode == 2) {
@@ -152,6 +167,12 @@ public class Fenster implements ActionListener {
 		initFrame();
 	}
 
+	/**
+	 * Verstecken des alten Fensters
+	 * 
+	 * @param messageDialog
+	 * @param renew
+	 */
 	public void dispose(String messageDialog, boolean renew) {
 		if (renew) {
 			int answer = JOptionPane.showConfirmDialog(f, messageDialog
@@ -167,6 +188,11 @@ public class Fenster implements ActionListener {
 		}
 	}
 
+	/**
+	 * Aktionen des ActionListeners
+	 * 
+	 * @param e
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 

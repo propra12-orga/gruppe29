@@ -1,17 +1,32 @@
 import java.util.TimerTask;
 
 public class BombExplosion extends TimerTask {
-
+	/** Bombe */
 	private Bomb bomb;
+	/** Spielfeld */
 	private Spielfeld sp;
+	/** Bombermänner */
 	Bomberman bm, bm2;
 
+	/**
+	 * 
+	 * @param b
+	 * @param sp
+	 * @param man
+	 */
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man) {
 		this.bomb = b;
 		this.sp = sp;
 		this.bm = man;
 	}
 
+	/**
+	 * 
+	 * @param b
+	 * @param sp
+	 * @param man
+	 * @param man2
+	 */
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man, Bomberman man2) {
 		this.bomb = b;
 		this.sp = sp;
@@ -19,7 +34,9 @@ public class BombExplosion extends TimerTask {
 		this.bm2 = man2;
 	}
 
-	@Override
+	/**
+	 * Bombe explodieren lassen
+	 */
 	public void run() {
 		bomb.setExploded(true);
 		System.out.println("Bombe gezündet!");

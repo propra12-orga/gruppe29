@@ -3,14 +3,20 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class Mauer extends JPanel {
-	// Groesse des Fensters
+	/** Größe des Fensters */
 	private int width;
 	private int height;
 
-	// Groesse der Bloecke
+	/** Größe der Blöcke */
 	private final int blockWidth;
 	private final int blockHeight;
 
+	/**
+	 * Mauer
+	 * 
+	 * @param width
+	 * @param height
+	 */
 	public Mauer(int width, int height) {
 		this.height = height;
 		this.width = width;
@@ -18,10 +24,13 @@ public class Mauer extends JPanel {
 		blockWidth = width / 10;
 	}
 
+	/**
+	 * @param g
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		// Rand zeichnen
+		/** Rand zeichnen */
 		for (int i = 0; i < width; i = i + blockWidth / 2) {
 			g.fillRect(i, 0, blockWidth, blockHeight / 2);
 			g.fillRect(i, height - blockHeight / 2, blockWidth, blockHeight / 2);
@@ -31,7 +40,7 @@ public class Mauer extends JPanel {
 			g.fillRect(width - blockWidth / 2, i, blockWidth / 2, blockHeight);
 		}
 
-		// Blöcke zeichnen
+		/** Blöcke zeichnen */
 		for (int i = blockWidth + blockWidth / 2; i < width; i = i + 2
 				* blockWidth) {
 			for (int j = blockHeight + blockHeight / 2; j < height; j = j + 2
