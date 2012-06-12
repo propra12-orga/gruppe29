@@ -10,86 +10,102 @@ public class Spielfeld extends JPanel implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-					- this.bm.getSteps()] < 1) {
-				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-						- this.bm.getSteps()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+		case KeyEvent.VK_UP: {
+			switch (this.raster[this.bm.getPosX()][this.bm.getPosY()
+					- this.bm.getSteps()]) {
+			case 0: {
 				this.bm.moveUp();
 				repaint();
 				this.bm.paintObject();
 				break;
-			} else
-				break;
-		case KeyEvent.VK_DOWN:
-			if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-					+ this.bm.getSteps()] < 1) {
-				if (this.raster[this.bm.getPosX()][this.bm.getPosY()
-						+ this.bm.getSteps()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
 				}
+				break;
+			}
+
+			}
+			break;
+		}
+		case KeyEvent.VK_DOWN: {
+			switch (this.raster[this.bm.getPosX()][this.bm.getPosY()
+					+ this.bm.getSteps()]) {
+			case 0: {
 				this.bm.moveDown();
 				repaint();
 				this.bm.paintObject();
+				break;
 			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
+				break;
+			}
+
+			}
+		}
 			break;
 
-		case KeyEvent.VK_LEFT:
-			if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
-					.getPosY()] < 1) {
-				if (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
-						.getPosY()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+		case KeyEvent.VK_LEFT: {
+			switch (this.raster[this.bm.getPosX() - this.bm.getSteps()][this.bm
+					.getPosY()]) {
+			case 0: {
 				this.bm.moveLeft();
 				repaint();
 				this.bm.paintObject();
 				break;
-			} else
-				break;
-		case KeyEvent.VK_RIGHT:
-			if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
-					.getPosY()] < 1) {
-				if (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
-						.getPosY()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
+			}
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
 				}
+				break;
+			}
+
+			}
+		}
+			break;
+		case KeyEvent.VK_RIGHT: {
+			switch (this.raster[this.bm.getPosX() + this.bm.getSteps()][this.bm
+					.getPosY()]) {
+			case 0: {
 				this.bm.moveRight();
 				repaint();
 				this.bm.paintObject();
 				break;
-			} else
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
 				break;
+			}
+
+			}
+		}
+			break;
 		case KeyEvent.VK_SPACE: {
 			int n = this.bm.getNewBombIndex();
 			this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs.get(n)
@@ -104,87 +120,100 @@ public class Spielfeld extends JPanel implements KeyListener {
 			break;
 		}
 		case KeyEvent.VK_W: {
-			if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-					- this.bm2.getSteps()] < 1) {
-				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-						- this.bm2.getSteps()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+			switch (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+					- this.bm2.getSteps()]) {
+			case 0: {
 				this.bm2.moveUp();
 				repaint();
 				this.bm2.paintObject();
 				break;
-			} else
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
 				break;
+			}
+
+			}
+			break;
 		}
 		case KeyEvent.VK_S: {
-			if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-					+ this.bm2.getSteps()] < 1) {
-				if (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
-						+ this.bm2.getSteps()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+			switch (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
+					+ this.bm2.getSteps()]) {
+			case 0: {
 				this.bm2.moveDown();
 				repaint();
 				this.bm2.paintObject();
+				break;
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
+				break;
+			}
+
 			}
 			break;
 		}
 		case KeyEvent.VK_A: {
-			if (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
-					.getPosY()] < 1) {
-				if (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
-						.getPosY()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+			switch (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
+					.getPosY()]) {
+			case 0: {
 				this.bm2.moveLeft();
 				repaint();
 				this.bm2.paintObject();
 				break;
-			} else
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
 				break;
+			}
+
+			}
+			break;
 		}
 		case KeyEvent.VK_D: {
-			if (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
-					.getPosY()] < 1) {
-				if (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
-						.getPosY()] == -1) {
-					Main.f.dispose(
-							"Du hast dich bis zum Ausgang durchgeschlagen!",
-							true);
-					if (two_player == true) {
-						Main.f.restart(2);
-					} else {
-						Main.f.restart(1);
-					}
-				}
+			switch (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
+					.getPosY()]) {
+			case 0: {
 				this.bm2.moveRight();
 				repaint();
 				this.bm2.paintObject();
 				break;
-			} else
+			}
+
+			case -1: {
+				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
+						true);
+				if (two_player == true) {
+					Main.f.restart(2);
+				} else {
+					Main.f.restart(1);
+				}
 				break;
+			}
+
+			}
+			break;
 		}
 		case KeyEvent.VK_Q: {
 			int n = this.bm2.getNewBombIndex();
@@ -266,27 +295,27 @@ public class Spielfeld extends JPanel implements KeyListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		for (int i = 0; i < this.raster[0].length; i++) {
-			for (int j = 0; j < this.raster.length; j++) {
+		for (int i = 0; i < this.raster[0].length; i += blockLength) {
+			for (int j = 0; j < this.raster.length; j += blockLength) {
 				switch (this.raster[i][j]) {
 				case 0: {
 					g.setColor(Color.WHITE);
-					g.drawLine(i, j, i, j);
+					g.fillRect(i, j, blockLength, blockLength);
 					break;
 				}
 				case 1: {
 					g.setColor(Color.BLACK);
-					g.drawLine(i, j, i, j);
+					g.fillRect(i, j, blockLength, blockLength);
 					break;
 				}
 				case 2: {
 					g.setColor(Color.ORANGE);
-					g.drawLine(i, j, i, j);
+					g.fillRect(i, j, blockLength, blockLength);
 					break;
 				}
 				case -1: {
 					g.setColor(Color.BLUE);
-					g.drawLine(i, j, i, j);
+					g.fillRect(i, j, blockLength, blockLength);
 					break;
 				}
 				}
