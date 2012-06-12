@@ -117,6 +117,8 @@ public class BombExplosion extends TimerTask {
 			} // wird zerstört
 			else if (this.sp.raster[this.bomb.getPosX()][i] == 3) {
 				// andere bombe muss explodieren
+			} else if (this.sp.raster[this.bomb.getPosX()][i] == 4) {
+				this.sp.raster[this.bomb.getPosX()][i] = -1;
 			}
 		}
 		if (!flag && swap >= 0)
@@ -146,6 +148,8 @@ public class BombExplosion extends TimerTask {
 			} // wird zerstört
 			else if (this.sp.raster[i][this.bomb.getPosY()] == 3) {
 				// andere bombe muss explodieren
+			} else if (this.sp.raster[i][this.bomb.getPosY()] == 3) {
+				this.sp.raster[i][this.bomb.getPosY()] = -1;
 			}
 		}
 		if (!flag && swap >= 0)

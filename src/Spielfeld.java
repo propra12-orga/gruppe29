@@ -24,6 +24,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm.moveUp();
+				repaint();
+				this.bm.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -48,6 +51,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm.moveDown();
+				repaint();
+				this.bm.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -72,6 +78,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				break;
 			}
 			case -1: {
+				this.bm.moveLeft();
+				repaint();
+				this.bm.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -96,6 +105,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm.moveRight();
+				repaint();
+				this.bm.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -133,6 +145,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm2.moveUp();
+				repaint();
+				this.bm2.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -157,6 +172,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm2.moveDown();
+				repaint();
+				this.bm2.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -181,6 +199,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm2.moveLeft();
+				repaint();
+				this.bm2.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -205,6 +226,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 			}
 
 			case -1: {
+				this.bm2.moveRight();
+				repaint();
+				this.bm2.paintObject();
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
@@ -258,6 +282,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	/**
 	 * Spielraster mit Int-Variablen für verschiedene Elemente auf dem Spielfeld
 	 * (-2) - Powerup (-1) - Ausgang (0) - begehbar (2) - zerstörbar (3) - Bombe
+	 * (4) - Zerstörbar mit Exit
 	 */
 	public int[][] raster;
 
@@ -356,6 +381,11 @@ public class Spielfeld extends JPanel implements KeyListener {
 					break;
 				}
 				case 2: {
+					g.setColor(Color.ORANGE);
+					g.fillRect(i, j, blockLength, blockLength);
+					break;
+				}
+				case 4: {
 					g.setColor(Color.ORANGE);
 					g.fillRect(i, j, blockLength, blockLength);
 					break;
