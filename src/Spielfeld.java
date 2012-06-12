@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 public class Spielfeld extends JPanel implements KeyListener {
 
 	@Override
+	/**
+	 * Abfrage der gedrückten Tasten und Eventhandler für beide Bomberman (Bewegung und Bombenwurf)
+	 */
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
 		case KeyEvent.VK_UP: {
@@ -238,29 +241,55 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 	}
 
-	// Groesse des Fensters
+	/** Breite des Fensters */
 	private int width;
+	/** Höhe des Fensters */
 	private int height;
 
+	/**
+	 * Getter für Fensterbreite
+	 * 
+	 * @return Breite des Fensters
+	 */
 	public int getBreite() {
 		return width;
 	}
 
-	// Spielraster
+	/**
+	 * Spielraster mit Int-Variablen für verschiedene Elemente auf dem Spielfeld
+	 * (-2) - Powerup (-1) - Ausgang (0) - begehbar (2) - zerstörbar (3) - Bombe
+	 */
 	public int[][] raster;
 
-	// Spielfeldobjekte
+	/** Spielfeldobjekt Bomberman (Einspieler) */
 	private Bomberman bm;
+	/** Spielfeldobjekt Bomberman (Zweiter Spieler) */
 	private Bomberman bm2;
+	/** Bombe */
 	private Bomb bomb;
 
-	private int columns; // anzahl an reihen
-	public int blockLength;// Groesse der Bloecke
-	private int expRad; // Explosionsradius
+	/** Anzahl der begehbaren Reihen */
+	private int columns;
+	/** Groesse der Bloecke (alle Blöcke sind quadratisch */
+	public int blockLength;
+	/** Explosionsradius */
+	private int expRad;
 
-	// 2-Spielermodus
+	/** Ist Zweispielermodus angeschaltet? */
 	public boolean two_player;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param width
+	 *            Fensterbreite
+	 * @param height
+	 *            Fensterhöhe
+	 * @param col
+	 *            Reihen
+	 * @param length
+	 *            Blocklänge
+	 */
 	public Spielfeld(int width, int height, int col, int length) {
 		this.height = height;
 		this.width = width;
@@ -281,6 +310,16 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.raster[i][j] = Main.raster[i][j];
 	}
 
+	/**
+	 * Constructor für Mehrspielermodus
+	 * 
+	 * @param width
+	 * @param height
+	 * @param col
+	 * @param length
+	 * @param mode
+	 *            Zweispielermodus an/aus
+	 */
 	public Spielfeld(int width, int height, int col, int length, boolean mode) {
 		this(width, height, col, length);
 		if (mode)
@@ -288,12 +327,18 @@ public class Spielfeld extends JPanel implements KeyListener {
 		mehrspielermodus();
 	}
 
+	/**
+	 * Initialisieren des zweiten Bobmermans
+	 */
 	public void mehrspielermodus() {
 		this.bm2 = new Bomberman(width - (2 * blockLength), height
 				- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		this.two_player = true;
 	}
 
+	/**
+	 * Zeichenmethode für das Spielfeld, aufgelöst nach Raster
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
