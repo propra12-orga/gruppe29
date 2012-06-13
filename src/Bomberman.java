@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 public class Bomberman extends JLabel {
 	/**
-	 * posX, posY Koordinaten des Bomberman; radius Pixelgröße der
+	 * posX, posY Koordinaten des Bomberman; radius Pixelgroeße der
 	 * Bombermanfigur
 	 */
 	private int posX;
@@ -23,33 +23,7 @@ public class Bomberman extends JLabel {
 	public int counter;
 
 	/**
-	 * Erstellt einen neuen Bomberman und initialisiert die Werte.
-	 * 
-	 * @param posX
-	 *            Startposition
-	 * @param posY
-	 *            Startposition
-	 * @param radius
-	 *            Pixelgröße der Bombermanfigur
-	 * @param expRad
-	 *            Explosionsradius
-	 */
-	public Bomberman(int posX, int posY, int radius, int expRad) {
-		this.posX = posX;
-		this.posY = posY;
-		this.radius = radius;
-		this.expRad = expRad;
-		this.bombs = new ArrayList<Bomb>();// (0, 0, this.radius, this.radius);
-		this.counter = 0;
-		ImageIcon ico = new ImageIcon("Bomberman.png");
-		ico.setImage(ico.getImage().getScaledInstance(radius, radius,
-				Image.SCALE_DEFAULT));
-		this.setIcon(ico);
-		setSteps(radius);
-	}
-
-	/**
-	 * Erstellt einen neuen Bomberman und initialisiert die Werte. Möglichkeit
+	 * Erstellt einen neuen Bomberman und initialisiert die Werte. Moeglichkeit
 	 * die Farbe des Bomberman zu ändern.
 	 * 
 	 * @param posX
@@ -57,14 +31,19 @@ public class Bomberman extends JLabel {
 	 * @param posY
 	 *            Startposition
 	 * @param radius
-	 *            Pixelgröße der Bombermanfigur
+	 *            Pixelgroeße der Bombermanfigur
 	 * @param expRad
 	 *            Explosionsradius
 	 * @param color
-	 *            Wert für Farbe des Bomberman
+	 *            Wert fuer Farbe des Bomberman
 	 */
 	public Bomberman(int posX, int posY, int radius, int expRad, int color) {
-		this(posX, posY, radius, expRad);
+		this.posX = posX;
+		this.posY = posY;
+		this.radius = radius;
+		this.expRad = expRad;
+		this.bombs = new ArrayList<Bomb>();
+		this.counter = 0;
 		String path_to_Image;
 		if (color > 1) // Bomberman Farbwahl
 			path_to_Image = "Bomberman2.png";
@@ -100,28 +79,28 @@ public class Bomberman extends JLabel {
 	}
 
 	/**
-	 * Ändert die Y-Position nach oben um steps.
+	 * Aendert die Y-Position nach oben um steps.
 	 */
 	public void moveUp() {
 		setPosY(getPosY() - steps);
 	}
 
 	/**
-	 * Ändert die Y-Position nach unten um steps.
+	 * Aendert die Y-Position nach unten um steps.
 	 */
 	public void moveDown() {
 		setPosY(getPosY() + steps);
 	}
 
 	/**
-	 * Ändert die X-Position nach links um steps.
+	 * Aendert die X-Position nach links um steps.
 	 */
 	public void moveLeft() {
 		setPosX(getPosX() - steps);
 	}
 
 	/**
-	 * Ändert die X-Position nach rechts um steps.
+	 * Aendert die X-Position nach rechts um steps.
 	 */
 	public void moveRight() {
 		setPosX(getPosX() + steps);
@@ -129,17 +108,17 @@ public class Bomberman extends JLabel {
 
 	/**
 	 * 
-	 * @return Pixelgröße des Bomberman
+	 * @return Pixelgroeße des Bomberman
 	 */
 	public int getRadius() {
 		return radius;
 	}
 
 	/**
-	 * Setzt Pixelgröße des Bomberman
+	 * Setzt Pixelgroeße des Bomberman
 	 * 
 	 * @param radius
-	 *            Pixelgröße des Bomberman
+	 *            Pixelgroeße des Bomberman
 	 */
 	public void setRadius(int radius) {
 		this.radius = radius;

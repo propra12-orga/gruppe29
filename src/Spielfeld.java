@@ -9,7 +9,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	@Override
 	/**
-	 * Abfrage der gedrückten Tasten und Eventhandler für beide Bomberman (Bewegung und Bombenwurf)
+	 * Abfrage der gedrueckten Tasten und Eventhandler für beide Bomberman (Bewegung und Bombenwurf)
 	 */
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
@@ -250,7 +250,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 			this.bm2.bombs.get(n).setVisible(true);
 			this.add(this.bm2.bombs.get(n));
 			repaint();
-			this.bm2.bombs.get(n).explode(this, this.bm2, this.bm);
+			this.bm2.bombs.get(n).explode(this, this.bm);
 			repaint();
 			break;
 		}
@@ -269,7 +269,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	/** Breite des Fensters */
 	private int width;
-	/** Höhe des Fensters */
+	/** Hoehe des Fensters */
 	private int height;
 
 	/**
@@ -283,8 +283,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	/**
 	 * Spielraster mit Int-Variablen für verschiedene Elemente auf dem Spielfeld
-	 * (-2) - Powerup (-1) - Ausgang (0) - begehbar (2) - zerstörbar (3) - Bombe
-	 * (4) - Zerstörbar mit Exit
+	 * (-2) - Powerup (-1) - Ausgang (0) - begehbar (2) - zerstoerbar (3) -
+	 * Bombe (4) - Zerstoerbar mit Exit
 	 */
 	public int[][] raster;
 
@@ -297,7 +297,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	/** Anzahl der begehbaren Reihen */
 	private int columns;
-	/** Groesse der Bloecke (alle Blöcke sind quadratisch */
+	/** Groesse der Bloecke (alle Bloecke sind quadratisch */
 	public int blockLength;
 	/** Explosionsradius */
 	private int expRad;
@@ -311,13 +311,15 @@ public class Spielfeld extends JPanel implements KeyListener {
 	 * @param width
 	 *            Fensterbreite
 	 * @param height
-	 *            Fensterhöhe
+	 *            Fensterhoehe
 	 * @param col
 	 *            Reihen
 	 * @param length
-	 *            Blocklänge
+	 *            Blocklaenge
+	 * @param mode
+	 *            2-Spieler-Modus
 	 */
-	public Spielfeld(int width, int height, int col, int length) {
+	public Spielfeld(int width, int height, int col, int length, boolean mode) {
 		this.height = height;
 		this.width = width;
 		columns = col;
@@ -327,9 +329,19 @@ public class Spielfeld extends JPanel implements KeyListener {
 		expRad = 2;
 		this.bm = new Bomberman(width - ((columns - 1) * blockLength), height
 				- ((columns - 1) * blockLength), blockLength, expRad
-				* blockLength);
+				* blockLength, 1);
+
+		if (mode) {
+			this.two_player = true;
+			this.bm2 = new Bomberman(width - (2 * blockLength), height
+					- (2 * blockLength), blockLength, expRad * blockLength, 2);
+		}
 
 		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
+
+		this.add(this.bm);
+		if (this.bm2 != null)
+			this.add(this.bm2);
 
 		this.raster = new int[width][height];
 		for (int i = 0; i < width; i++)
@@ -338,33 +350,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	}
 
 	/**
-	 * Constructor für Mehrspielermodus
-	 * 
-	 * @param width
-	 * @param height
-	 * @param col
-	 * @param length
-	 * @param mode
-	 *            Zweispielermodus an/aus
-	 */
-	public Spielfeld(int width, int height, int col, int length, boolean mode) {
-		this(width, height, col, length);
-		if (mode)
-			this.two_player = true;
-		mehrspielermodus();
-	}
-
-	/**
-	 * Initialisieren des zweiten Bobmermans
-	 */
-	public void mehrspielermodus() {
-		this.bm2 = new Bomberman(width - (2 * blockLength), height
-				- (2 * blockLength), blockLength, expRad * blockLength, 2);
-		this.two_player = true;
-	}
-
-	/**
-	 * Zeichenmethode für das Spielfeld, aufgelöst nach Raster
+	 * Zeichenmethode für das Spielfeld, aufgeloest nach Raster
 	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -403,12 +389,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 		// Bomberman zeichnen
 		bm.paintObject();
-		this.add(this.bm);
 
-		if (bm2 != null) {
+		if (bm2 != null)
 			bm2.paintObject();
-			this.add(this.bm2);
-		}
 
 		for (int i = 0; i < this.bm.bombs.size(); i++)
 			if (this.bm.bombs.get(i) != null

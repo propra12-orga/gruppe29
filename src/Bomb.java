@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Bomb extends JLabel {
-	// bombe
 	private int posX;
 	private int posY;
 	/** Radius der Bombe */
@@ -20,7 +19,7 @@ public class Bomb extends JLabel {
 	private boolean exploded;
 
 	/**
-	 * Die Methode Bomb übernimmt die Parameter und setzt die Bombe auf
+	 * Die Methode Bomb uebernimmt die Parameter und setzt die Bombe auf
 	 * unsichtbar und auf nicht explodiert
 	 * 
 	 * @param posX
@@ -47,9 +46,9 @@ public class Bomb extends JLabel {
 	 * Die Methode explode erstellt einen Timer t und setzt den Timer
 	 * 
 	 * @param sp
-	 *            übergibt das Spielfeld
+	 *            uebergibt das Spielfeld
 	 * @param man
-	 *            übergibt den Bomberman
+	 *            uebergibt den Bomberman
 	 */
 	public void explode(Spielfeld sp, Bomberman man) {
 		Timer t = new Timer();
@@ -62,9 +61,9 @@ public class Bomb extends JLabel {
 	 * Die Methode explode erstellt einen Timer t und setzt den Timer
 	 * 
 	 * @param sp
-	 *            übergibt das Spielfeld
+	 *            uebergibt das Spielfeld
 	 * @param man
-	 *            übergibt den 1. Bomberman
+	 *            uebergibt den 1. Bomberman
 	 * @param man2
 	 *            übergibt den 2. Bomberman
 	 */
@@ -77,7 +76,7 @@ public class Bomb extends JLabel {
 
 	/**
 	 * 
-	 * @return gibt zurück, ob die Bombe explodiert ist
+	 * @return gibt zurueck, ob die Bombe explodiert ist
 	 */
 	public boolean isExploded() {
 		return exploded;
@@ -93,7 +92,7 @@ public class Bomb extends JLabel {
 
 	/**
 	 * 
-	 * @return gibt zurück, ob die Bombe sichtbar ist oder unsichtbar ist
+	 * @return gibt zurueck, ob die Bombe sichtbar ist oder unsichtbar ist
 	 */
 	public boolean isVisible() {
 		return visible;

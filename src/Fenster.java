@@ -36,7 +36,7 @@ public class Fenster implements ActionListener {
 		this.height = height;
 		columns = col;
 		length = blockLength;
-		sp = new Spielfeld(width, height, columns, length);
+		sp = new Spielfeld(width, height, columns, length, false);
 		initFrame();
 	}
 
@@ -59,7 +59,7 @@ public class Fenster implements ActionListener {
 		f.setVisible(true);
 	}
 
-	/** Menüleiste */
+	/** Menueleiste */
 	private void initMenue() {
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
@@ -157,11 +157,9 @@ public class Fenster implements ActionListener {
 		this.mode = mode;
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true);
-			sp.two_player = true;
-			sp.mehrspielermodus();
 			System.out.println("Neustart im 2 Spielermodus");
 		} else {
-			sp = new Spielfeld(width, height, columns, length);
+			sp = new Spielfeld(width, height, columns, length, false);
 			System.out.println("Neustart im 1 Spielermodus");
 		}
 		initFrame();
