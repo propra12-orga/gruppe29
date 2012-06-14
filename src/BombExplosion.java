@@ -331,11 +331,11 @@ public class BombExplosion extends TimerTask {
 																		// mauer
 																		// kapputt
 																		// machen
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
 							* this.bomb.getRadius()] = 0;
 				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
 						.getPosY() + i * this.bomb.getRadius()] == 4)
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
 							* this.bomb.getRadius()] = -1;
 				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
 						.getPosY() + i * this.bomb.getRadius()] == 3) {
