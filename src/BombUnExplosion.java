@@ -1,7 +1,7 @@
 import java.util.TimerTask;
 
 public class BombUnExplosion extends TimerTask {
-
+	private Bomberman bm;
 	/** Bomb-Objekt */
 	private Bomb bomb;
 	/** Spielfeld-Referenz */
@@ -15,6 +15,7 @@ public class BombUnExplosion extends TimerTask {
 	 *            Übergabe des Spielfelds
 	 */
 	public BombUnExplosion(Bomb b, Spielfeld sp) {
+		// this.bm = bm;
 		this.bomb = b;
 		this.sp = sp;
 	}
@@ -26,9 +27,9 @@ public class BombUnExplosion extends TimerTask {
 	public void run() {
 		bomb.setExploded(false);
 		bomb.setVisible(false);
+		// bm.bombs.remove(bomb);
 		System.out.println("Bombe abgefackelt!");
 		sp.raster[bomb.getPosX()][bomb.getPosY()] = 0;
 		sp.repaint();
 	}
-
 }

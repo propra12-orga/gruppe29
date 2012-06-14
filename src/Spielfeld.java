@@ -127,16 +127,20 @@ public class Spielfeld extends JPanel implements KeyListener {
 			break;
 		case KeyEvent.VK_SPACE: {
 			int n = this.bm.getNewBombIndex();
-			this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs.get(n)
-					.getPosY()] = 3;
-			this.bm.bombs.get(n).setVisible(true);
-			this.add(this.bm.bombs.get(n));
-			// repaint();
-			if (two_player)
-				this.bm.bombs.get(n).explode(this, this.bm, this.bm2);
-			else
-				this.bm.bombs.get(n).explode(this, this.bm);
-			repaint();
+			if (this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs
+					.get(n).getPosY()] != 3) {
+				this.bomb.numbOfBombs1++;
+				this.raster[this.bm.bombs.get(n).getPosX()][this.bm.bombs
+						.get(n).getPosY()] = 3;
+				this.bm.bombs.get(n).setVisible(true);
+				this.add(this.bm.bombs.get(n));
+				repaint();
+				if (two_player)
+					this.bm.bombs.get(n).explode(this, this.bm, this.bm2);
+				else
+					this.bm.bombs.get(n).explode(this, this.bm);
+				repaint();
+			}
 			break;
 		}
 		case KeyEvent.VK_W: {
@@ -249,13 +253,17 @@ public class Spielfeld extends JPanel implements KeyListener {
 		}
 		case KeyEvent.VK_Q: {
 			int n = this.bm2.getNewBombIndex();
-			this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs.get(n)
-					.getPosY()] = 3;
-			this.bm2.bombs.get(n).setVisible(true);
-			this.add(this.bm2.bombs.get(n));
-			repaint();
-			this.bm2.bombs.get(n).explode(this, this.bm);
-			repaint();
+			if (this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs
+					.get(n).getPosY()] != 3) {
+				this.bomb.numbOfBombs2++;
+				this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs
+						.get(n).getPosY()] = 3;
+				this.bm2.bombs.get(n).setVisible(true);
+				this.add(this.bm2.bombs.get(n));
+				repaint();
+				this.bm2.bombs.get(n).explode(this, this.bm, this.bm2);
+				repaint();
+			}
 			break;
 		}
 		default:
@@ -302,6 +310,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public int blockLength;
 	/** Explosionsradius */
 	private int expRad;
+	/** Bombe */
+	private Bomb bomb;
 
 	/** Ist Zweispielermodus angeschaltet? */
 	public boolean two_player;
@@ -337,6 +347,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 			this.bm2 = new Bomberman(width - (2 * blockLength), height
 					- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		}
+
+		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
 
 		this.add(this.bm);
 		if (this.bm2 != null)

@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Bomb extends JLabel {
+	public static int numbOfBombs1 = 0;
+	public static int numbOfBombs2 = 0;
+
 	private int posX;
 	private int posY;
 	/** Radius der Bombe */
@@ -17,6 +20,8 @@ public class Bomb extends JLabel {
 	private boolean visible;
 	/** Bombe explodiert nicht explodiert */
 	private boolean exploded;
+	public Timer tExp;
+	public Timer tUnExp;
 
 	/**
 	 * Die Methode Bomb uebernimmt die Parameter und setzt die Bombe auf
@@ -33,6 +38,8 @@ public class Bomb extends JLabel {
 	 * */
 	public Bomb(int posX, int posY, int radius, int explosionRadius) {
 		super();
+		this.tExp = new Timer();
+		this.tUnExp = new Timer();
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
@@ -51,10 +58,8 @@ public class Bomb extends JLabel {
 	 *            uebergibt den Bomberman
 	 */
 	public void explode(Spielfeld sp, Bomberman man) {
-		Timer t = new Timer();
-		t.schedule(new BombExplosion(this, sp, man), 1000);
-		t.schedule(new BombUnExplosion(this, sp), 1500);
-
+		tExp.schedule(new BombExplosion(this, sp, man), 2000);
+		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
 	}
 
 	/**
@@ -68,10 +73,8 @@ public class Bomb extends JLabel {
 	 *            übergibt den 2. Bomberman
 	 */
 	public void explode(Spielfeld sp, Bomberman man, Bomberman man2) {
-		Timer t = new Timer();
-		t.schedule(new BombExplosion(this, sp, man, man2), 1000);
-		t.schedule(new BombUnExplosion(this, sp), 1500);
-
+		tExp.schedule(new BombExplosion(this, sp, man, man2), 2000);
+		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
 	}
 
 	/**
@@ -184,24 +187,13 @@ public class Bomb extends JLabel {
 				Image.SCALE_DEFAULT));
 		this.setIcon(ico);
 		this.setBounds(this.posX, this.posY, this.radius, this.radius);
-
-		// Image image = Toolkit.getDefaultToolkit().getImage("flamme.png");
-
 		if (isExploded()) {
 			g.setColor(Color.orange);
 			for (int i = radius; i <= explosionRadius; i += radius) {
-				/*
-				 * g.drawImage(image, posX - i, posY, radius, radius, null);
-				 * g.drawImage(image, posX + i, posY, radius, radius, null);
-				 * g.drawImage(image, posX, posY - i, radius, radius, null);
-				 * g.drawImage(image, posX, posY + i, radius, radius, null);
-				 */
-
 				g.fillOval(posX - i, posY, radius, radius);
 				g.fillOval(posX + i, posY, radius, radius);
 				g.fillOval(posX, posY - i, radius, radius);
 				g.fillOval(posX, posY + i, radius, radius);
-
 			}
 		}
 
