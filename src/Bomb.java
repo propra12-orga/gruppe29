@@ -184,13 +184,24 @@ public class Bomb extends JLabel {
 				Image.SCALE_DEFAULT));
 		this.setIcon(ico);
 		this.setBounds(this.posX, this.posY, this.radius, this.radius);
+
+		// Image image = Toolkit.getDefaultToolkit().getImage("flamme.png");
+
 		if (isExploded()) {
 			g.setColor(Color.orange);
 			for (int i = radius; i <= explosionRadius; i += radius) {
+				/*
+				 * g.drawImage(image, posX - i, posY, radius, radius, null);
+				 * g.drawImage(image, posX + i, posY, radius, radius, null);
+				 * g.drawImage(image, posX, posY - i, radius, radius, null);
+				 * g.drawImage(image, posX, posY + i, radius, radius, null);
+				 */
+
 				g.fillOval(posX - i, posY, radius, radius);
 				g.fillOval(posX + i, posY, radius, radius);
 				g.fillOval(posX, posY - i, radius, radius);
 				g.fillOval(posX, posY + i, radius, radius);
+
 			}
 		}
 

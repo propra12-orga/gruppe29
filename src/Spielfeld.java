@@ -1,9 +1,13 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+
+import Spielobjekte.Ausgang;
+import Spielobjekte.Boden;
+import Spielobjekte.BreakableMauer;
+import Spielobjekte.Mauer;
 
 public class Spielfeld extends JPanel implements KeyListener {
 
@@ -127,7 +131,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 					.getPosY()] = 3;
 			this.bm.bombs.get(n).setVisible(true);
 			this.add(this.bm.bombs.get(n));
-			repaint();
+			// repaint();
 			if (two_player)
 				this.bm.bombs.get(n).explode(this, this.bm, this.bm2);
 			else
@@ -292,9 +296,6 @@ public class Spielfeld extends JPanel implements KeyListener {
 	private Bomberman bm;
 	/** Spielfeldobjekt Bomberman (Zweiter Spieler) */
 	private Bomberman bm2;
-	/** Bombe */
-	private Bomb bomb;
-
 	/** Anzahl der begehbaren Reihen */
 	private int columns;
 	/** Groesse der Bloecke (alle Bloecke sind quadratisch */
@@ -337,8 +338,6 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		}
 
-		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
-
 		this.add(this.bm);
 		if (this.bm2 != null)
 			this.add(this.bm2);
@@ -359,28 +358,29 @@ public class Spielfeld extends JPanel implements KeyListener {
 			for (int j = 0; j < this.raster.length; j += blockLength) {
 				switch (this.raster[i][j]) {
 				case 0: {
-					g.setColor(Color.WHITE);
-					g.fillRect(i, j, blockLength, blockLength);
+					Boden b = new Boden(i, j, blockLength);
+					b.paintObject(g);
 					break;
 				}
 				case 1: {
-					g.setColor(Color.BLACK);
-					g.fillRect(i, j, blockLength, blockLength);
+
+					Mauer m = new Mauer(i, j, blockLength);
+					m.paintObject(g);
 					break;
 				}
 				case 2: {
-					g.setColor(Color.ORANGE);
-					g.fillRect(i, j, blockLength, blockLength);
+					BreakableMauer brm = new BreakableMauer(i, j, blockLength);
+					brm.paintObject(g);
 					break;
 				}
 				case 4: {
-					g.setColor(Color.ORANGE);
-					g.fillRect(i, j, blockLength, blockLength);
+					BreakableMauer brm = new BreakableMauer(i, j, blockLength);
+					brm.paintObject(g);
 					break;
 				}
 				case -1: {
-					g.setColor(Color.BLUE);
-					g.fillRect(i, j, blockLength, blockLength);
+					Ausgang a = new Ausgang(i, j, blockLength);
+					a.paintObject(g);
 					break;
 				}
 				}
@@ -391,6 +391,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		bm.paintObject();
 
 		if (bm2 != null)
+
 			bm2.paintObject();
 
 		for (int i = 0; i < this.bm.bombs.size(); i++)
