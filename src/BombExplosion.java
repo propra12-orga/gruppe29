@@ -39,524 +39,522 @@ public class BombExplosion extends TimerTask {
 	 */
 	public void run() {
 		bomb.setExploded(true);
-		System.out.println("Bombe gezündet!");
 
-		if (bm2 == null) {
-			// Zerstoerung der Mauern + Bombermans töten
-			// oben & unten#
+		// Zerstoerung der Mauern + Bombermans töten
+		// oben & unten#
 
-			// oben
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-						* this.bomb.getRadius()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 2) // zerstörbare
-																		// mauer
-																		// kapputt
-																		// machen
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-							* this.bomb.getRadius()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 4)
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-							* this.bomb.getRadius()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if ((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY() - i * this.bomb.getRadius())
-								&& (this.bm.bombs.get(j).getPosX() == this.bomb
-										.getPosX())) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist Differenz
-														// zwischen den
-														// TImern
-														// !!
-						}
+		// oben
+		for (int i = 1; i * this.bomb.getRadius() <= this.bomb
+				.getExplosionRadius(); i++) {
+			switch (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+					* this.bomb.getRadius()]) {
+			case -2: { // PowerUp zerstören
+
+			}
+				break;
+			case 1: { // unzerstoerbare mauer stoppt explosion
+				i = 100;
+			}
+				break;
+			case 2: { // zerstörbare mauer kapputt machen
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+						* this.bomb.getRadius()] = 0;
+			}
+				break;
+			case 3: { // Kettenreaktion
+				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+					if (bm2 == null)
+						kettenreaktion(bm, 1, i, j);
+					else {
+						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+							kettenreaktion(bm, bm2, 1, i, j, k);
 					}
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX())
-						&& (this.bm.getPosY() == this.bomb.getPosY() - i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(1);
 				}
 			}
-			// unten
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-						* this.bomb.getRadius()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 2) // zerstörbare
-																		// mauer
-																		// kapputt
-																		// machen
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-							* this.bomb.getRadius()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 4)
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-							* this.bomb.getRadius()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if ((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY() + i * this.bomb.getRadius())
-								&& (this.bm.bombs.get(j).getPosX() == this.bomb
-										.getPosX())) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist Differenz
-														// zwischen den
-														// TImern
-														// !!
-						}
-					}
+				break;
+			case 4: { // zerstörbare mauer kapputt machen, exit setzen
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+						* this.bomb.getRadius()] = -1;
+			}
+				break;
+			default: {
 
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX())
-						&& (this.bm.getPosY() == this.bomb.getPosY() + i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(1);
-				}
+			}
+			}
+			if (i < 100) {
+				if (bm2 == null)
+					kill(bm, 1, i);
+				else
+					kill(bm, bm2, 1, i);
 			}
 
-			// links&rechts
-
-			// links
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 2) // zerstörbare
-																			// mauer
-					// kapputt machen
-					this.sp.raster[this.bomb.getPosX() - i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 4)
-					this.sp.raster[this.bomb.getPosX() - i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if ((this.bm.bombs.get(j).getPosX() == this.bomb
-								.getPosX() - i * this.bomb.getRadius())
-								&& (this.bm.bombs.get(j).getPosY() == this.bomb
-										.getPosY())) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist Differenz
-														// zwischen den
-														// TImern
-														// !!
-						}
+		}
+		// unten
+		for (int i = 1; i * this.bomb.getRadius() <= this.bomb
+				.getExplosionRadius(); i++) {
+			switch (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+					* this.bomb.getRadius()]) {
+			case -2: {
+				// PowerUp zerstören
+			}
+				break;
+			case 1: { // unzerstoerbare mauer stoppt explosion
+				i = 100;
+			}
+				break;
+			case 2: { // zerstörbare mauer kapputt machen
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+						* this.bomb.getRadius()] = 0;
+			}
+				break;
+			case 3: { // Kettenreaktion
+				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+					if (bm2 == null)
+						kettenreaktion(bm, 3, i, j);
+					else {
+						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+							kettenreaktion(bm, bm2, 3, i, j, k);
 					}
-				}
-				if ((this.bm.getPosY() == this.bomb.getPosY())
-						&& (this.bm.getPosX() == this.bomb.getPosX() - i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(1);
 				}
 			}
-			// rechts
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 2) // zerstörbare
-																			// mauer
-					// kapputt machen
-					this.sp.raster[this.bomb.getPosX() + i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 4)
-					this.sp.raster[this.bomb.getPosX() + i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if ((this.bm.bombs.get(j).getPosX() == this.bomb
-								.getPosX() + i * this.bomb.getRadius())
-								&& (this.bm.bombs.get(j).getPosY() == this.bomb
-										.getPosY())) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist Differenz
-														// zwischen den
-														// TImern
-														// !!
-						}
-					}
-				}
-				if ((this.bm.getPosY() == this.bomb.getPosY())
-						&& (this.bm.getPosX() == this.bomb.getPosX() + i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(1);
-				}
+				break;
+			case 4: { // zerstörbare mauer kapputt machen, exit setzen
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+						* this.bomb.getRadius()] = -1;
 			}
-		} else { // ---------------------2 Bomberman---------------------
-			// Zerstoerung der Mauern + Bombermans töten
-			// oben & unten#
-
-			// oben
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-						* this.bomb.getRadius()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 2) // zerstörbare
-																		// mauer
-																		// kapputt
-																		// machen
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-							* this.bomb.getRadius()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 4)
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-							* this.bomb.getRadius()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() - i * this.bomb.getRadius()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if (((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY() - i * this.bomb.getRadius()) && (this.bm.bombs
-								.get(j).getPosX() == this.bomb.getPosX()))) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist
-														// Differenz
-														// zwischen
-														// den
-														// TImern
-														// !!
-						}
-					}
-					for (int j = 0; j < this.bomb.numbOfBombs2; j++) {
-						if (((this.bm2.bombs.get(j).getPosY() == this.bomb
-								.getPosY() - i * this.bomb.getRadius()) && (this.bm2.bombs
-								.get(j).getPosX() == this.bomb.getPosX()))) {
-							System.out.println("Bombe gefunden");
-							this.bm2.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm2.bombs.get(j),
-											sp, bm2), 0);
-							this.bm2.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm2.bombs.get(j),
-											sp), 500); // 500 ist
-							// Differenz
-							// zwischen
-							// den
-							// TImern
-							// !!
-						}
-					}
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX())
-						&& (this.bm.getPosY() == this.bomb.getPosY() - i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-				if ((this.bm2.getPosX() == this.bomb.getPosX())
-						&& (this.bm2.getPosY() == this.bomb.getPosY() - i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
+				break;
+			default: {
 			}
-			// unten
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-						* this.bomb.getRadius()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 2) // zerstörbare
-																		// mauer
-																		// kapputt
-																		// machen
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-							* this.bomb.getRadius()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 4)
-					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-							* this.bomb.getRadius()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX()][this.bomb
-						.getPosY() + i * this.bomb.getRadius()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if (((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY() + i * this.bomb.getRadius()) && (this.bm.bombs
-								.get(j).getPosX() == this.bomb.getPosX()))) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist
-														// Differenz
-														// zwischen
-														// den
-														// TImern
-														// !!
-						}
-					}
-					for (int j = 0; j < this.bomb.numbOfBombs2; j++) {
-						if (((this.bm2.bombs.get(j).getPosY() == this.bomb
-								.getPosY() + i * this.bomb.getRadius()) && (this.bm2.bombs
-								.get(j).getPosX() == this.bomb.getPosX()))) {
-							System.out.println("Bombe gefunden");
-							this.bm2.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm2.bombs.get(j),
-											sp, bm2), 0);
-							this.bm2.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm2.bombs.get(j),
-											sp), 500); // 500 ist
-							// Differenz
-							// zwischen
-							// den
-							// TImern
-							// !!
-						}
-					}
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX())
-						&& (this.bm.getPosY() == this.bomb.getPosY() + i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-				if ((this.bm2.getPosX() == this.bomb.getPosX())
-						&& (this.bm2.getPosY() == this.bomb.getPosY() + i
-								* this.bomb.getRadius())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
+			}
+			if (i < 100) {
+				if (bm2 == null)
+					kill(bm, 3, i);
+				else
+					kill(bm, bm2, 3, i);
 			}
 
-			// links&rechts
-
-			// links
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 2) // zerstörbare
-					// mauer
-					// kapputt
-					// machen
-					this.sp.raster[this.bomb.getPosX() - i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 4)
-					this.sp.raster[this.bomb.getPosX() - i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX() - i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if (((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY()) && (this.bm.bombs.get(j).getPosX() == this.bomb
-								.getPosX() - i * this.bomb.getRadius()))) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist
-														// Differenz
-														// zwischen
-														// den
-														// TImern
-														// !!
-						}
-					}
-					for (int j = 0; j < this.bomb.numbOfBombs2; j++) {
-						if (((this.bm2.bombs.get(j).getPosY() == this.bomb
-								.getPosY()) && (this.bm2.bombs.get(j).getPosX() == this.bomb
-								.getPosX() - i * this.bomb.getRadius()))) {
-							System.out.println("Bombe gefunden");
-							this.bm2.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm2.bombs.get(j),
-											sp, bm2), 0);
-							this.bm2.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm2.bombs.get(j),
-											sp), 500); // 500 ist
-							// Differenz
-							// zwischen
-							// den
-							// TImern
-							// !!
-						}
-					}
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX() - i
-						* this.bomb.getRadius())
-						&& (this.bm.getPosY() == this.bomb.getPosY())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-				if ((this.bm2.getPosX() == this.bomb.getPosX() - i
-						* this.bomb.getRadius())
-						&& (this.bm2.getPosY() == this.bomb.getPosY())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-			}
-
-			// rechts
-			for (int i = 1; i * this.bomb.getRadius() <= this.bomb
-					.getExplosionRadius(); i++) {
-				if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 1)
-					break;// unzerstoerbare mauer stoppt explosion
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 2) // zerstörbare
-					// mauer
-					// kapputt
-					// machen
-					this.sp.raster[this.bomb.getPosX() + i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 4)
-					this.sp.raster[this.bomb.getPosX() + i
-							* this.bomb.getRadius()][this.bomb.getPosY()] = -1;
-				else if (this.sp.raster[this.bomb.getPosX() + i
-						* this.bomb.getRadius()][this.bomb.getPosY()] == 3) {
-					for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
-						if (((this.bm.bombs.get(j).getPosY() == this.bomb
-								.getPosY()) && (this.bm.bombs.get(j).getPosX() == this.bomb
-								.getPosX() + i * this.bomb.getRadius()))) {
-							System.out.println("Bombe gefunden");
-							this.bm.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm.bombs.get(j), sp,
-											bm), 0);
-							this.bm.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm.bombs.get(j),
-											sp), 500); // 500 ist
-														// Differenz
-														// zwischen
-														// den
-														// TImern
-														// !!
-						}
-					}
-					for (int j = 0; j < this.bomb.numbOfBombs2; j++) {
-						if (((this.bm2.bombs.get(j).getPosY() == this.bomb
-								.getPosY()) && (this.bm2.bombs.get(j).getPosX() == this.bomb
-								.getPosX() + i * this.bomb.getRadius()))) {
-							System.out.println("Bombe gefunden");
-							this.bm2.bombs.get(j).tExp.schedule(
-									new BombExplosion(this.bm2.bombs.get(j),
-											sp, bm2), 0);
-							this.bm2.bombs.get(j).tUnExp.schedule(
-									new BombUnExplosion(this.bm2.bombs.get(j),
-											sp), 500); // 500 ist
-							// Differenz
-							// zwischen
-							// den
-							// TImern
-							// !!
-						}
-					}
-				}
-				if ((this.bm.getPosX() == this.bomb.getPosX() + i
-						* this.bomb.getRadius())
-						&& (this.bm.getPosY() == this.bomb.getPosY())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-				if ((this.bm2.getPosX() == this.bomb.getPosX() + i
-						* this.bomb.getRadius())
-						&& (this.bm2.getPosY() == this.bomb.getPosY())) {
-					this.sp.repaint();
-					Main.f.dispose(
-							"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-							true);
-
-					Main.f.restart(2);
-				}
-			}
 		}
 
+		// links&rechts
+
+		// links
+		for (int i = 1; i * this.bomb.getRadius() <= this.bomb
+				.getExplosionRadius(); i++) {
+			switch (this.sp.raster[this.bomb.getPosX() - i
+					* this.bomb.getRadius()][this.bomb.getPosY()]) {
+			case -2: {
+				// PowerUp zerstören
+			}
+				break;
+			case 1: { // unzerstoerbare mauer stoppt explosion
+				i = 100;
+			}
+				break;
+			case 2: {
+				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = 0;
+			}
+				break;
+			case 3: {
+				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+					if (bm2 == null)
+						kettenreaktion(bm, 4, i, j);
+					else {
+						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+							kettenreaktion(bm, bm2, 4, i, j, k);
+					}
+				}
+			}
+				break;
+			case 4: {
+				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = -1;
+			}
+			}
+			if (i < 100) {
+				if (bm2 == null)
+					kill(bm, 4, i);
+				else
+					kill(bm, bm2, 4, i);
+			}
+		}
+		// rechts
+		for (int i = 1; i * this.bomb.getRadius() <= this.bomb
+				.getExplosionRadius(); i++) {
+			switch (this.sp.raster[this.bomb.getPosX() + i
+					* this.bomb.getRadius()][this.bomb.getPosY()]) {
+			case -2: {
+				// PowerUp zerstören
+			}
+				break;
+			case 1: { // unzerstoerbare mauer stoppt explosion
+				i = 100;
+			}
+				break;
+			case 2: {
+				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = 0;
+			}
+			case 3: {
+				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+					if (bm2 == null)
+						kettenreaktion(bm, 2, i, j);
+					else {
+						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+							kettenreaktion(bm, bm2, 2, i, j, k);
+					}
+				}
+			}
+			case 4: {
+				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = -1;
+			}
+			}
+			if (i < 100) {
+				if (bm2 == null)
+					kill(bm, 2, i);
+				else
+					kill(bm, bm2, 2, i);
+			}
+		}
+		if ((this.bm.getPosX() == this.bomb.getPosX())
+				&& (this.bm.getPosY() == this.bomb.getPosY())) {
+			this.sp.repaint();
+			Main.f.dispose(
+					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+					true);
+
+			Main.f.restart(1);
+		}
 		this.sp.repaint();
+	}
+
+	private void kill(Bomberman man, int direction, int i) {
+		switch (direction) {
+		case 1: { // oben
+			if ((man.getPosX() == this.bomb.getPosX())
+					&& (man.getPosY() == this.bomb.getPosY() - i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 2: { // rechts
+			if ((man.getPosY() == this.bomb.getPosY())
+					&& (man.getPosX() == this.bomb.getPosX() + i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 3: { // unten
+			if ((man.getPosX() == this.bomb.getPosX())
+					&& (man.getPosY() == this.bomb.getPosY() + i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 4: { // links
+			if ((man.getPosY() == this.bomb.getPosY())
+					&& (man.getPosX() == this.bomb.getPosX() - i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+		}
+	}
+
+	private void kill(Bomberman man, Bomberman man2, int direction, int i) {
+		switch (direction) {
+		case 1: { // oben
+			if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
+					.getPosY() - i * this.bomb.getRadius()))
+					|| ((man2.getPosX() == this.bomb.getPosX()) && (man2
+							.getPosY() == this.bomb.getPosY() - i
+							* this.bomb.getRadius()))) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 2: { // rechts
+			if (((man.getPosY() == this.bomb.getPosY()) && (man.getPosX() == this.bomb
+					.getPosX() + i * this.bomb.getRadius()))
+					|| ((man2.getPosY() == this.bomb.getPosY()) && (man2
+							.getPosX() == this.bomb.getPosX() + i
+							* this.bomb.getRadius()))) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 3: { // unten
+			if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
+					.getPosY() + i * this.bomb.getRadius()))
+					|| ((man2.getPosX() == this.bomb.getPosX()) && (man2
+							.getPosY() == this.bomb.getPosY() + i
+							* this.bomb.getRadius()))) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+			break;
+		case 4: { // links
+			if (((man.getPosY() == this.bomb.getPosY()) && (man.getPosX() == this.bomb
+					.getPosX() - i * this.bomb.getRadius()))
+					|| ((man2.getPosY() == this.bomb.getPosY()) && (man2
+							.getPosX() == this.bomb.getPosX() - i
+							* this.bomb.getRadius()))) {
+				this.sp.repaint();
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(1);
+			}
+		}
+		}
+	}
+
+	private void kettenreaktion(Bomberman man, int direction, int i, int j) {
+		switch (direction) {
+		case 1: { // oben
+			if ((man.bombs.get(j).getPosY() == this.bomb.getPosY() - i
+					* this.bomb.getRadius())
+					&& (man.bombs.get(j).getPosX() == this.bomb.getPosX())) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+		}
+			break;
+		case 2: { // rechts
+			if ((man.bombs.get(j).getPosX() == this.bomb.getPosX() + i
+					* this.bomb.getRadius())
+					&& (man.bombs.get(j).getPosY() == this.bomb.getPosY())) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+		}
+			break;
+		case 3: { // unten
+			if ((man.bombs.get(j).getPosY() == this.bomb.getPosY() + i
+					* this.bomb.getRadius())
+					&& (man.bombs.get(j).getPosX() == this.bomb.getPosX())) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+		}
+			break;
+		case 4: { // links
+			if ((man.bombs.get(j).getPosX() == this.bomb.getPosX() - i
+					* this.bomb.getRadius())
+					&& (man.bombs.get(j).getPosY() == this.bomb.getPosY())) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+		}
+		}
+	}
+
+	private void kettenreaktion(Bomberman man, Bomberman man2, int direction,
+			int i, int j, int k) {
+		switch (direction) {
+		case 1: { // oben
+			if (((man.bombs.get(j).getPosY() == this.bomb.getPosY() - i
+					* this.bomb.getRadius()) && (man.bombs.get(j).getPosX() == this.bomb
+					.getPosX()))) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY() - i
+					* this.bomb.getRadius()) && (man2.bombs.get(k).getPosX() == this.bomb
+					.getPosX()))) {
+				System.out.println("Bombe gefunden");
+				man2.bombs.get(k).tExp.schedule(
+						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
+				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
+						man2.bombs.get(k), sp), 500); // 500 ist
+				// Differenz
+				// zwischen
+				// den
+				// TImern
+				// !!
+			}
+		}
+			break;
+		case 2: { // rechts
+			if (((man.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man.bombs
+					.get(j).getPosX() == this.bomb.getPosX() + i
+					* this.bomb.getRadius()))) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY()) && (man2.bombs
+					.get(k).getPosX() == this.bomb.getPosX() + i
+					* this.bomb.getRadius()))) {
+				System.out.println("Bombe gefunden");
+				man2.bombs.get(k).tExp.schedule(
+						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
+				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
+						man2.bombs.get(k), sp), 500); // 500 ist
+				// Differenz
+				// zwischen
+				// den
+				// TImern
+				// !!
+			}
+		}
+			break;
+		case 3: { // unten
+			if (((man.bombs.get(j).getPosY() == this.bomb.getPosY() + i
+					* this.bomb.getRadius()) && (man.bombs.get(j).getPosX() == this.bomb
+					.getPosX()))) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY() + i
+					* this.bomb.getRadius()) && (man2.bombs.get(k).getPosX() == this.bomb
+					.getPosX()))) {
+				System.out.println("Bombe gefunden");
+				man2.bombs.get(k).tExp.schedule(
+						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
+				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
+						man2.bombs.get(k), sp), 500); // 500 ist
+				// Differenz
+				// zwischen
+				// den
+				// TImern
+				// !!
+			}
+		}
+			break;
+		case 4: { // links
+			if (((man.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man.bombs
+					.get(j).getPosX() == this.bomb.getPosX() - i
+					* this.bomb.getRadius()))) {
+				System.out.println("Bombe gefunden");
+				man.bombs.get(j).tExp.schedule(
+						new BombExplosion(man.bombs.get(j), sp, man), 0);
+				man.bombs.get(j).tUnExp.schedule(
+						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
+																			// ist
+																			// Differenz
+																			// zwischen
+																			// den
+																			// TImern
+																			// !!
+			}
+			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY()) && (man2.bombs
+					.get(k).getPosX() == this.bomb.getPosX() - i
+					* this.bomb.getRadius()))) {
+				System.out.println("Bombe gefunden");
+				man2.bombs.get(k).tExp.schedule(
+						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
+				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
+						man2.bombs.get(k), sp), 500); // 500 ist
+				// Differenz
+				// zwischen
+				// den
+				// TImern
+				// !!
+			}
+		}
+		}
 	}
 }

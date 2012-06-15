@@ -301,9 +301,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 	public int[][] raster;
 
 	/** Spielfeldobjekt Bomberman (Einspieler) */
-	private Bomberman bm;
+	public Bomberman bm;
 	/** Spielfeldobjekt Bomberman (Zweiter Spieler) */
-	private Bomberman bm2;
+	public Bomberman bm2;
 	/** Anzahl der begehbaren Reihen */
 	private int columns;
 	/** Groesse der Bloecke (alle Bloecke sind quadratisch */
@@ -311,7 +311,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 	/** Explosionsradius */
 	private int expRad;
 	/** Bombe */
-	private Bomb bomb;
+	public Bomb bomb;
 
 	/** Ist Zweispielermodus angeschaltet? */
 	public boolean two_player;

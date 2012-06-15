@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -155,9 +156,13 @@ public class Fenster implements ActionListener {
 	 */
 	public void restart(int mode) {
 		this.mode = mode;
+		sp.bomb.numbOfBombs1 = 0;
+		sp.bm.bombs = new ArrayList<Bomb>();
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true);
 			System.out.println("Neustart im 2 Spielermodus");
+			sp.bomb.numbOfBombs2 = 0;
+			sp.bm2.bombs = new ArrayList<Bomb>();
 		} else {
 			sp = new Spielfeld(width, height, columns, length, false);
 			System.out.println("Neustart im 1 Spielermodus");
