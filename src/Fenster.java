@@ -1,7 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +23,7 @@ public class Fenster implements ActionListener {
 	private JFrame f;
 	private JFrame fc;
 	private JPanel p;
+	private boolean play;
 	/** Erstellung eines Spielfeldes sp */
 	private Spielfeld sp;
 	private int width;
@@ -37,6 +45,7 @@ public class Fenster implements ActionListener {
 		this.height = height;
 		columns = col;
 		length = blockLength;
+		play = true;
 		sp = new Spielfeld(width, height, columns, length, false);
 		initFrame();
 	}
@@ -58,6 +67,32 @@ public class Fenster implements ActionListener {
 		p.setSize(width, height);
 		initMenue();
 		f.setVisible(true);
+
+		try {
+			// URL soundURL = new URL("thelastofthejedi.wav"); // ist zu
+			// initialisieren
+
+			AudioInputStream audioInputStream = AudioSystem
+					.getAudioInputStream(new File("melodie.wav"));
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(
+					audioInputStream);
+			AudioFormat af = audioInputStream.getFormat();
+			int size = (int) (af.getFrameSize() * audioInputStream
+					.getFrameLength());
+			byte[] audio = new byte[size];
+			DataLine.Info info = new DataLine.Info(Clip.class, af, size);
+			bufferedInputStream.read(audio, 0, size);
+			Clip clip = (Clip) AudioSystem.getLine(info);
+			clip.open(af, audio, 0, size);
+			while (true) {
+				if (play)
+					clip.loop(1);
+				else
+					clip.stop();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/** Menueleiste */
@@ -76,6 +111,15 @@ public class Fenster implements ActionListener {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
 				restart(1);
+			}
+		});
+		JMenuItem sound = new JMenuItem("Sound An/Aus");
+		sound.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				if (play)
+					play = false;
+				else
+					play = true;
 			}
 		});
 		JMenuItem credits = new JMenuItem("Credits");
@@ -124,6 +168,7 @@ public class Fenster implements ActionListener {
 		});
 		menueLeiste.add(menue);
 		menue.add(start);
+		menue.add(sound);
 		menue.add(credits);
 		menue.add(beenden);
 		menueLeiste.add(mp);
