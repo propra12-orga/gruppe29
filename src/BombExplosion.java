@@ -217,15 +217,6 @@ public class BombExplosion extends TimerTask {
 					kill(bm, bm2, 2, i);
 			}
 		}
-		if ((this.bm.getPosX() == this.bomb.getPosX())
-				&& (this.bm.getPosY() == this.bomb.getPosY())) {
-			this.sp.repaint();
-			Main.f.dispose(
-					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-					true);
-
-			Main.f.restart(1);
-		}
 		this.sp.repaint();
 	}
 
@@ -299,8 +290,18 @@ public class BombExplosion extends TimerTask {
 			}
 		}
 		}
+		if ((this.bm.getPosX() == this.bomb.getPosX())
+				&& (this.bm.getPosY() == this.bomb.getPosY())) {
+			this.sp.repaint();
+			Main.f.dispose(
+					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+					true);
+
+			Main.f.restart(1);
+		}
 	}
 
+	// Behandlung für Bomberman im Zweispielermodus
 	private void kill(Bomberman man, Bomberman man2, int direction, int i) {
 		switch (direction) {
 		case 1: { // oben
@@ -318,9 +319,7 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose(
-						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-						true);
+				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
 
 				Main.f.restart(2);
 			}
@@ -341,9 +340,7 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose(
-						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-						true);
+				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
 
 				Main.f.restart(2);
 			}
@@ -364,9 +361,7 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose(
-						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-						true);
+				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
 
 				Main.f.restart(2);
 			}
@@ -387,14 +382,24 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose(
-						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-						true);
+				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
 
 				Main.f.restart(2);
 			}
 		}
 		}
+		if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
+				.getPosY()))
+				|| ((man2.getPosX() == this.bomb.getPosX()) && (man2.getPosY() == this.bomb
+						.getPosY()))) {
+			this.sp.repaint();
+			Main.f.dispose(
+					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+					true);
+
+			Main.f.restart(2);
+		}
+
 	}
 
 	private void kettenreaktion(Bomberman man, int direction, int i, int j) {
