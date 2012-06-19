@@ -23,7 +23,9 @@ public class Fenster implements ActionListener {
 	private JFrame f;
 	private JFrame fc;
 	private JPanel p;
+	Clip clip;
 	private boolean play;
+	private boolean stop;
 	/** Erstellung eines Spielfeldes sp */
 	private Spielfeld sp;
 	private int width;
@@ -31,6 +33,7 @@ public class Fenster implements ActionListener {
 	private int columns;
 	private int length;
 	private int mode;
+	Thread backgroundsound;
 
 	/**
 	 * Fenster erstellen
@@ -46,7 +49,24 @@ public class Fenster implements ActionListener {
 		columns = col;
 		length = blockLength;
 		play = true;
+		stop = false;
 		sp = new Spielfeld(width, height, columns, length, false);
+		try {
+			AudioInputStream audioInputStream = AudioSystem
+					.getAudioInputStream(new File("melodie.wav"));
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(
+					audioInputStream);
+			AudioFormat af = audioInputStream.getFormat();
+			int size = (int) (af.getFrameSize() * audioInputStream
+					.getFrameLength());
+			byte[] audio = new byte[size];
+			DataLine.Info info = new DataLine.Info(Clip.class, af, size);
+			bufferedInputStream.read(audio, 0, size);
+			clip = (Clip) AudioSystem.getLine(info);
+			clip.open(af, audio, 0, size);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		initFrame();
 	}
 
@@ -68,31 +88,14 @@ public class Fenster implements ActionListener {
 		initMenue();
 		f.setVisible(true);
 
-		try {
-			// URL soundURL = new URL("thelastofthejedi.wav"); // ist zu
-			// initialisieren
+		playSound();
+	}
 
-			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(new File("melodie.wav"));
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(
-					audioInputStream);
-			AudioFormat af = audioInputStream.getFormat();
-			int size = (int) (af.getFrameSize() * audioInputStream
-					.getFrameLength());
-			byte[] audio = new byte[size];
-			DataLine.Info info = new DataLine.Info(Clip.class, af, size);
-			bufferedInputStream.read(audio, 0, size);
-			Clip clip = (Clip) AudioSystem.getLine(info);
-			clip.open(af, audio, 0, size);
-			while (true) {
-				if (play)
-					clip.loop(1);
-				else
-					clip.stop();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private void playSound() {
+		if (play)
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		else
+			clip.stop();
 	}
 
 	/** Menueleiste */
@@ -116,10 +119,13 @@ public class Fenster implements ActionListener {
 		JMenuItem sound = new JMenuItem("Sound An/Aus");
 		sound.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				if (play)
+				if (play) {
 					play = false;
-				else
+					playSound();
+				} else {
 					play = true;
+					playSound();
+				}
 			}
 		});
 		JMenuItem credits = new JMenuItem("Credits");
@@ -203,14 +209,18 @@ public class Fenster implements ActionListener {
 		this.mode = mode;
 		sp.bomb.numbOfBombs1 = 0;
 		sp.bm.bombs = new ArrayList<Bomb>();
+		stop = true;
+		clip.stop();
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true);
 			System.out.println("Neustart im 2 Spielermodus");
 			sp.bomb.numbOfBombs2 = 0;
 			sp.bm2.bombs = new ArrayList<Bomb>();
+			stop = false;
 		} else {
 			sp = new Spielfeld(width, height, columns, length, false);
 			System.out.println("Neustart im 1 Spielermodus");
+			stop = false;
 		}
 		initFrame();
 	}
@@ -226,11 +236,15 @@ public class Fenster implements ActionListener {
 			int answer = JOptionPane.showConfirmDialog(f, messageDialog
 					+ " Möchtest du Neustarten?", "Game Over",
 					JOptionPane.YES_NO_OPTION);
-			if (answer == JOptionPane.YES_OPTION)
+			if (answer == JOptionPane.YES_OPTION) {
+				stop = true;
+				clip.stop();
 				f.dispose();
-			else
+			} else
 				System.exit(0);
 		} else {
+			stop = true;
+			clip.stop();
 			JOptionPane.showMessageDialog(f, messageDialog);
 			f.dispose();
 		}
