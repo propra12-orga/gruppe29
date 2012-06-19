@@ -236,6 +236,10 @@ public class BombExplosion extends TimerTask {
 					&& (man.getPosY() == this.bomb.getPosY() - i
 							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
@@ -249,6 +253,10 @@ public class BombExplosion extends TimerTask {
 					&& (man.getPosX() == this.bomb.getPosX() + i
 							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
@@ -262,6 +270,10 @@ public class BombExplosion extends TimerTask {
 					&& (man.getPosY() == this.bomb.getPosY() + i
 							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
@@ -275,6 +287,10 @@ public class BombExplosion extends TimerTask {
 					&& (man.getPosX() == this.bomb.getPosX() - i
 							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
@@ -294,11 +310,19 @@ public class BombExplosion extends TimerTask {
 							.getPosY() == this.bomb.getPosY() - i
 							* this.bomb.getRadius()))) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(2);
 			}
 		}
 			break;
@@ -309,11 +333,19 @@ public class BombExplosion extends TimerTask {
 							.getPosX() == this.bomb.getPosX() + i
 							* this.bomb.getRadius()))) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(2);
 			}
 		}
 			break;
@@ -324,11 +356,19 @@ public class BombExplosion extends TimerTask {
 							.getPosY() == this.bomb.getPosY() + i
 							* this.bomb.getRadius()))) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(2);
 			}
 		}
 			break;
@@ -339,11 +379,19 @@ public class BombExplosion extends TimerTask {
 							.getPosX() == this.bomb.getPosX() - i
 							* this.bomb.getRadius()))) {
 				this.sp.repaint();
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(2);
 			}
 		}
 		}

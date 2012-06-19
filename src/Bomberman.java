@@ -67,6 +67,12 @@ public class Bomberman extends JLabel {
 		return this.bombs.lastIndexOf(bomb);
 	}
 
+	public synchronized void removeAllBombsFromList() {
+		for (int i = 0; i < this.bombs.size(); i++) {
+			this.bombs.remove(i);
+		}
+	}
+
 	/**
 	 * Zeichnen der Bombe
 	 */
