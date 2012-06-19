@@ -217,6 +217,28 @@ public class BombExplosion extends TimerTask {
 					kill(bm, bm2, 2, i);
 			}
 		}
+		if ((bm.getPosX() == this.bomb.getPosX())
+				&& (bm.getPosY() == this.bomb.getPosY())) {
+			this.sp.repaint();
+			System.out.println("Lalala");
+			Main.f.dispose(
+					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+					true);
+
+			Main.f.restart(1);
+		} else if (bm2 != null)
+			if ((bm.getPosX() == this.bomb.getPosX())
+					&& (bm.getPosY() == this.bomb.getPosY())
+					|| (bm2.getPosX() == this.bomb.getPosX())
+					&& (bm2.getPosY() == this.bomb.getPosY())) {
+				this.sp.repaint();
+				System.out.println("Lalala");
+				Main.f.dispose(
+						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
+						true);
+
+				Main.f.restart(2);
+			}
 		this.sp.repaint();
 	}
 
@@ -289,16 +311,16 @@ public class BombExplosion extends TimerTask {
 				Main.f.restart(1);
 			}
 		}
+			break;
 		}
-		if ((this.bm.getPosX() == this.bomb.getPosX())
-				&& (this.bm.getPosY() == this.bomb.getPosY())) {
-			this.sp.repaint();
-			Main.f.dispose(
-					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-					true);
-
-			Main.f.restart(1);
-		}
+		/*
+		 * if ((this.bm.getPosX() == this.bomb.getPosX()) && (this.bm.getPosY()
+		 * == this.bomb.getPosY())) { this.sp.repaint();
+		 * System.out.println("Lalala"); Main.f.dispose(
+		 * "Deine eigene Bombe ist explodiert und hat dich mitgerissen!", true);
+		 * 
+		 * Main.f.restart(1); }
+		 */
 	}
 
 	// Behandlung für Bomberman im Zweispielermodus
@@ -387,18 +409,17 @@ public class BombExplosion extends TimerTask {
 				Main.f.restart(2);
 			}
 		}
+			break;
 		}
-		if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
-				.getPosY()))
-				|| ((man2.getPosX() == this.bomb.getPosX()) && (man2.getPosY() == this.bomb
-						.getPosY()))) {
-			this.sp.repaint();
-			Main.f.dispose(
-					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
-					true);
-
-			Main.f.restart(2);
-		}
+		/*
+		 * if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() ==
+		 * this.bomb .getPosY())) || ((man2.getPosX() == this.bomb.getPosX()) &&
+		 * (man2.getPosY() == this.bomb .getPosY()))) { this.sp.repaint();
+		 * System.out.println("Lalala"); Main.f.dispose(
+		 * "Deine eigene Bombe ist explodiert und hat dich mitgerissen!", true);
+		 * 
+		 * Main.f.restart(2); }
+		 */
 
 	}
 
