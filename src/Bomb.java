@@ -22,6 +22,7 @@ public class Bomb extends JLabel {
 	private boolean exploded;
 	public Timer tExp;
 	public Timer tUnExp;
+	public Timer tSound;
 
 	/**
 	 * Die Methode Bomb uebernimmt die Parameter und setzt die Bombe auf
@@ -40,6 +41,7 @@ public class Bomb extends JLabel {
 		super();
 		this.tExp = new Timer();
 		this.tUnExp = new Timer();
+		this.tSound = new Timer();
 		this.posX = posX;
 		this.posY = posY;
 		this.radius = radius;
@@ -60,6 +62,7 @@ public class Bomb extends JLabel {
 	public void explode(Spielfeld sp, Bomberman man) {
 		tExp.schedule(new BombExplosion(this, sp, man), 2000);
 		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
+		tSound.schedule(new BombSound(), 2000);
 	}
 
 	/**
@@ -75,6 +78,8 @@ public class Bomb extends JLabel {
 	public void explode(Spielfeld sp, Bomberman man, Bomberman man2) {
 		tExp.schedule(new BombExplosion(this, sp, man, man2), 2000);
 		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
+		tSound.schedule(new BombSound(), 2000);
+
 	}
 
 	/**
