@@ -24,8 +24,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.moveUp();
 				repaint();
 				this.bm.paintObject();
-				break;
 			}
+				break;
 
 			case -1: {
 				this.bm.moveUp();
@@ -38,8 +38,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
 			}
+				break;
 
 			}
 			break;
@@ -51,8 +51,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.moveDown();
 				repaint();
 				this.bm.paintObject();
-				break;
 			}
+				break;
 
 			case -1: {
 				this.bm.moveDown();
@@ -65,9 +65,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
 			}
-
+				break;
 			}
 		}
 			break;
@@ -79,8 +78,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.moveLeft();
 				repaint();
 				this.bm.paintObject();
-				break;
+
 			}
+				break;
 			case -1: {
 				this.bm.moveLeft();
 				repaint();
@@ -92,8 +92,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
+
 			}
+				break;
 
 			}
 		}
@@ -105,8 +106,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm.moveRight();
 				repaint();
 				this.bm.paintObject();
-				break;
+
 			}
+				break;
 
 			case -1: {
 				this.bm.moveRight();
@@ -119,8 +121,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
+
 			}
+				break;
 
 			}
 		}
@@ -141,8 +144,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 					this.bm.bombs.get(n).explode(this, this.bm);
 				repaint();
 			}
-			break;
+
 		}
+			break;
 		case KeyEvent.VK_W: {
 			switch (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 					- this.bm2.getSteps()]) {
@@ -150,8 +154,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm2.moveUp();
 				repaint();
 				this.bm2.paintObject();
-				break;
+
 			}
+				break;
 
 			case -1: {
 				this.bm2.moveUp();
@@ -164,12 +169,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
-			}
 
 			}
-			break;
+				break;
+
+			}
+
 		}
+			break;
 		case KeyEvent.VK_S: {
 			switch (this.raster[this.bm2.getPosX()][this.bm2.getPosY()
 					+ this.bm2.getSteps()]) {
@@ -177,8 +184,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm2.moveDown();
 				repaint();
 				this.bm2.paintObject();
-				break;
+
 			}
+				break;
 
 			case -1: {
 				this.bm2.moveDown();
@@ -191,12 +199,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
-			}
 
 			}
-			break;
+				break;
+
+			}
+
 		}
+			break;
 		case KeyEvent.VK_A: {
 			switch (this.raster[this.bm2.getPosX() - this.bm2.getSteps()][this.bm2
 					.getPosY()]) {
@@ -204,8 +214,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm2.moveLeft();
 				repaint();
 				this.bm2.paintObject();
-				break;
+
 			}
+				break;
 
 			case -1: {
 				this.bm2.moveLeft();
@@ -218,12 +229,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
-			}
 
 			}
-			break;
+				break;
+
+			}
+
 		}
+			break;
 		case KeyEvent.VK_D: {
 			switch (this.raster[this.bm2.getPosX() + this.bm2.getSteps()][this.bm2
 					.getPosY()]) {
@@ -231,8 +244,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm2.moveRight();
 				repaint();
 				this.bm2.paintObject();
-				break;
+
 			}
+				break;
 
 			case -1: {
 				this.bm2.moveRight();
@@ -245,12 +259,14 @@ public class Spielfeld extends JPanel implements KeyListener {
 				} else {
 					Main.f.restart(1);
 				}
-				break;
-			}
 
 			}
-			break;
+				break;
+
+			}
+
 		}
+			break;
 		case KeyEvent.VK_Q: {
 			int n = this.bm2.getNewBombIndex();
 			if (this.raster[this.bm2.bombs.get(n).getPosX()][this.bm2.bombs
@@ -264,8 +280,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				this.bm2.bombs.get(n).explode(this, this.bm, this.bm2);
 				repaint();
 			}
-			break;
+
 		}
+			break;
 		default:
 			break;
 		}
@@ -372,29 +389,31 @@ public class Spielfeld extends JPanel implements KeyListener {
 				case 0: {
 					Boden b = new Boden(i, j, blockLength);
 					b.paintObject(g);
-					break;
 				}
+					break;
 				case 1: {
 
 					Mauer m = new Mauer(i, j, blockLength);
 					m.paintObject(g);
-					break;
+
 				}
+					break;
 				case 2: {
 					BreakableMauer brm = new BreakableMauer(i, j, blockLength);
 					brm.paintObject(g);
-					break;
 				}
+					break;
 				case 4: {
 					BreakableMauer brm = new BreakableMauer(i, j, blockLength);
 					brm.paintObject(g);
-					break;
 				}
+					break;
 				case -1: {
 					Ausgang a = new Ausgang(i, j, blockLength);
 					a.paintObject(g);
-					break;
+
 				}
+					break;
 				}
 			}
 		}
