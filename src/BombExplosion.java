@@ -195,6 +195,7 @@ public class BombExplosion extends TimerTask {
 				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
 						.getPosY()] = 0;
 			}
+				break;
 			case 3: {
 				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
 					if (bm2 == null)
