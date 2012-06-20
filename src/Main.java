@@ -2,7 +2,9 @@ import java.io.IOException;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
+
+import parser.RasterParser;
+import parser.XMLParser;
 
 public class Main {
 	/** Pixelraster */
@@ -29,51 +31,16 @@ public class Main {
 	 * @exception IOException
 	 *                , JDOMException
 	 */
-	public static void main(String args[]) {
-		try {
-			doc = new SAXBuilder().build("Bomberman.xml");
-			root = doc.getRootElement();
-			columns = Integer.parseInt(root.getChild("header")
-					.getChild("dimension").getValue());
-			length = 50;
-			sizeX = sizeY = columns * length;
-			raster = new int[sizeX][sizeY];
-			raster2 = new int[columns][columns];
-			feldEinlesen();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		transform();
+	public static void main(String[] args) {
+		XMLParser xml = new XMLParser("Bomberman.xml");
+		RasterParser rp = new RasterParser();
+		columns = xml.getColumns();
+		length = 50;
+		sizeX = sizeY = columns * length;
+		raster2 = xml.readXML(columns);
+		raster = rp.transform(raster2, columns, length);
 		f = new Fenster(sizeX, sizeY, columns, length);
+
 	}
 
-	/**
-	 * Methode zum Einlesen des Spielfelds aus der XML-Datei "Bomberman.xml". Es
-	 * wird ein blockraster erstellt.
-	 * 
-	 * @throws IOException
-	 *             , JDOMException
-	 */
-	private static void feldEinlesen() throws Exception {
-		for (int i = 0; i < columns; i++)
-			for (int j = 0; j < columns; j++) {
-				Element col = root.getChild("Column" + i);
-				Element row = col.getChild("Row" + j);
-				raster2[i][j] = Integer.parseInt(row.getValue());
-			}
-	}
-
-	/**
-	 * Methode zum erstellen des Pixelrasters aus einem Blockraster. (Jede Zelle
-	 * aus dem Blockraster wird zu einem Pixelblock im Pixelraster ausgeweitet).
-	 */
-	private static void transform() {
-		for (int k = 0; k < columns; k++)
-			for (int l = 0; l < columns; l++) {
-				for (int i = 0; i < length; i++)
-					for (int j = 0; j < length; j++)
-						raster[((k * sizeX) / columns) + i][((l * sizeY) / columns)
-								+ j] = raster2[k][l];
-			}
-	}
 }

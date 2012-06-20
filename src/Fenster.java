@@ -19,6 +19,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import parser.RasterParser;
+import parser.XMLParser;
+
 public class Fenster implements ActionListener {
 	private JFrame f;
 	private JFrame fc;
@@ -33,7 +36,6 @@ public class Fenster implements ActionListener {
 	private int columns;
 	private int length;
 	private int mode;
-	Thread backgroundsound;
 
 	/**
 	 * Fenster erstellen
@@ -103,6 +105,31 @@ public class Fenster implements ActionListener {
 		// MENUEBAR
 		JMenuBar menueLeiste = new JMenuBar();
 		JMenu menue = new JMenu("Optionen");
+
+		JMenuItem speichern = new JMenuItem("Speichern");
+		speichern.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				// SPEICHERN
+				XMLParser xml = new XMLParser("save.xml");
+				RasterParser rp = new RasterParser();
+				xml.writeXML(rp.untransform(sp.raster, columns, length),
+						columns);
+
+			}
+		});
+		JMenuItem laden = new JMenuItem("Laden");
+		laden.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				// LADEN
+				XMLParser xml = new XMLParser("save.xml");
+				RasterParser rp = new RasterParser();
+				Main.raster = rp.transform(xml.readXML(columns), columns,
+						length);
+				System.out.println("Laden");
+				f.dispose();
+				restart(Main.f.mode);
+			}
+		});
 		JMenuItem beenden = new JMenuItem("Beenden");
 		beenden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
@@ -174,8 +201,13 @@ public class Fenster implements ActionListener {
 		});
 		menueLeiste.add(menue);
 		menue.add(start);
+		menue.addSeparator();
+		menue.add(speichern);
+		menue.add(laden);
+		menue.addSeparator();
 		menue.add(sound);
 		menue.add(credits);
+		menue.addSeparator();
 		menue.add(beenden);
 		menueLeiste.add(mp);
 		mp.add(mehrspieler);
@@ -211,6 +243,7 @@ public class Fenster implements ActionListener {
 		sp.bm.bombs = new ArrayList<Bomb>();
 		stop = true;
 		clip.stop();
+
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true);
 			System.out.println("Neustart im 2 Spielermodus");
