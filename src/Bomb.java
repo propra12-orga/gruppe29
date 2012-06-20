@@ -1,6 +1,6 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Timer;
 
 import javax.swing.ImageIcon;
@@ -193,12 +193,20 @@ public class Bomb extends JLabel {
 		this.setIcon(ico);
 		this.setBounds(this.posX, this.posY, this.radius, this.radius);
 		if (isExploded()) {
-			g.setColor(Color.orange);
+			Image flame = Toolkit.getDefaultToolkit().getImage("flame.png");
+			ImageIcon ico2 = new ImageIcon(flame);
+			this.setIcon(ico2);
+			g.drawImage(flame, this.posX, this.posY, this.radius, this.radius,
+					null);
 			for (int i = radius; i <= explosionRadius; i += radius) {
-				g.fillOval(posX - i, posY, radius, radius);
-				g.fillOval(posX + i, posY, radius, radius);
-				g.fillOval(posX, posY - i, radius, radius);
-				g.fillOval(posX, posY + i, radius, radius);
+				g.drawImage(flame, this.posX - i, this.posY, this.radius,
+						this.radius, null);
+				g.drawImage(flame, this.posX + i, this.posY, this.radius,
+						this.radius, null);
+				g.drawImage(flame, this.posX, this.posY - i, this.radius,
+						this.radius, null);
+				g.drawImage(flame, this.posX, this.posY + i, this.radius,
+						this.radius, null);
 			}
 		}
 
