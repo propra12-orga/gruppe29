@@ -23,7 +23,7 @@ public class BombSound extends TimerTask {
 	public void run() {
 		try {
 			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(new File("boom.wav"));
+					.getAudioInputStream(new File("boom2.wav"));
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(
 					audioInputStream);
 			AudioFormat af = audioInputStream.getFormat();
@@ -35,8 +35,8 @@ public class BombSound extends TimerTask {
 			Clip clip = (Clip) AudioSystem.getLine(info);
 			clip.open(af, audio, 0, size);
 			clip.start();
-			Thread.sleep(2500);
-			// clip.stop();
+			Thread.sleep(1000);
+			clip.stop();
 			clip.close();
 		} catch (Exception e) {
 			e.printStackTrace();
