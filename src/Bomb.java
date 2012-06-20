@@ -194,10 +194,10 @@ public class Bomb extends JLabel {
 		this.setBounds(this.posX, this.posY, this.radius, this.radius);
 		if (isExploded()) {
 			Image flame = Toolkit.getDefaultToolkit().getImage("flame.png");
-			ImageIcon ico2 = new ImageIcon(flame);
+			ImageIcon ico2 = new ImageIcon("flamew.png");
+			ico2.setImage(ico2.getImage().getScaledInstance(this.radius,
+					this.radius, Image.SCALE_DEFAULT));
 			this.setIcon(ico2);
-			g.drawImage(flame, this.posX, this.posY, this.radius, this.radius,
-					null);
 			for (int i = radius; i <= explosionRadius; i += radius) {
 				g.drawImage(flame, this.posX - i, this.posY, this.radius,
 						this.radius, null);

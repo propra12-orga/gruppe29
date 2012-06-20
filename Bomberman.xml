@@ -9,6 +9,7 @@
 (0) - begehbarer Weg 
 (1) - unzerstörbare Mauern 
 (2) - zerstörbare Mauern
+(4) - Block mit Ausgang
 -->
     <Column0>
     	<Row0>1</Row0>
@@ -32,7 +33,7 @@
     	<Row3>0</Row3>
     	<Row4>0</Row4>
     	<Row5>0</Row5>
-    	<Row6>2</Row6>
+    	<Row6>0</Row6>
     	<Row7>0</Row7>
     	<Row8>0</Row8>
     	<Row9>0</Row9>
@@ -44,13 +45,13 @@
 		<Row0>1</Row0>
     	<Row1>0</Row1>
     	<Row2>1</Row2>
-    	<Row3>0</Row3>
+    	<Row3>2</Row3>
     	<Row4>1</Row4>
-    	<Row5>0</Row5>
+    	<Row5>2</Row5>
     	<Row6>1</Row6>
-    	<Row7>0</Row7>
+    	<Row7>2</Row7>
     	<Row8>1</Row8>
-    	<Row9>0</Row9>
+    	<Row9>2</Row9>
     	<Row10>1</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
@@ -58,15 +59,15 @@
 	<Column3>
 		<Row0>1</Row0>
     	<Row1>0</Row1>
-    	<Row2>0</Row2>
-    	<Row3>0</Row3>
-    	<Row4>0</Row4>
-    	<Row5>0</Row5>
-    	<Row6>0</Row6>
-    	<Row7>0</Row7>
-    	<Row8>0</Row8>
-    	<Row9>0</Row9>
-    	<Row10>0</Row10>
+    	<Row2>2</Row2>
+    	<Row3>2</Row3>
+    	<Row4>2</Row4>
+    	<Row5>2</Row5>
+    	<Row6>2</Row6>
+    	<Row7>2</Row7>
+    	<Row8>2</Row8>
+    	<Row9>2</Row9>
+    	<Row10>2</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
 	</Column3>
@@ -74,13 +75,13 @@
 		<Row0>1</Row0>
     	<Row1>0</Row1>
     	<Row2>1</Row2>
-    	<Row3>0</Row3>
+    	<Row3>2</Row3>
     	<Row4>1</Row4>
-    	<Row5>0</Row5>
+    	<Row5>2</Row5>
     	<Row6>1</Row6>
-    	<Row7>0</Row7>
+    	<Row7>2</Row7>
     	<Row8>1</Row8>
-    	<Row9>0</Row9>
+    	<Row9>2</Row9>
     	<Row10>1</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
@@ -88,15 +89,15 @@
 	<Column5>
 		<Row0>1</Row0>
     	<Row1>0</Row1>
-    	<Row2>0</Row2>
-    	<Row3>0</Row3>
-    	<Row4>0</Row4>
-    	<Row5>0</Row5>
-    	<Row6>0</Row6>
-    	<Row7>0</Row7>
-    	<Row8>0</Row8>
-    	<Row9>0</Row9>
-    	<Row10>0</Row10>
+    	<Row2>2</Row2>
+    	<Row3>2</Row3>
+    	<Row4>2</Row4>
+    	<Row5>2</Row5>
+    	<Row6>2</Row6>
+    	<Row7>2</Row7>
+    	<Row8>2</Row8>
+    	<Row9>2</Row9>
+    	<Row10>2</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
 	</Column5>
@@ -104,13 +105,13 @@
 		<Row0>1</Row0>
     	<Row1>0</Row1>
     	<Row2>1</Row2>
-    	<Row3>0</Row3>
+    	<Row3>2</Row3>
     	<Row4>1</Row4>
-    	<Row5>0</Row5>
+    	<Row5>2</Row5>
     	<Row6>1</Row6>
-    	<Row7>0</Row7>
+    	<Row7>2</Row7>
     	<Row8>1</Row8>
-    	<Row9>0</Row9>
+    	<Row9>2</Row9>
     	<Row10>1</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
@@ -118,15 +119,15 @@
 	<Column7>
 		<Row0>1</Row0>
     	<Row1>0</Row1>
-    	<Row2>0</Row2>
-    	<Row3>0</Row3>
-    	<Row4>0</Row4>
-    	<Row5>0</Row5>
-    	<Row6>0</Row6>
-    	<Row7>0</Row7>
-    	<Row8>0</Row8>
-    	<Row9>0</Row9>
-    	<Row10>0</Row10>
+    	<Row2>2</Row2>
+    	<Row3>2</Row3>
+    	<Row4>2</Row4>
+    	<Row5>2</Row5>
+    	<Row6>2</Row6>
+    	<Row7>2</Row7>
+    	<Row8>2</Row8>
+    	<Row9>2</Row9>
+    	<Row10>2</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
 	</Column7>
@@ -134,13 +135,13 @@
 		<Row0>1</Row0>
     	<Row1>0</Row1>
     	<Row2>1</Row2>
-    	<Row3>0</Row3>
+    	<Row3>2</Row3>
     	<Row4>1</Row4>
-    	<Row5>0</Row5>
+    	<Row5>2</Row5>
     	<Row6>1</Row6>
-    	<Row7>0</Row7>
+    	<Row7>2</Row7>
     	<Row8>1</Row8>
-    	<Row9>0</Row9>
+    	<Row9>2</Row9>
     	<Row10>1</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
@@ -148,15 +149,15 @@
 	<Column9>
 		<Row0>1</Row0>
     	<Row1>0</Row1>
-    	<Row2>0</Row2>
-    	<Row3>0</Row3>
-    	<Row4>0</Row4>
-    	<Row5>0</Row5>
-    	<Row6>0</Row6>
-    	<Row7>0</Row7>
-    	<Row8>0</Row8>
-    	<Row9>0</Row9>
-    	<Row10>0</Row10>
+    	<Row2>2</Row2>
+    	<Row3>2</Row3>
+    	<Row4>2</Row4>
+    	<Row5>2</Row5>
+    	<Row6>2</Row6>
+    	<Row7>2</Row7>
+    	<Row8>2</Row8>
+    	<Row9>2</Row9>
+    	<Row10>2</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
 	</Column9>
@@ -164,13 +165,13 @@
 		<Row0>1</Row0>
     	<Row1>0</Row1>
     	<Row2>1</Row2>
-    	<Row3>0</Row3>
+    	<Row3>2</Row3>
     	<Row4>1</Row4>
-    	<Row5>0</Row5>
+    	<Row5>2</Row5>
     	<Row6>1</Row6>
-    	<Row7>0</Row7>
+    	<Row7>2</Row7>
     	<Row8>1</Row8>
-    	<Row9>0</Row9>
+    	<Row9>2</Row9>
     	<Row10>1</Row10>
     	<Row11>0</Row11>
     	<Row12>1</Row12>
@@ -178,9 +179,9 @@
 	<Column11>
 		<Row0>1</Row0>
     	<Row1>0</Row1>
-    	<Row2>0</Row2>
+    	<Row2>4</Row2>
     	<Row3>0</Row3>
-    	<Row4>4</Row4>
+    	<Row4>0</Row4>
     	<Row5>0</Row5>
     	<Row6>0</Row6>
     	<Row7>0</Row7>
