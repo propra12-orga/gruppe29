@@ -39,6 +39,7 @@ public class BombExplosion extends TimerTask {
 	 */
 	public void run() {
 		bomb.setExploded(true);
+		this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY()] = 0;
 
 		// Zerstoerung der Mauern + Bombermans töten
 		// oben & unten#
@@ -62,11 +63,11 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 3: { // Kettenreaktion
-				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+				for (int j = 0; j < bm.getCounter(); j++) {
 					if (bm2 == null)
 						kettenreaktion(bm, 1, i, j);
 					else {
-						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+						for (int k = 0; k < bm2.getCounter(); k++)
 							kettenreaktion(bm, bm2, 1, i, j, k);
 					}
 				}
@@ -108,11 +109,11 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 3: { // Kettenreaktion
-				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+				for (int j = 0; j < bm.getCounter(); j++) {
 					if (bm2 == null)
 						kettenreaktion(bm, 3, i, j);
 					else {
-						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+						for (int k = 0; k < bm2.getCounter(); k++)
 							kettenreaktion(bm, bm2, 3, i, j, k);
 					}
 				}
@@ -156,11 +157,11 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 3: {
-				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+				for (int j = 0; j < bm.getCounter(); j++) {
 					if (bm2 == null)
 						kettenreaktion(bm, 4, i, j);
 					else {
-						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+						for (int k = 0; k < bm2.getCounter(); k++)
 							kettenreaktion(bm, bm2, 4, i, j, k);
 					}
 				}
@@ -197,11 +198,11 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 3: {
-				for (int j = 0; j < this.bomb.numbOfBombs1; j++) {
+				for (int j = 0; j < bm.getCounter(); j++) {
 					if (bm2 == null)
 						kettenreaktion(bm, 2, i, j);
 					else {
-						for (int k = 0; k < this.bomb.numbOfBombs2; k++)
+						for (int k = 0; k < bm2.getCounter(); k++)
 							kettenreaktion(bm, bm2, 2, i, j, k);
 					}
 				}
@@ -542,13 +543,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 		}
 			break;
@@ -560,13 +561,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 		}
 			break;
@@ -578,13 +579,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 		}
 			break;
@@ -596,13 +597,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 		}
 		}
@@ -619,13 +620,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY() - i
 					* this.bomb.getRadius()) && (man2.bombs.get(k).getPosX() == this.bomb
@@ -634,7 +635,7 @@ public class BombExplosion extends TimerTask {
 				man2.bombs.get(k).tExp.schedule(
 						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
 				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
-						man2.bombs.get(k), sp), 500); // 500 ist
+						man2.bombs.get(k), man2, sp), 500); // 500 ist
 				// Differenz
 				// zwischen
 				// den
@@ -651,13 +652,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY()) && (man2.bombs
 					.get(k).getPosX() == this.bomb.getPosX() + i
@@ -666,7 +667,7 @@ public class BombExplosion extends TimerTask {
 				man2.bombs.get(k).tExp.schedule(
 						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
 				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
-						man2.bombs.get(k), sp), 500); // 500 ist
+						man2.bombs.get(k), man2, sp), 500); // 500 ist
 				// Differenz
 				// zwischen
 				// den
@@ -683,13 +684,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY() + i
 					* this.bomb.getRadius()) && (man2.bombs.get(k).getPosX() == this.bomb
@@ -698,7 +699,7 @@ public class BombExplosion extends TimerTask {
 				man2.bombs.get(k).tExp.schedule(
 						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
 				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
-						man2.bombs.get(k), sp), 500); // 500 ist
+						man2.bombs.get(k), man2, sp), 500); // 500 ist
 				// Differenz
 				// zwischen
 				// den
@@ -715,13 +716,13 @@ public class BombExplosion extends TimerTask {
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
-						new BombUnExplosion(man.bombs.get(j), sp), 500); // 500
-																			// ist
-																			// Differenz
-																			// zwischen
-																			// den
-																			// TImern
-																			// !!
+						new BombUnExplosion(man.bombs.get(j), man, sp), 500); // 500
+																				// ist
+																				// Differenz
+																				// zwischen
+																				// den
+																				// TImern
+																				// !!
 			}
 			if (((man2.bombs.get(k).getPosY() == this.bomb.getPosY()) && (man2.bombs
 					.get(k).getPosX() == this.bomb.getPosX() - i
@@ -730,7 +731,7 @@ public class BombExplosion extends TimerTask {
 				man2.bombs.get(k).tExp.schedule(
 						new BombExplosion(man2.bombs.get(k), sp, man2), 0);
 				man2.bombs.get(k).tUnExp.schedule(new BombUnExplosion(
-						man2.bombs.get(k), sp), 500); // 500 ist
+						man2.bombs.get(k), man2, sp), 500); // 500 ist
 				// Differenz
 				// zwischen
 				// den

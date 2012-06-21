@@ -7,9 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Bomb extends JLabel {
-	public static int numbOfBombs1 = 0;
-	public static int numbOfBombs2 = 0;
-
 	private int posX;
 	private int posY;
 	/** Radius der Bombe */
@@ -64,7 +61,7 @@ public class Bomb extends JLabel {
 	 */
 	public void explode(Spielfeld sp, Bomberman man) {
 		tExp.schedule(new BombExplosion(this, sp, man), 2000);
-		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
+		tUnExp.schedule(new BombUnExplosion(this, man, sp), 2500);
 		tSound.schedule(new BombSound(), 2000);
 	}
 
@@ -80,7 +77,7 @@ public class Bomb extends JLabel {
 	 */
 	public void explode(Spielfeld sp, Bomberman man, Bomberman man2) {
 		tExp.schedule(new BombExplosion(this, sp, man, man2), 2000);
-		tUnExp.schedule(new BombUnExplosion(this, sp), 2500);
+		tUnExp.schedule(new BombUnExplosion(this, this.getOwner(), sp), 2500);
 		tSound.schedule(new BombSound(), 2000);
 
 	}

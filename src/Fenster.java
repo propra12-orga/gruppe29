@@ -2,7 +2,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -239,18 +238,14 @@ public class Fenster implements ActionListener {
 	 */
 	public void restart(int mode) {
 		this.mode = mode;
-		sp.bomb.numbOfBombs1 = 0;
-		sp.bm.bombs = new ArrayList<Bomb>();
+		sp.bm.removeAllBombsFromList();
 		stop = true;
 		clip.stop();
 
 		if (mode == 2) {
-			System.out.println(this.sp.bm.getScore());
-			// System.out.println(this.sp.bm2.getScore());
 			sp = new Spielfeld(width, height, columns, length, true);
 			System.out.println("Neustart im 2 Spielermodus");
-			sp.bomb.numbOfBombs2 = 0;
-			sp.bm2.bombs = new ArrayList<Bomb>();
+			sp.bm2.removeAllBombsFromList();
 			stop = false;
 		} else {
 			sp = new Spielfeld(width, height, columns, length, false);
