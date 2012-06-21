@@ -22,7 +22,7 @@ public class Ausgang extends JLabel {
 	}
 
 	public void paintObject(Graphics g) {
-		Image image = Toolkit.getDefaultToolkit().getImage("ausgang.png");
+		Image image = Toolkit.getDefaultToolkit().getImage("img/ausgang.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,
 				this.blockLength, null);
 		// g.setColor(Color.BLUE);

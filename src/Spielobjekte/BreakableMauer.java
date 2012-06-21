@@ -28,7 +28,7 @@ public class BreakableMauer extends JLabel {
 	}
 
 	public void paintObject(Graphics g) {
-		Image image = Toolkit.getDefaultToolkit().getImage("breakable.png");
+		Image image = Toolkit.getDefaultToolkit().getImage("img/breakable.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,
 				this.blockLength, null);
 

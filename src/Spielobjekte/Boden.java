@@ -28,7 +28,7 @@ public class Boden extends GraphicObject {
 	 * @param g
 	 */
 	public void paintObject(Graphics g) {
-		Image image = Toolkit.getDefaultToolkit().getImage("boden.png");
+		Image image = Toolkit.getDefaultToolkit().getImage("img/boden.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,
 				this.blockLength, null);
 

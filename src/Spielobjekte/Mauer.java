@@ -28,7 +28,8 @@ public class Mauer extends GraphicObject {
 	 * @param g
 	 */
 	public void paintObject(Graphics g) {
-		Image image = Toolkit.getDefaultToolkit().getImage("unbreakable.png");
+		Image image = Toolkit.getDefaultToolkit().getImage(
+				"img/unbreakable.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,
 				this.blockLength, null);
 

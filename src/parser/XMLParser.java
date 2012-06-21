@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -20,7 +21,7 @@ public class XMLParser {
 	public int getColumns() {
 		Document doc = null;
 		try {
-			doc = new SAXBuilder().build(this.filename);
+			doc = new SAXBuilder().build(new File(this.filename));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,7 +41,7 @@ public class XMLParser {
 	public int[][] readXML(int columns) {
 		Document doc = null;
 		try {
-			doc = new SAXBuilder().build(this.filename);
+			doc = new SAXBuilder().build(new File(this.filename));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +79,7 @@ public class XMLParser {
 		Document doc = new Document(root);
 		Writer fw = null;
 		try {
-			fw = new FileWriter(this.filename);
+			fw = new FileWriter(new File(this.filename));
 
 			XMLOutputter out = new XMLOutputter();
 			out.output(doc, fw);
