@@ -23,6 +23,7 @@ public class Bomb extends JLabel {
 	public Timer tExp;
 	public Timer tUnExp;
 	public Timer tSound;
+	private Bomberman owner;
 
 	/**
 	 * Die Methode Bomb uebernimmt die Parameter und setzt die Bombe auf
@@ -37,7 +38,8 @@ public class Bomb extends JLabel {
 	 * @param explosionRadius
 	 *            Explosionsradius der Bombe
 	 * */
-	public Bomb(int posX, int posY, int radius, int explosionRadius) {
+	public Bomb(int posX, int posY, int radius, int explosionRadius,
+			Bomberman owner) {
 		super();
 		this.tExp = new Timer();
 		this.tUnExp = new Timer();
@@ -48,6 +50,7 @@ public class Bomb extends JLabel {
 		this.explosionRadius = explosionRadius;
 		this.visible = false;
 		this.exploded = false;
+		this.owner = owner;
 
 	}
 
@@ -181,6 +184,10 @@ public class Bomb extends JLabel {
 	 */
 	public void setExplosionRadius(int explosionRadius) {
 		this.explosionRadius = explosionRadius;
+	}
+
+	public Bomberman getOwner() {
+		return this.owner;
 	}
 
 	/**

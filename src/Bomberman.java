@@ -21,6 +21,7 @@ public class Bomberman extends JLabel {
 	private int expRad;
 	/** Anzahl der Bomben in der Liste */
 	public int counter;
+	private int score;
 
 	/**
 	 * Erstellt einen neuen Bomberman und initialisiert die Werte. Moeglichkeit
@@ -44,6 +45,7 @@ public class Bomberman extends JLabel {
 		this.expRad = expRad;
 		this.bombs = new ArrayList<Bomb>();
 		this.counter = 0;
+		this.score = 0;
 		String path_to_Image;
 		if (color > 1) // Bomberman Farbwahl
 			path_to_Image = "Bomberman2.png";
@@ -62,7 +64,8 @@ public class Bomberman extends JLabel {
 	 * @return Index auf die neu erstellte Bombe
 	 */
 	public int getNewBombIndex() {
-		Bomb bomb = new Bomb(this.posX, this.posY, this.radius, this.expRad);
+		Bomb bomb = new Bomb(this.posX, this.posY, this.radius, this.expRad,
+				this);
 		this.bombs.add(bomb);
 		return this.bombs.lastIndexOf(bomb);
 	}
@@ -184,4 +187,11 @@ public class Bomberman extends JLabel {
 		this.steps = steps;
 	}
 
+	public void addScore(int value) {
+		this.score += 3;
+	}
+
+	public int getScore() {
+		return this.score;
+	}
 }

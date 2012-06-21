@@ -218,10 +218,10 @@ public class BombExplosion extends TimerTask {
 					kill(bm, bm2, 2, i);
 			}
 		}
+		/** Bomberman steht AUF der Bombe */
 		if ((bm.getPosX() == this.bomb.getPosX())
 				&& (bm.getPosY() == this.bomb.getPosY())) {
 			this.sp.repaint();
-			System.out.println("Lalala");
 			Main.f.dispose(
 					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 					true);
@@ -233,7 +233,6 @@ public class BombExplosion extends TimerTask {
 					|| (bm2.getPosX() == this.bomb.getPosX())
 					&& (bm2.getPosY() == this.bomb.getPosY())) {
 				this.sp.repaint();
-				System.out.println("Lalala");
 				Main.f.dispose(
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
@@ -328,12 +327,11 @@ public class BombExplosion extends TimerTask {
 	private void kill(Bomberman man, Bomberman man2, int direction, int i) {
 		switch (direction) {
 		case 1: { // oben
-			if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
-					.getPosY() - i * this.bomb.getRadius()))
-					|| ((man2.getPosX() == this.bomb.getPosX()) && (man2
-							.getPosY() == this.bomb.getPosY() - i
-							* this.bomb.getRadius()))) {
+			if ((man.getPosX() == this.bomb.getPosX())
+					&& (man.getPosY() == this.bomb.getPosY() - i
+							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
 				for (int f = 0; f < man.bombs.size(); f++) {
 					man.bombs.get(f).tExp.cancel();
 					man.bombs.get(f).tUnExp.cancel();
@@ -342,19 +340,46 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
+				if (man.equals(this.bomb.getOwner())) {
 
-				Main.f.restart(2);
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man2.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
+			} else if ((man2.getPosX() == this.bomb.getPosX())
+					&& (man2.getPosY() == this.bomb.getPosY() - i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
+				if (man2.equals(this.bomb.getOwner())) {
+
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
 			}
 		}
 			break;
 		case 2: { // rechts
-			if (((man.getPosY() == this.bomb.getPosY()) && (man.getPosX() == this.bomb
-					.getPosX() + i * this.bomb.getRadius()))
-					|| ((man2.getPosY() == this.bomb.getPosY()) && (man2
-							.getPosX() == this.bomb.getPosX() + i
-							* this.bomb.getRadius()))) {
+			if ((man.getPosY() == this.bomb.getPosY())
+					&& (man.getPosX() == this.bomb.getPosX() + i
+							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
 				for (int f = 0; f < man.bombs.size(); f++) {
 					man.bombs.get(f).tExp.cancel();
 					man.bombs.get(f).tUnExp.cancel();
@@ -363,19 +388,47 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
+				if (man.equals(this.bomb.getOwner())) {
 
-				Main.f.restart(2);
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man2.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
+			} else if ((man2.getPosY() == this.bomb.getPosY())
+					&& (man2.getPosX() == this.bomb.getPosX() + i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
+				if (man2.equals(this.bomb.getOwner())) {
+
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
 			}
 		}
 			break;
 		case 3: { // unten
-			if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() == this.bomb
-					.getPosY() + i * this.bomb.getRadius()))
-					|| ((man2.getPosX() == this.bomb.getPosX()) && (man2
-							.getPosY() == this.bomb.getPosY() + i
-							* this.bomb.getRadius()))) {
+			if ((man.getPosX() == this.bomb.getPosX())
+					&& (man.getPosY() == this.bomb.getPosY() + i
+							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
 				for (int f = 0; f < man.bombs.size(); f++) {
 					man.bombs.get(f).tExp.cancel();
 					man.bombs.get(f).tUnExp.cancel();
@@ -384,19 +437,46 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
+				if (man.equals(this.bomb.getOwner())) {
 
-				Main.f.restart(2);
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man2.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
+			} else if ((man2.getPosX() == this.bomb.getPosX())
+					&& (man2.getPosY() == this.bomb.getPosY() + i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
+				if (man2.equals(this.bomb.getOwner())) {
+
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
 			}
 		}
 			break;
 		case 4: { // links
-			if (((man.getPosY() == this.bomb.getPosY()) && (man.getPosX() == this.bomb
-					.getPosX() - i * this.bomb.getRadius()))
-					|| ((man2.getPosY() == this.bomb.getPosY()) && (man2
-							.getPosX() == this.bomb.getPosX() - i
-							* this.bomb.getRadius()))) {
+			if ((man.getPosY() == this.bomb.getPosY())
+					&& (man.getPosX() == this.bomb.getPosX() - i
+							* this.bomb.getRadius())) {
 				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
 				for (int f = 0; f < man.bombs.size(); f++) {
 					man.bombs.get(f).tExp.cancel();
 					man.bombs.get(f).tUnExp.cancel();
@@ -405,9 +485,37 @@ public class BombExplosion extends TimerTask {
 					man2.bombs.get(g).tExp.cancel();
 					man2.bombs.get(g).tUnExp.cancel();
 				}
-				Main.f.dispose("Dein Gegenspieler hat dich getötet", true);
+				if (man.equals(this.bomb.getOwner())) {
 
-				Main.f.restart(2);
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man2.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
+			} else if ((man2.getPosY() == this.bomb.getPosY())
+					&& (man2.getPosX() == this.bomb.getPosX() - i
+							* this.bomb.getRadius())) {
+				this.sp.repaint();
+				/** Andere Explosionen abbrechen */
+				for (int f = 0; f < man.bombs.size(); f++) {
+					man.bombs.get(f).tExp.cancel();
+					man.bombs.get(f).tUnExp.cancel();
+				}
+				for (int g = 0; g < man2.bombs.size(); g++) {
+					man2.bombs.get(g).tExp.cancel();
+					man2.bombs.get(g).tUnExp.cancel();
+				}
+				if (man2.equals(this.bomb.getOwner())) {
+
+					Main.f.dispose("Du hast dich selbst getötet!", true);
+					Main.f.restart(2);
+				} else {
+					man.addScore(3);
+					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
+					Main.f.restart(2);
+				}
 			}
 		}
 			break;

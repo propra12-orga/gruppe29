@@ -365,7 +365,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		}
 
-		this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
+		// this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
 
 		this.add(this.bm);
 		if (this.bm2 != null)

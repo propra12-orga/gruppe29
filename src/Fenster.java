@@ -245,6 +245,8 @@ public class Fenster implements ActionListener {
 		clip.stop();
 
 		if (mode == 2) {
+			System.out.println(this.sp.bm.getScore());
+			// System.out.println(this.sp.bm2.getScore());
 			sp = new Spielfeld(width, height, columns, length, true);
 			System.out.println("Neustart im 2 Spielermodus");
 			sp.bomb.numbOfBombs2 = 0;
