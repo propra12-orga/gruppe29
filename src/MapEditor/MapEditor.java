@@ -1,17 +1,21 @@
 package MapEditor;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 
 import parser.RasterParser;
 import parser.XMLParser;
-import Standart.OurJFileChooser;
+import Standard.OurJFileChooser;
 
 public class MapEditor extends JFrame implements ActionListener {
 
@@ -30,13 +34,9 @@ public class MapEditor extends JFrame implements ActionListener {
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-		this.setSize(sizeX, sizeY + length);
+		this.setSize(sizeX, sizeY + 3 * length);
 		this.setTitle("Bomberman - Mapeditor");
-
-		ep = new EditorFeld(sizeX, sizeY, columns, length, raster);
-
-		this.add(ep);
-		this.addKeyListener(ep);
+		this.setLayout(new BorderLayout());
 
 		JMenuBar menueLeiste = new JMenuBar();
 		JMenu menue = new JMenu("Optionen");
@@ -90,6 +90,16 @@ public class MapEditor extends JFrame implements ActionListener {
 		menue.add(beenden);
 
 		this.setJMenuBar(menueLeiste);
+
+		JToolBar toolbar = new JToolBar();
+		toolbar.add(new JButton(new ImageIcon("img/breakable.png")));
+		toolbar.setSize(sizeX, length);
+		this.add(toolbar, BorderLayout.PAGE_START);
+
+		ep = new EditorFeld(sizeX, sizeY, columns, length, raster);
+
+		this.add(ep, BorderLayout.CENTER);
+		this.addKeyListener(ep);
 
 	}
 
