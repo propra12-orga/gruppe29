@@ -368,8 +368,6 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		}
 
-		// this.bomb = new Bomb(0, 0, this.bm.getRadius(), blockLength);
-
 		this.add(this.bm);
 		if (this.bm2 != null)
 			this.add(this.bm2);
@@ -431,13 +429,13 @@ public class Spielfeld extends JPanel implements KeyListener {
 		for (int i = 0; i < this.bm.bombs.size(); i++)
 			if (this.bm.bombs.get(i) != null
 					&& this.bm.bombs.get(i).isVisible())
-				this.bm.bombs.get(i).paintObject(g);
+				this.bm.bombs.get(i).paintObject(g, this);
 
 		if (bm2 != null) {
 			for (int i = 0; i < this.bm2.bombs.size(); i++)
 				if (this.bm2.bombs.get(i) != null
 						&& this.bm2.bombs.get(i).isVisible())
-					this.bm2.bombs.get(i).paintObject(g);
+					this.bm2.bombs.get(i).paintObject(g, this);
 		}
 	}
 }

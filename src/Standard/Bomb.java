@@ -50,7 +50,6 @@ public class Bomb extends JLabel {
 		this.visible = false;
 		this.exploded = false;
 		this.owner = owner;
-
 	}
 
 	/**
@@ -192,7 +191,7 @@ public class Bomb extends JLabel {
 	/**
 	 * zeichnet die Bombe
 	 */
-	public void paintObject(Graphics g) {
+	public void paintObject(Graphics g, Spielfeld sp) {
 		ImageIcon ico = new ImageIcon("img/bombew.png");
 		ico.setImage(ico.getImage().getScaledInstance(this.radius, this.radius,
 				Image.SCALE_DEFAULT));
@@ -204,15 +203,44 @@ public class Bomb extends JLabel {
 			ico2.setImage(ico2.getImage().getScaledInstance(this.radius,
 					this.radius, Image.SCALE_DEFAULT));
 			this.setIcon(ico2);
+			boolean up = true, left = true, right = true, down = true; // flags
 			for (int i = radius; i <= explosionRadius; i += radius) {
-				g.drawImage(flame, this.posX - i, this.posY, this.radius,
-						this.radius, null);
-				g.drawImage(flame, this.posX + i, this.posY, this.radius,
-						this.radius, null);
-				g.drawImage(flame, this.posX, this.posY - i, this.radius,
-						this.radius, null);
-				g.drawImage(flame, this.posX, this.posY + i, this.radius,
-						this.radius, null);
+				if (left) {
+					if (this.posX - i <= 0)
+						left = false;
+					else if (sp.raster[this.posX - i][this.posY] == 1)
+						left = false;
+					else
+						g.drawImage(flame, this.posX - i, this.posY,
+								this.radius, this.radius, null);
+				}
+				if (right) {
+					if (this.posX + i > sp.getBreite() - radius)
+						right = false;
+					else if (sp.raster[this.posX + i][this.posY] == 1)
+						right = false;
+					else
+						g.drawImage(flame, this.posX + i, this.posY,
+								this.radius, this.radius, null);
+				}
+				if (up) {
+					if (this.posY - i <= 0)
+						up = false;
+					else if (sp.raster[this.posX][this.posY - i] == 1)
+						up = false;
+					else
+						g.drawImage(flame, this.posX, this.posY - i,
+								this.radius, this.radius, null);
+				}
+				if (down) {
+					if (this.posY + i > sp.getBreite() - radius)
+						down = false;
+					else if (sp.raster[this.posX][this.posY + i] == 1)
+						down = false;
+					else
+						g.drawImage(flame, this.posX, this.posY + i,
+								this.radius, this.radius, null);
+				}
 			}
 		}
 

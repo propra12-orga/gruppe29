@@ -1,9 +1,10 @@
 package Standard;
+
 public class ExplosionThread implements Runnable {
-	Spielfeld sp;
-	Bomb bomb;
-	Bomberman man;
-	int direction, i, j;
+	private Spielfeld sp;
+	private Bomb bomb;
+	private Bomberman man;
+	private int direction, i, j;
 
 	public ExplosionThread(Spielfeld sp, Bomb bomb, Bomberman man,
 			int direction, int i, int j) {
