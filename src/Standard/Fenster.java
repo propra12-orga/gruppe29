@@ -160,6 +160,50 @@ public class Fenster implements ActionListener {
 				restart(1);
 			}
 		});
+
+		JMenuItem tutorial = new JMenuItem("Tutorial Level");
+		tutorial.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				f.dispose();
+				restart(1);
+				final JLabel text = new JLabel(
+						"Mit den Pfeil-Tasten auf deiner Tastatur kannst du den Bomberman steuern");
+				p.add(text);
+				final JButton weiter = new JButton("Weiter");
+				weiter.setFocusable(false);
+				p.add(weiter);
+				weiter.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(
+							java.awt.event.ActionEvent object) {
+						text.setText("<html><body>Mit der Leertaste kannst du eine Bombe legen! Der Explosionsradius<br>ist 1, also Achtung!</body></html>");
+						// text.setFocusable(false);
+						final JButton weiter2 = new JButton("Weiter");
+						p.add(weiter2);
+						p.remove(weiter);
+						weiter2.addActionListener(new java.awt.event.ActionListener() {
+							public void actionPerformed(
+									java.awt.event.ActionEvent object) {
+								text.setText("<html><body>Das war das Tutorial. Mit einem Klick auf 'Beenden' endet<br>das Tutorial und das Spiel startet.</body></html>");
+								text.setFocusable(false);
+								JButton weiter3 = new JButton("Beenden");
+								weiter3.setFocusable(false);
+								p.add(weiter3);
+								p.remove(weiter2);
+								weiter3.addActionListener(new java.awt.event.ActionListener() {
+									public void actionPerformed(
+											java.awt.event.ActionEvent object) {
+										f.dispose();
+										restart(1);
+
+									}
+								});
+							}
+						});
+					}
+				});
+			}
+		});
+
 		JMenuItem sound = new JMenuItem("Musik An/Aus");
 		sound.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
@@ -230,6 +274,7 @@ public class Fenster implements ActionListener {
 		menue.add(speichern);
 		menue.add(laden);
 		menue.addSeparator();
+		menue.add(tutorial);
 		menue.add(sound);
 		menue.add(credits);
 		menue.addSeparator();
