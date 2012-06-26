@@ -10,8 +10,13 @@ import Spielobjekte.Ausgang;
 import Spielobjekte.Boden;
 import Spielobjekte.BreakableMauer;
 import Spielobjekte.Mauer;
+import Standard.Bomberman;
 
 public class EditorFeld extends JPanel implements KeyListener {
+
+	private int theChosenOne;
+	private boolean isPlaced = false;
+	private boolean isPlaced2 = false;
 
 	@Override
 	/**
@@ -56,17 +61,106 @@ public class EditorFeld extends JPanel implements KeyListener {
 		}
 			break;
 		case KeyEvent.VK_SPACE: {
-			if (this.raster[this.builder.getPosX()][this.builder.getPosY()] == 0)
-				for (int i = 0; i < this.blockLength; i++)
-					for (int j = 0; j < this.blockLength; j++)
-						this.raster[this.builder.getPosX() + i][this.builder
-								.getPosY() + j] = 2;
-			else if (this.raster[this.builder.getPosX()][this.builder.getPosY()] == 2)
-				for (int i = 0; i < this.blockLength; i++)
-					for (int j = 0; j < this.blockLength; j++)
-						this.raster[this.builder.getPosX() + i][this.builder
-								.getPosY() + j] = 0;
-			repaint();
+			switch (theChosenOne) {
+			case 2: {
+				if (this.raster[this.builder.getPosX()][this.builder.getPosY()] == 0)
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 2;
+				else if (this.raster[this.builder.getPosX()][this.builder
+						.getPosY()] == 2)
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 0;
+				repaint();
+			}
+				break;
+			case 1: {
+				if (this.raster[this.builder.getPosX()][this.builder.getPosY()] != 1)
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 1;
+				else {
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 0;
+				}
+				repaint();
+			}
+				break;
+			case -1: {
+				if (this.raster[this.builder.getPosX()][this.builder.getPosY()] != 4)
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 4;
+				else if (this.raster[this.builder.getPosX()][this.builder
+						.getPosY()] == 4) {
+					for (int i = 0; i < this.blockLength; i++)
+						for (int j = 0; j < this.blockLength; j++)
+							this.raster[this.builder.getPosX() + i][this.builder
+									.getPosY() + j] = 0;
+				}
+				repaint();
+			}
+				break;
+			case 5: {
+				if (!isPlaced) {
+					if (this.raster[this.builder.getPosX()][this.builder
+							.getPosY()] != 5) {
+						for (int i = 0; i < this.blockLength; i++)
+							for (int j = 0; j < this.blockLength; j++)
+								this.raster[this.builder.getPosX() + i][this.builder
+										.getPosY() + j] = 5;
+						isPlaced = true;
+						this.bm.setVisible(true);
+					}
+				} else {
+					if (this.raster[this.builder.getPosX()][this.builder
+							.getPosY()] == 5) {
+						for (int i = 0; i < this.blockLength; i++)
+							for (int j = 0; j < this.blockLength; j++)
+								this.raster[this.builder.getPosX() + i][this.builder
+										.getPosY() + j] = 0;
+						isPlaced = false;
+						this.bm.setVisible(false);
+					}
+				}
+				repaint();
+			}
+				break;
+			case 6: {
+				if (!isPlaced2) {
+					if (this.raster[this.builder.getPosX()][this.builder
+							.getPosY()] != 6) {
+						for (int i = 0; i < this.blockLength; i++)
+							for (int j = 0; j < this.blockLength; j++)
+								this.raster[this.builder.getPosX() + i][this.builder
+										.getPosY() + j] = 6;
+						isPlaced2 = true;
+						this.bm2.setVisible(true);
+					}
+
+				} else {
+					if (this.raster[this.builder.getPosX()][this.builder
+							.getPosY()] == 6) {
+						for (int i = 0; i < this.blockLength; i++)
+							for (int j = 0; j < this.blockLength; j++)
+								this.raster[this.builder.getPosX() + i][this.builder
+										.getPosY() + j] = 0;
+						isPlaced2 = false;
+						this.bm2.setVisible(false);
+					}
+
+				}
+				repaint();
+			}
+				break;
+			}
 		}
 			break;
 		default:
@@ -81,6 +175,9 @@ public class EditorFeld extends JPanel implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 	}
+
+	Bomberman bm;
+	Bomberman bm2;
 
 	/** Breite des Fensters */
 	private int width;
@@ -137,12 +234,22 @@ public class EditorFeld extends JPanel implements KeyListener {
 				height - ((columns - 1) * blockLength), blockLength, expRad
 						* blockLength, 1);
 
+		bm = new Bomberman(blockLength, blockLength, blockLength, expRad, 1);
+		this.add(bm);
+		bm.setVisible(false);
+		bm2 = new Bomberman(blockLength, blockLength, blockLength, expRad, 1);
+		this.add(bm2);
+		bm2.setVisible(false);
 		this.add(this.builder);
 
 		this.raster = new int[width][height];
 		for (int i = 0; i < width; i++)
 			for (int j = 0; j < height; j++)
 				this.raster[i][j] = raster[i][j];
+	}
+
+	public void setTheChosenOne(int c) {
+		this.theChosenOne = c;
 	}
 
 	/**
@@ -176,17 +283,27 @@ public class EditorFeld extends JPanel implements KeyListener {
 					brm.paintObject(g);
 				}
 					break;
+				case 5: {
+					bm.setPosX(i);
+					bm.setPosY(j);
+					bm.paintObject();
+				}
+					break;
+				case 6: {
+					bm2.setPosX(i);
+					bm2.setPosY(j);
+					bm2.paintObject();
+				}
+					break;
 				case -1: {
 					Ausgang a = new Ausgang(i, j, blockLength);
 					a.paintObject(g);
-
 				}
 					break;
 				}
 			}
 		}
 
-		// Bomberman zeichnen
 		builder.paintObject();
 
 	}

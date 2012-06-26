@@ -358,8 +358,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		this.two_player = false;
 
 		expRad = 2;
-		this.bm = new Bomberman(width - ((columns - 1) * blockLength), height
-				- ((columns - 1) * blockLength), blockLength, expRad
+		this.bm = new Bomberman(blockLength, blockLength, blockLength, expRad
 				* blockLength, 1);
 
 		if (mode) {
@@ -368,14 +367,33 @@ public class Spielfeld extends JPanel implements KeyListener {
 					- (2 * blockLength), blockLength, expRad * blockLength, 2);
 		}
 
+		boolean bmLoaded = false;
+		boolean bm2Loaded = false;
+		this.raster = new int[width][height];
+		for (int i = 0; i < width; i++)
+			for (int j = 0; j < height; j++) {
+				this.raster[i][j] = raster[i][j];
+				if (!bmLoaded) {
+					if (raster[i][j] == 5) {
+						bmLoaded = true;
+						this.bm.setPosX(i);
+						this.bm.setPosY(j);
+					}
+				}
+				if (two_player) {
+					if (!bm2Loaded) {
+						if (raster[i][j] == 6) {
+							bm2Loaded = true;
+							this.bm2.setPosX(i);
+							this.bm2.setPosY(j);
+						}
+					}
+				}
+			}
+
 		this.add(this.bm);
 		if (this.bm2 != null)
 			this.add(this.bm2);
-
-		this.raster = new int[width][height];
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < height; j++)
-				this.raster[i][j] = raster[i][j];
 	}
 
 	/**
@@ -407,6 +425,15 @@ public class Spielfeld extends JPanel implements KeyListener {
 				case 4: {
 					BreakableMauer brm = new BreakableMauer(i, j, blockLength);
 					brm.paintObject(g);
+				}
+					break;
+				case 5: {
+					this.bm.paintObject();
+				}
+					break;
+				case 6: {
+					if (bm2 != null)
+						this.bm2.paintObject();
 				}
 					break;
 				case -1: {

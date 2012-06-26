@@ -92,7 +92,41 @@ public class MapEditor extends JFrame implements ActionListener {
 		this.setJMenuBar(menueLeiste);
 
 		JToolBar toolbar = new JToolBar();
-		toolbar.add(new JButton(new ImageIcon("img/breakable.png")));
+		JButton breakable = new JButton(new ImageIcon("img/breakable.png"));
+		JButton ausgang = new JButton(new ImageIcon("img/ausgang.png"));
+		JButton unbreakable = new JButton(new ImageIcon("img/unbreakable.png"));
+		JButton bomberman1 = new JButton(new ImageIcon("img/Bomberman.png"));
+		JButton bomberman2 = new JButton(new ImageIcon("img/Bomberman2.png"));
+		breakable.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ep.setTheChosenOne(2);
+			}
+		});
+		ausgang.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ep.setTheChosenOne(-1);
+			}
+		});
+		unbreakable.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ep.setTheChosenOne(1);
+			}
+		});
+		bomberman1.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ep.setTheChosenOne(5);
+			}
+		});
+		bomberman2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ep.setTheChosenOne(6);
+			}
+		});
+		toolbar.add(breakable);
+		toolbar.add(ausgang);
+		toolbar.add(unbreakable);
+		toolbar.add(bomberman1);
+		toolbar.add(bomberman2);
 		toolbar.setSize(sizeX, length);
 		this.add(toolbar, BorderLayout.PAGE_START);
 
@@ -101,6 +135,7 @@ public class MapEditor extends JFrame implements ActionListener {
 		this.add(ep, BorderLayout.CENTER);
 		this.addKeyListener(ep);
 
+		this.setFocusable(true);
 	}
 
 	/**
