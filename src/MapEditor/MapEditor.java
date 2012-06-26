@@ -82,8 +82,73 @@ public class MapEditor extends JFrame implements ActionListener {
 				dispose();
 			}
 		});
+		JMenuItem bar = new JMenuItem("Toolbar");
+		bar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				JFrame fc = new JFrame("Toolbar");
+				fc.setLocation(700, 300);
+				fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				fc.setSize(360, 100);
+
+				JToolBar toolbar = new JToolBar();
+
+				JButton breakable = new JButton(new ImageIcon(
+						"img/breakable.png"));
+				JButton ausgang = new JButton(new ImageIcon("img/ausgang.png"));
+				JButton unbreakable = new JButton(new ImageIcon(
+						"img/unbreakable.png"));
+				JButton bomberman1 = new JButton(new ImageIcon(
+						"img/Bomberman.png"));
+				JButton bomberman2 = new JButton(new ImageIcon(
+						"img/Bomberman2.png"));
+				breakable
+						.addActionListener(new java.awt.event.ActionListener() {
+							public void actionPerformed(
+									java.awt.event.ActionEvent object) {
+								ep.setTheChosenOne(2);
+							}
+						});
+				ausgang.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(
+							java.awt.event.ActionEvent object) {
+						ep.setTheChosenOne(-1);
+					}
+				});
+				unbreakable
+						.addActionListener(new java.awt.event.ActionListener() {
+							public void actionPerformed(
+									java.awt.event.ActionEvent object) {
+								ep.setTheChosenOne(1);
+							}
+						});
+				bomberman1
+						.addActionListener(new java.awt.event.ActionListener() {
+							public void actionPerformed(
+									java.awt.event.ActionEvent object) {
+								ep.setTheChosenOne(5);
+							}
+						});
+				bomberman2
+						.addActionListener(new java.awt.event.ActionListener() {
+							public void actionPerformed(
+									java.awt.event.ActionEvent object) {
+								ep.setTheChosenOne(6);
+							}
+						});
+				toolbar.add(breakable);
+				toolbar.add(ausgang);
+				toolbar.add(unbreakable);
+				toolbar.add(bomberman1);
+				toolbar.add(bomberman2);
+				toolbar.setSize(sizeX, length);
+				fc.add(toolbar);
+				fc.setVisible(true);
+			}
+		});
 
 		menueLeiste.add(menue);
+		menue.add(bar);
+		menue.addSeparator();
 		menue.add(speichern);
 		menue.add(laden);
 		menue.addSeparator();
@@ -91,51 +156,13 @@ public class MapEditor extends JFrame implements ActionListener {
 
 		this.setJMenuBar(menueLeiste);
 
-		JToolBar toolbar = new JToolBar();
-		JButton breakable = new JButton(new ImageIcon("img/breakable.png"));
-		JButton ausgang = new JButton(new ImageIcon("img/ausgang.png"));
-		JButton unbreakable = new JButton(new ImageIcon("img/unbreakable.png"));
-		JButton bomberman1 = new JButton(new ImageIcon("img/Bomberman.png"));
-		JButton bomberman2 = new JButton(new ImageIcon("img/Bomberman2.png"));
-		breakable.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent object) {
-				ep.setTheChosenOne(2);
-			}
-		});
-		ausgang.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent object) {
-				ep.setTheChosenOne(-1);
-			}
-		});
-		unbreakable.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent object) {
-				ep.setTheChosenOne(1);
-			}
-		});
-		bomberman1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent object) {
-				ep.setTheChosenOne(5);
-			}
-		});
-		bomberman2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent object) {
-				ep.setTheChosenOne(6);
-			}
-		});
-		toolbar.add(breakable);
-		toolbar.add(ausgang);
-		toolbar.add(unbreakable);
-		toolbar.add(bomberman1);
-		toolbar.add(bomberman2);
-		toolbar.setSize(sizeX, length);
-		this.add(toolbar, BorderLayout.PAGE_START);
-
 		ep = new EditorFeld(sizeX, sizeY, columns, length, raster);
 
 		this.add(ep, BorderLayout.CENTER);
 		this.addKeyListener(ep);
 
 		this.setFocusable(true);
+
 	}
 
 	/**
