@@ -25,8 +25,7 @@ public class EditorFeld extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
 		case KeyEvent.VK_UP: {
-			if (this.raster[this.builder.getPosX()][this.builder.getPosY()
-					- this.builder.getSteps()] != 1) {
+			if (this.builder.getPosY() - this.builder.getSteps() >= 0) {
 				this.builder.moveUp();
 				repaint();
 				this.builder.paintObject();
@@ -34,8 +33,8 @@ public class EditorFeld extends JPanel implements KeyListener {
 		}
 			break;
 		case KeyEvent.VK_DOWN: {
-			if (this.raster[this.builder.getPosX()][this.builder.getPosY()
-					+ this.builder.getSteps()] != 1) {
+			if (this.builder.getPosY() + this.builder.getSteps() < this
+					.getBreite()) {
 				this.builder.moveDown();
 				repaint();
 				this.builder.paintObject();
@@ -43,8 +42,7 @@ public class EditorFeld extends JPanel implements KeyListener {
 		}
 			break;
 		case KeyEvent.VK_LEFT: {
-			if (this.raster[this.builder.getPosX() - this.builder.getSteps()][this.builder
-					.getPosY()] != 1) {
+			if (this.builder.getPosX() - this.builder.getSteps() >= 0) {
 				this.builder.moveLeft();
 				repaint();
 				this.builder.paintObject();
@@ -52,8 +50,8 @@ public class EditorFeld extends JPanel implements KeyListener {
 		}
 			break;
 		case KeyEvent.VK_RIGHT: {
-			if (this.raster[this.builder.getPosX() + this.builder.getSteps()][this.builder
-					.getPosY()] != 1) {
+			if (this.builder.getPosX() + this.builder.getSteps() < this
+					.getBreite()) {
 				this.builder.moveRight();
 				repaint();
 				this.builder.paintObject();
@@ -230,14 +228,13 @@ public class EditorFeld extends JPanel implements KeyListener {
 		blockLength = length;
 
 		expRad = 2;
-		this.builder = new Builder(width - ((columns - 1) * blockLength),
-				height - ((columns - 1) * blockLength), blockLength, expRad
-						* blockLength, 1);
+		this.builder = new Builder(blockLength, blockLength, blockLength,
+				expRad * blockLength, 1);
 
 		bm = new Bomberman(blockLength, blockLength, blockLength, expRad, 1);
 		this.add(bm);
 		bm.setVisible(false);
-		bm2 = new Bomberman(blockLength, blockLength, blockLength, expRad, 1);
+		bm2 = new Bomberman(blockLength, blockLength, blockLength, expRad, 2);
 		this.add(bm2);
 		bm2.setVisible(false);
 		this.add(this.builder);
@@ -270,7 +267,6 @@ public class EditorFeld extends JPanel implements KeyListener {
 
 					Mauer m = new Mauer(i, j, blockLength);
 					m.paintObject(g);
-
 				}
 					break;
 				case 2: {

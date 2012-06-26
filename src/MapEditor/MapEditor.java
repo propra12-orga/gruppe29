@@ -23,8 +23,16 @@ public class MapEditor extends JFrame implements ActionListener {
 	int[][] raster, raster2;
 	protected EditorFeld ep;
 
-	public MapEditor() {
-		XMLParser xml = new XMLParser("maps/Default.xml");
+	public MapEditor(int mode) {
+		final int modus = mode;
+		XMLParser xml;
+		if (mode == 1) {
+			xml = new XMLParser("maps/Default.xml");
+			this.setTitle("Bomberman - Einzelspieler - Mapeditor");
+		} else {
+			xml = new XMLParser("mapsMP/Default.xml");
+			this.setTitle("Bomberman - Mehrspieler - Mapeditor");
+		}
 		RasterParser rp = new RasterParser();
 		columns = xml.getColumns();
 		length = 50;
@@ -35,7 +43,6 @@ public class MapEditor extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
 		this.setSize(sizeX, sizeY + 3 * length);
-		this.setTitle("Bomberman - Mapeditor");
 		this.setLayout(new BorderLayout());
 
 		JMenuBar menueLeiste = new JMenuBar();
@@ -45,7 +52,11 @@ public class MapEditor extends JFrame implements ActionListener {
 		speichern.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				// SPEICHERN
-				OurJFileChooser jfc = new OurJFileChooser("maps/");
+				OurJFileChooser jfc;
+				if (modus == 1)
+					jfc = new OurJFileChooser("maps/");
+				else
+					jfc = new OurJFileChooser("mapsMP/");
 				int status = jfc.showSaveDialog(null);
 				if (status == JFileChooser.APPROVE_OPTION) {
 					XMLParser xml = new XMLParser(jfc.getSelectedFile()
@@ -62,7 +73,11 @@ public class MapEditor extends JFrame implements ActionListener {
 		laden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				// LADEN
-				OurJFileChooser jfc = new OurJFileChooser("maps/");
+				OurJFileChooser jfc;
+				if (modus == 1)
+					jfc = new OurJFileChooser("maps/");
+				else
+					jfc = new OurJFileChooser("mapsMP/");
 				int status = jfc.showOpenDialog(null);
 				if (status == JFileChooser.APPROVE_OPTION) {
 					XMLParser xml = new XMLParser(jfc.getSelectedFile()
@@ -94,13 +109,15 @@ public class MapEditor extends JFrame implements ActionListener {
 
 				JButton breakable = new JButton(new ImageIcon(
 						"img/breakable.png"));
-				JButton ausgang = new JButton(new ImageIcon("img/ausgang.png"));
+				JButton bm2exit;
+				if (modus == 1)
+					bm2exit = new JButton(new ImageIcon("img/ausgang.png"));
+				else
+					bm2exit = new JButton(new ImageIcon("img/Bomberman2.png"));
 				JButton unbreakable = new JButton(new ImageIcon(
 						"img/unbreakable.png"));
 				JButton bomberman1 = new JButton(new ImageIcon(
 						"img/Bomberman.png"));
-				JButton bomberman2 = new JButton(new ImageIcon(
-						"img/Bomberman2.png"));
 				breakable
 						.addActionListener(new java.awt.event.ActionListener() {
 							public void actionPerformed(
@@ -108,12 +125,6 @@ public class MapEditor extends JFrame implements ActionListener {
 								ep.setTheChosenOne(2);
 							}
 						});
-				ausgang.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(
-							java.awt.event.ActionEvent object) {
-						ep.setTheChosenOne(-1);
-					}
-				});
 				unbreakable
 						.addActionListener(new java.awt.event.ActionListener() {
 							public void actionPerformed(
@@ -128,18 +139,19 @@ public class MapEditor extends JFrame implements ActionListener {
 								ep.setTheChosenOne(5);
 							}
 						});
-				bomberman2
-						.addActionListener(new java.awt.event.ActionListener() {
-							public void actionPerformed(
-									java.awt.event.ActionEvent object) {
-								ep.setTheChosenOne(6);
-							}
-						});
+				bm2exit.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(
+							java.awt.event.ActionEvent object) {
+						if (modus == 1)
+							ep.setTheChosenOne(-1);
+						else
+							ep.setTheChosenOne(6);
+					}
+				});
 				toolbar.add(breakable);
-				toolbar.add(ausgang);
 				toolbar.add(unbreakable);
 				toolbar.add(bomberman1);
-				toolbar.add(bomberman2);
+				toolbar.add(bm2exit);
 				toolbar.setSize(sizeX, length);
 				fc.add(toolbar);
 				fc.setVisible(true);

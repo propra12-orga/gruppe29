@@ -58,6 +58,7 @@ public class Fenster implements ActionListener {
 		play = true;
 		stop = false;
 		sp = new Spielfeld(width, height, columns, length, false, Main.raster);
+		mode = 1;
 		try {
 			AudioInputStream audioInputStream = AudioSystem
 					.getAudioInputStream(new File("sounds/melodie.wav"));
@@ -127,11 +128,47 @@ public class Fenster implements ActionListener {
 					System.out.println("Dateiauswahl abgebrochen");
 			}
 		});
+		JMenuItem speichernMP = new JMenuItem("Speichern");
+		speichernMP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				// SPEICHERN
+				OurJFileChooser jfc = new OurJFileChooser("mapsMP/");
+				int status = jfc.showSaveDialog(null);
+				if (status == JFileChooser.APPROVE_OPTION) {
+					XMLParser xml = new XMLParser(jfc.getSelectedFile()
+							.toString());
+					RasterParser rp = new RasterParser();
+					xml.writeXML(rp.untransform(sp.raster, columns, length),
+							columns);
+				} else
+					System.out.println("Dateiauswahl abgebrochen");
+			}
+		});
 		JMenuItem laden = new JMenuItem("Laden");
 		laden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				// LADEN
 				OurJFileChooser jfc = new OurJFileChooser("maps/");
+				int status = jfc.showOpenDialog(null);
+				if (status == JFileChooser.APPROVE_OPTION) {
+					XMLParser xml = new XMLParser(jfc.getSelectedFile()
+							.toString());
+					RasterParser rp = new RasterParser();
+					Main.raster = rp.transform(xml.readXML(columns), columns,
+							length);
+					System.out.println("Laden");
+					f.dispose();
+					restart(Main.f.mode);
+				} else
+					System.out.println("Dateiauswahl abgebrochen");
+
+			}
+		});
+		JMenuItem ladenMP = new JMenuItem("Laden");
+		ladenMP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				// LADEN
+				OurJFileChooser jfc = new OurJFileChooser("mapsMP/");
 				int status = jfc.showOpenDialog(null);
 				if (status == JFileChooser.APPROVE_OPTION) {
 					XMLParser xml = new XMLParser(jfc.getSelectedFile()
@@ -261,18 +298,31 @@ public class Fenster implements ActionListener {
 			}
 		});
 		JMenu editor = new JMenu("Editor");
-		JMenuItem editstart = new JMenuItem("Starten");
+		JMenuItem editstart = new JMenuItem("Einzelspieler");
 		editstart.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				MapEditor me = new MapEditor();
+				MapEditor me = new MapEditor(1);
 				me.setVisible(true);
 			}
 		});
+		JMenuItem editstartMP = new JMenuItem("Mehrspieler");
+		editstartMP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				MapEditor me = new MapEditor(2);
+				me.setVisible(true);
+			}
+		});
+
 		menueLeiste.add(menue);
 		menue.add(start);
 		menue.addSeparator();
-		menue.add(speichern);
-		menue.add(laden);
+		if (this.mode == 1) {
+			menue.add(speichern);
+			menue.add(laden);
+		} else {
+			menue.add(speichernMP);
+			menue.add(ladenMP);
+		}
 		menue.addSeparator();
 		menue.add(tutorial);
 		menue.add(sound);
@@ -284,6 +334,7 @@ public class Fenster implements ActionListener {
 		mp.add(mehrspielerExit);
 		menueLeiste.add(editor);
 		editor.add(editstart);
+		editor.add(editstartMP);
 		f.setJMenuBar(menueLeiste);
 	}
 

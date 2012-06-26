@@ -380,6 +380,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 						this.bm.setPosY(j);
 					}
 				}
+				if (raster[i][j] == 5)
+					this.raster[i][j] = 0;
 				if (two_player) {
 					if (!bm2Loaded) {
 						if (raster[i][j] == 6) {
@@ -389,6 +391,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 						}
 					}
 				}
+				if (raster[i][j] == 6)
+					this.raster[i][j] = 0;
 			}
 
 		this.add(this.bm);
