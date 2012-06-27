@@ -40,6 +40,8 @@ public class Fenster implements ActionListener {
 	private int length;
 	private int mode;
 
+	JLabel scoreLabel;
+	JLabel scoreLabel2;
 	private int[] score;
 
 	/**
@@ -158,7 +160,7 @@ public class Fenster implements ActionListener {
 							length);
 					System.out.println("Laden");
 					f.dispose();
-					restart(Main.f.mode);
+					restart(Main.f.mode, true);
 				} else
 					System.out.println("Dateiauswahl abgebrochen");
 
@@ -178,7 +180,7 @@ public class Fenster implements ActionListener {
 							length);
 					System.out.println("Laden");
 					f.dispose();
-					restart(Main.f.mode);
+					restart(Main.f.mode, true);
 				} else
 					System.out.println("Dateiauswahl abgebrochen");
 
@@ -194,7 +196,7 @@ public class Fenster implements ActionListener {
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
-				restart(1);
+				restart(1, false);
 			}
 		});
 
@@ -202,7 +204,7 @@ public class Fenster implements ActionListener {
 		tutorial.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
-				restart(1);
+				restart(1, true);
 				final JLabel text = new JLabel(
 						"Mit den Pfeil-Tasten auf deiner Tastatur kannst du den Bomberman steuern");
 				p.add(text);
@@ -230,7 +232,7 @@ public class Fenster implements ActionListener {
 									public void actionPerformed(
 											java.awt.event.ActionEvent object) {
 										f.dispose();
-										restart(1);
+										restart(1, false);
 
 									}
 								});
@@ -286,15 +288,16 @@ public class Fenster implements ActionListener {
 		mehrspieler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
-				restart(2);
-
+				restart(2, true);
 			}
 		});
 		JMenuItem mehrspielerExit = new JMenuItem("Beenden");
 		mehrspielerExit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				f.dispose();
-				restart(1);
+				if (mode == 2) {
+					f.dispose();
+					restart(1, true);
+				}
 			}
 		});
 		JMenu editor = new JMenu("Editor");
@@ -312,6 +315,17 @@ public class Fenster implements ActionListener {
 				me.setVisible(true);
 			}
 		});
+
+		scoreLabel = new JLabel();
+		scoreLabel2 = new JLabel();
+		updateScore();
+		scoreLabel.setBounds(0, 0, 300, 100);
+		scoreLabel.setVisible(true);
+		scoreLabel2.setBounds(0, 0, 300, 100);
+		scoreLabel2.setVisible(true);
+
+		f.add(scoreLabel);
+		f.add(scoreLabel2);
 
 		menueLeiste.add(menue);
 		menue.add(start);
@@ -360,12 +374,18 @@ public class Fenster implements ActionListener {
 	 * 
 	 * @param mode
 	 */
-	public void restart(int mode) {
+	public void restart(int mode, boolean resetScore) {
 		this.mode = mode;
 		sp.bm.removeAllBombsFromList();
 		stop = true;
 		clip.stop();
-
+		int tmp = 0, tmp2 = 0;
+		if (!resetScore) {
+			if (sp.bm2 != null) {
+				tmp2 = sp.bm2.getScore();
+			}
+			tmp = sp.bm.getScore();
+		}
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true,
 					Main.raster);
@@ -378,7 +398,20 @@ public class Fenster implements ActionListener {
 			System.out.println("Neustart im 1 Spielermodus");
 			stop = false;
 		}
+		sp.bm.addScore(tmp);
+		if (sp.bm2 != null)
+			sp.bm2.addScore(tmp2);
 		initFrame();
+	}
+
+	public void updateScore() {
+		if (sp.bm2 == null)
+			scoreLabel.setText("Du hast:" + sp.bm.getScore() + " Punkte\n");
+		else {
+			scoreLabel.setText("Spieler 1 hat:" + sp.bm.getScore() + " Punkte");
+			scoreLabel2.setText("Spieler 2 hat:" + sp.bm2.getScore()
+					+ " Punkte");
+		}
 	}
 
 	/**
@@ -400,17 +433,6 @@ public class Fenster implements ActionListener {
 			} else {
 				System.exit(0);
 			}
-		} else {
-			stop = true;
-			clip.stop();
-			JOptionPane.showMessageDialog(f, messageDialog);
-			System.out.println("Spieler 1 hat: " + this.sp.bm.getScore()
-					+ " Punkte.");
-			if (this.sp.bm2 != null)
-				System.out.println("Spieler 2 hat: " + this.sp.bm2.getScore()
-						+ " Punkte.");
-
-			f.dispose();
 		}
 	}
 

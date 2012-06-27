@@ -61,6 +61,7 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 2: { // zerstörbare mauer kapputt machen
+				bomb.getOwner().addScore(1);
 				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
 						* this.bomb.getRadius()] = 0;
 			}
@@ -109,6 +110,7 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 2: { // zerstörbare mauer kapputt machen
+				bomb.getOwner().addScore(1);
 				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
 						* this.bomb.getRadius()] = 0;
 			}
@@ -159,6 +161,7 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 2: {
+				bomb.getOwner().addScore(1);
 				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
 						.getPosY()] = 0;
 			}
@@ -202,6 +205,7 @@ public class BombExplosion extends TimerTask {
 			}
 				break;
 			case 2: {
+				bomb.getOwner().addScore(1);
 				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
 						.getPosY()] = 0;
 			}
@@ -238,7 +242,7 @@ public class BombExplosion extends TimerTask {
 					"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 					true);
 
-			Main.f.restart(1);
+			Main.f.restart(1, false);
 		} else if (bm2 != null)
 			if ((bm.getPosX() == this.bomb.getPosX())
 					&& (bm.getPosY() == this.bomb.getPosY())
@@ -249,13 +253,14 @@ public class BombExplosion extends TimerTask {
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(2);
+				Main.f.restart(2, false);
 			}
+		Main.f.updateScore();
 		this.sp.repaint();
 	}
 
 	//
-	// töten mit 1 spieler
+	// töten mit 1 spieler------------------------------------------------------
 	//
 
 	private void kill(Bomberman man, int direction, int i) {
@@ -273,7 +278,7 @@ public class BombExplosion extends TimerTask {
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(1, true);
 			}
 		}
 			break;
@@ -290,7 +295,7 @@ public class BombExplosion extends TimerTask {
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(1, true);
 			}
 		}
 			break;
@@ -307,7 +312,7 @@ public class BombExplosion extends TimerTask {
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(1, true);
 			}
 		}
 			break;
@@ -324,7 +329,7 @@ public class BombExplosion extends TimerTask {
 						"Deine eigene Bombe ist explodiert und hat dich mitgerissen!",
 						true);
 
-				Main.f.restart(1);
+				Main.f.restart(1, true);
 			}
 		}
 			break;
@@ -362,11 +367,11 @@ public class BombExplosion extends TimerTask {
 				if (man.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man2.addScore(3);
+					man2.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			} else if ((man2.getPosX() == this.bomb.getPosX())
 					&& (man2.getPosY() == this.bomb.getPosY() - i
@@ -384,11 +389,11 @@ public class BombExplosion extends TimerTask {
 				if (man2.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man.addScore(3);
+					man.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			}
 		}
@@ -410,11 +415,11 @@ public class BombExplosion extends TimerTask {
 				if (man.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man2.addScore(3);
+					man2.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			} else if ((man2.getPosY() == this.bomb.getPosY())
 					&& (man2.getPosX() == this.bomb.getPosX() + i
@@ -432,11 +437,11 @@ public class BombExplosion extends TimerTask {
 				if (man2.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man.addScore(3);
+					man.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			}
 		}
@@ -459,11 +464,11 @@ public class BombExplosion extends TimerTask {
 				if (man.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man2.addScore(3);
+					man2.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			} else if ((man2.getPosX() == this.bomb.getPosX())
 					&& (man2.getPosY() == this.bomb.getPosY() + i
@@ -481,11 +486,11 @@ public class BombExplosion extends TimerTask {
 				if (man2.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man.addScore(3);
+					man.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			}
 		}
@@ -507,11 +512,11 @@ public class BombExplosion extends TimerTask {
 				if (man.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man2.addScore(3);
+					man2.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			} else if ((man2.getPosY() == this.bomb.getPosY())
 					&& (man2.getPosX() == this.bomb.getPosX() - i
@@ -529,11 +534,11 @@ public class BombExplosion extends TimerTask {
 				if (man2.equals(this.bomb.getOwner())) {
 
 					Main.f.dispose("Du hast dich selbst getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					man.addScore(3);
+					man.addScore(5);
 					Main.f.dispose("Dein Gegenspieler hat dich getötet!", true);
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				}
 			}
 		}

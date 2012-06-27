@@ -36,9 +36,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 			}
 				break;
@@ -63,9 +63,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 			}
 				break;
@@ -90,9 +90,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -119,9 +119,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -167,9 +167,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -197,9 +197,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -227,9 +227,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -257,9 +257,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2);
+					Main.f.restart(2, false);
 				} else {
-					Main.f.restart(1);
+					Main.f.restart(1, false);
 				}
 
 			}
@@ -357,7 +357,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 		blockLength = length;
 		this.two_player = false;
 
-		expRad = 2;
+		expRad = 1; // Explosionsradius in Feldern
 		this.bm = new Bomberman(blockLength, blockLength, blockLength, expRad
 				* blockLength, 1);
 
