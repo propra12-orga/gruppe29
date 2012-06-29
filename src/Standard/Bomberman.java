@@ -190,7 +190,7 @@ public class Bomberman extends JLabel {
 	}
 
 	public void addScore(int value) {
-		this.score += 3;
+		this.score += value;
 	}
 
 	public int getScore() {
