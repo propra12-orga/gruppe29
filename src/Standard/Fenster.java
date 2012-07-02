@@ -195,6 +195,10 @@ public class Fenster implements ActionListener {
 		JMenuItem start = new JMenuItem("Neues Spiel");
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				if (sp.bm2 != null) {
+					sp.bm2.deleteScore();
+				}
+				sp.bm.deleteScore();
 				f.dispose();
 				restart(1, false);
 			}

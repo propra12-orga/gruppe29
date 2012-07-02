@@ -197,6 +197,10 @@ public class Bomberman extends JLabel {
 		return this.score;
 	}
 
+	public void deleteScore() {
+		this.score = 0;
+	}
+
 	public int getCounter() {
 		return counter;
 	}
