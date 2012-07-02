@@ -72,6 +72,9 @@ public class Bomberman extends JLabel {
 		return this.bombs.lastIndexOf(bomb);
 	}
 
+	/**
+	 * Löscht die Bombenliste
+	 */
 	public synchronized void removeAllBombsFromList() {
 		for (int i = 0; i < this.bombs.size(); i++) {
 			this.bombs.remove(i);
@@ -189,30 +192,59 @@ public class Bomberman extends JLabel {
 		this.steps = steps;
 	}
 
+	/**
+	 * setzt den Scorewert um value hoch
+	 * 
+	 * @param value
+	 *            ist der Punktewert vom Objekt das zerstört wurde.
+	 */
 	public void addScore(int value) {
 		this.score += value;
 	}
 
+	/**
+	 * lädt den Score
+	 * 
+	 * @return gibt den Score zurück
+	 */
 	public int getScore() {
 		return this.score;
 	}
 
+	/**
+	 * setzt den Score auf 0
+	 */
 	public void deleteScore() {
 		this.score = 0;
 	}
 
+	/**
+	 * 
+	 * @return gibt den Counter zurück
+	 */
 	public int getCounter() {
 		return counter;
 	}
 
+	/**
+	 * 
+	 * @param counter
+	 *            setzt den Counter der Bomben
+	 */
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
 
+	/**
+	 * erhöht den Counter der Bomben
+	 */
 	public void incBombs() {
 		this.counter++;
 	}
 
+	/**
+	 * verringert den Counter der Bomben
+	 */
 	public void decBombs() {
 		this.counter--;
 	}

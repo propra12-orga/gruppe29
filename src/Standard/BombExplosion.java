@@ -262,7 +262,14 @@ public class BombExplosion extends TimerTask {
 	//
 	// töten mit 1 spieler------------------------------------------------------
 	//
-
+	/**
+	 * überprüft, ob der Bomberman im Einzelspielermodus stirbt
+	 * 
+	 * @param man
+	 * @param direction
+	 *            übergibt die Richtung in der geprüft wird
+	 * @param i
+	 */
 	private void kill(Bomberman man, int direction, int i) {
 		switch (direction) {
 		case 1: { // oben
@@ -334,20 +341,21 @@ public class BombExplosion extends TimerTask {
 		}
 			break;
 		}
-		/*
-		 * if ((this.bm.getPosX() == this.bomb.getPosX()) && (this.bm.getPosY()
-		 * == this.bomb.getPosY())) { this.sp.repaint();
-		 * System.out.println("Lalala"); Main.f.dispose(
-		 * "Deine eigene Bombe ist explodiert und hat dich mitgerissen!", true);
-		 * 
-		 * Main.f.restart(1); }
-		 */
+
 	}
 
 	//
 	// Behandlung für Bomberman im Zweispielermodus -----------------------
 	//
-
+	/**
+	 * überprüft, ob der Bomberman im Zweispielermodus stirbt
+	 * 
+	 * @param man
+	 * @param man2
+	 * @param direction
+	 *            übergibt die Richtung in der geprüft wird
+	 * @param i
+	 */
 	private void kill(Bomberman man, Bomberman man2, int direction, int i) {
 		switch (direction) {
 		case 1: { // oben
@@ -544,22 +552,23 @@ public class BombExplosion extends TimerTask {
 		}
 			break;
 		}
-		/*
-		 * if (((man.getPosX() == this.bomb.getPosX()) && (man.getPosY() ==
-		 * this.bomb .getPosY())) || ((man2.getPosX() == this.bomb.getPosX()) &&
-		 * (man2.getPosY() == this.bomb .getPosY()))) { this.sp.repaint();
-		 * System.out.println("Lalala"); Main.f.dispose(
-		 * "Deine eigene Bombe ist explodiert und hat dich mitgerissen!", true);
-		 * 
-		 * Main.f.restart(2); }
-		 */
 
 	}
 
 	//
 	// Kettenreaktion 1 spieler ----------------------------------------
 	//
-
+	/**
+	 * Kettenreaktion für Bomberman im Einspielermodus
+	 * 
+	 * @param man
+	 * @param direction
+	 *            übergibt die Richtung in der geprüft wird
+	 * @param i
+	 *            Schleifenvaribeln
+	 * @param j
+	 *            Schleifenvaribeln
+	 */
 	private void kettenreaktion(Bomberman man, int direction, int i, int j) {
 		ExplosionThread t = new ExplosionThread(sp, bomb, man, direction, i, j);
 		t.run();
@@ -568,7 +577,20 @@ public class BombExplosion extends TimerTask {
 	//
 	// Kettenreaktion 2 spieler -----------------------------------------
 	//
-
+	/**
+	 * Kettenreaktion für Bomberman im Zweispielermodus
+	 * 
+	 * @param man
+	 *            Bomberman 1
+	 * @param man2
+	 *            Bomberman 2
+	 * @param direction
+	 *            übergibt die Richtung in der geprüft wird
+	 * @param i
+	 *            Schleifenvaribeln
+	 * @param j
+	 *            Schleifenvaribeln
+	 */
 	private void kettenreaktion(Bomberman man, Bomberman man2, int direction,
 			int i, int j) {
 		if ((man.getCounter() < j) || (man.getCounter() == 0)) {

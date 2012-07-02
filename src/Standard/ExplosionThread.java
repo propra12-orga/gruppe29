@@ -1,11 +1,32 @@
 package Standard;
 
 public class ExplosionThread implements Runnable {
+	/**
+	 * Spielfeld
+	 */
 	private Spielfeld sp;
+	/**
+	 * Bombe
+	 */
 	private Bomb bomb;
+	/**
+	 * Bomberman
+	 */
 	private Bomberman man;
+	/**
+	 * Richtung in die geprüft wird
+	 */
 	private int direction, i, j;
 
+	/**
+	 * 
+	 * @param sp
+	 * @param bomb
+	 * @param man
+	 * @param direction
+	 * @param i
+	 * @param j
+	 */
 	public ExplosionThread(Spielfeld sp, Bomb bomb, Bomberman man,
 			int direction, int i, int j) {
 		this.sp = sp;
@@ -16,7 +37,9 @@ public class ExplosionThread implements Runnable {
 		this.j = j;
 	}
 
-	@Override
+	/**
+	 * Explosion der Bombe
+	 */
 	public void run() {
 		switch (direction) {
 		case 1: { // oben

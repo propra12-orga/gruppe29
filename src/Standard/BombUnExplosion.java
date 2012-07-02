@@ -3,6 +3,9 @@ package Standard;
 import java.util.TimerTask;
 
 public class BombUnExplosion extends TimerTask {
+	/**
+	 * Bomberman
+	 */
 	private Bomberman bm;
 	/** Bomb-Objekt */
 	private Bomb bomb;
