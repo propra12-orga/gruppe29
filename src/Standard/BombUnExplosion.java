@@ -36,7 +36,6 @@ public class BombUnExplosion extends TimerTask {
 
 		if (bm.bombs.contains(bomb)) {
 			this.bomb.getOwner().decBombs();
-			System.out.println("BUE:2:" + bm.getCounter());
 			this.bm.bombs.remove(bomb);
 		}
 		sp.repaint();

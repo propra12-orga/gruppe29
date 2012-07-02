@@ -416,13 +416,11 @@ public class Fenster implements ActionListener {
 		if (mode == 2) {
 			sp = new Spielfeld(width, height, columns, length, true,
 					Main.raster);
-			System.out.println("Neustart im 2 Spielermodus");
 			sp.bm2.removeAllBombsFromList();
 			stop = false;
 		} else {
 			sp = new Spielfeld(width, height, columns, length, false,
 					Main.raster);
-			System.out.println("Neustart im 1 Spielermodus");
 			stop = false;
 		}
 		sp.bm.addScore(tmp);

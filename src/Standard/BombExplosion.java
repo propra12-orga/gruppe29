@@ -42,7 +42,6 @@ public class BombExplosion extends TimerTask {
 	public void run() {
 		bomb.setExploded(true);
 		this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY()] = 0;
-		System.out.println("BE:1:" + bm.getCounter());
 
 		// Zerstoerung der Mauern + Bombermans töten
 		// oben & unten#
@@ -603,7 +602,6 @@ public class BombExplosion extends TimerTask {
 				if (((man.bombs.get(j).getPosY() == this.bomb.getPosY() - i
 						* this.bomb.getRadius()) && (man.bombs.get(j).getPosX() == this.bomb
 						.getPosX()))) {
-					System.out.println("Bombe gefunden");
 					man.bombs.get(j).tExp.schedule(
 							new BombExplosion(man.bombs.get(j), sp, man), 0);
 					man.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -618,7 +616,6 @@ public class BombExplosion extends TimerTask {
 				if (((man2.bombs.get(j).getPosY() == this.bomb.getPosY() - i
 						* this.bomb.getRadius()) && (man2.bombs.get(j)
 						.getPosX() == this.bomb.getPosX()))) {
-					System.out.println("Bombe gefunden");
 					man2.bombs.get(j).tExp.schedule(new BombExplosion(
 							man2.bombs.get(j), sp, man2), 0);
 					switch (direction) {
@@ -627,7 +624,6 @@ public class BombExplosion extends TimerTask {
 								- i * this.bomb.getRadius())
 								&& (man.bombs.get(j).getPosX() == this.bomb
 										.getPosX())) {
-							System.out.println("Bombe gefunden");
 							man.bombs.get(j).tExp.schedule(new BombExplosion(
 									man.bombs.get(j), sp, man), 0);
 							man.bombs.get(j).tUnExp.schedule(
@@ -647,7 +643,6 @@ public class BombExplosion extends TimerTask {
 								+ i * this.bomb.getRadius())
 								&& (man.bombs.get(j).getPosY() == this.bomb
 										.getPosY())) {
-							System.out.println("Bombe gefunden");
 							man.bombs.get(j).tExp.schedule(new BombExplosion(
 									man.bombs.get(j), sp, man), 0);
 							man.bombs.get(j).tUnExp.schedule(
@@ -667,7 +662,6 @@ public class BombExplosion extends TimerTask {
 								+ i * this.bomb.getRadius())
 								&& (man.bombs.get(j).getPosX() == this.bomb
 										.getPosX())) {
-							System.out.println("Bombe gefunden");
 							man.bombs.get(j).tExp.schedule(new BombExplosion(
 									man.bombs.get(j), sp, man), 0);
 							man.bombs.get(j).tUnExp.schedule(
@@ -687,7 +681,6 @@ public class BombExplosion extends TimerTask {
 								- i * this.bomb.getRadius())
 								&& (man.bombs.get(j).getPosY() == this.bomb
 										.getPosY())) {
-							System.out.println("Bombe gefunden");
 							man.bombs.get(j).tExp.schedule(new BombExplosion(
 									man.bombs.get(j), sp, man), 0);
 							man.bombs.get(j).tUnExp.schedule(
@@ -716,7 +709,6 @@ public class BombExplosion extends TimerTask {
 				if (((man.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man.bombs
 						.get(j).getPosX() == this.bomb.getPosX() + i
 						* this.bomb.getRadius()))) {
-					System.out.println("Bombe gefunden");
 					man.bombs.get(j).tExp.schedule(
 							new BombExplosion(man.bombs.get(j), sp, man), 0);
 					man.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -731,7 +723,6 @@ public class BombExplosion extends TimerTask {
 				if (((man2.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man2.bombs
 						.get(j).getPosX() == this.bomb.getPosX() + i
 						* this.bomb.getRadius()))) {
-					System.out.println("Bombe gefunden");
 					man2.bombs.get(j).tExp.schedule(new BombExplosion(
 							man2.bombs.get(j), sp, man2), 0);
 					man2.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -748,7 +739,6 @@ public class BombExplosion extends TimerTask {
 				if (((man.bombs.get(j).getPosY() == this.bomb.getPosY() + i
 						* this.bomb.getRadius()) && (man.bombs.get(j).getPosX() == this.bomb
 						.getPosX()))) {
-					System.out.println("Bombe gefunden");
 					man.bombs.get(j).tExp.schedule(
 							new BombExplosion(man.bombs.get(j), sp, man), 0);
 					man.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -763,7 +753,6 @@ public class BombExplosion extends TimerTask {
 				if (((man2.bombs.get(j).getPosY() == this.bomb.getPosY() + i
 						* this.bomb.getRadius()) && (man2.bombs.get(j)
 						.getPosX() == this.bomb.getPosX()))) {
-					System.out.println("Bombe gefunden");
 					man2.bombs.get(j).tExp.schedule(new BombExplosion(
 							man2.bombs.get(j), sp, man2), 0);
 					man2.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -780,7 +769,6 @@ public class BombExplosion extends TimerTask {
 				if (((man.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man.bombs
 						.get(j).getPosX() == this.bomb.getPosX() - i
 						* this.bomb.getRadius()))) {
-					System.out.println("Bombe gefunden");
 					man.bombs.get(j).tExp.schedule(
 							new BombExplosion(man.bombs.get(j), sp, man), 0);
 					man.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
@@ -795,7 +783,6 @@ public class BombExplosion extends TimerTask {
 				if (((man2.bombs.get(j).getPosY() == this.bomb.getPosY()) && (man2.bombs
 						.get(j).getPosX() == this.bomb.getPosX() - i
 						* this.bomb.getRadius()))) {
-					System.out.println("Bombe gefunden");
 					man2.bombs.get(j).tExp.schedule(new BombExplosion(
 							man2.bombs.get(j), sp, man2), 0);
 					man2.bombs.get(j).tUnExp.schedule(new BombUnExplosion(
