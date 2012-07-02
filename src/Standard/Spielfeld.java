@@ -36,9 +36,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 			}
 				break;
@@ -63,9 +63,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 			}
 				break;
@@ -90,9 +90,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}
@@ -119,9 +119,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}
@@ -167,9 +167,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}
@@ -197,9 +197,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}
@@ -227,9 +227,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}
@@ -257,9 +257,9 @@ public class Spielfeld extends JPanel implements KeyListener {
 				Main.f.dispose("Du hast dich bis zum Ausgang durchgeschlagen!",
 						true);
 				if (two_player == true) {
-					Main.f.restart(2, false);
+					Main.f.restart(2, true);
 				} else {
-					Main.f.restart(1, false);
+					Main.f.restart(1, true);
 				}
 
 			}

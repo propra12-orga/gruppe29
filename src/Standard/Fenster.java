@@ -26,7 +26,7 @@ import parser.XMLParser;
 import MapEditor.MapEditor;
 
 public class Fenster implements ActionListener {
-	private JFrame f;
+	public JFrame f;
 	private JFrame fc;
 	private JPanel p;
 	Clip clip;
@@ -236,43 +236,9 @@ public class Fenster implements ActionListener {
 		JMenuItem tutorial = new JMenuItem("Tutorial Level");
 		tutorial.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
-				f.dispose();
-				restart(1, true);
-				final JLabel text = new JLabel(
-						"Mit den Pfeil-Tasten auf deiner Tastatur kannst du den Bomberman steuern");
-				p.add(text);
-				final JButton weiter = new JButton("Weiter");
-				weiter.setFocusable(false);
-				p.add(weiter);
-				weiter.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(
-							java.awt.event.ActionEvent object) {
-						text.setText("<html><body>Mit der Leertaste kannst du eine Bombe legen! Der Explosionsradius<br>ist 1, also Achtung!</body></html>");
-						// text.setFocusable(false);
-						final JButton weiter2 = new JButton("Weiter");
-						p.add(weiter2);
-						p.remove(weiter);
-						weiter2.addActionListener(new java.awt.event.ActionListener() {
-							public void actionPerformed(
-									java.awt.event.ActionEvent object) {
-								text.setText("<html><body>Das war das Tutorial. Mit einem Klick auf 'Beenden' endet<br>das Tutorial und das Spiel startet.</body></html>");
-								text.setFocusable(false);
-								JButton weiter3 = new JButton("Beenden");
-								weiter3.setFocusable(false);
-								p.add(weiter3);
-								p.remove(weiter2);
-								weiter3.addActionListener(new java.awt.event.ActionListener() {
-									public void actionPerformed(
-											java.awt.event.ActionEvent object) {
-										f.dispose();
-										restart(1, false);
-
-									}
-								});
-							}
-						});
-					}
-				});
+				Tutorial tut = new Tutorial(sp);
+				f.addKeyListener(tut);
+				tut.run();
 			}
 		});
 
@@ -484,7 +450,7 @@ public class Fenster implements ActionListener {
 	public void dispose(String messageDialog, boolean renew) {
 		if (renew) {
 			int answer = JOptionPane.showConfirmDialog(f, messageDialog
-					+ " Möchtest du Neustarten?", "Game Over",
+					+ " Möchtest du ein neues Spiel starten?", "Game Over",
 					JOptionPane.YES_NO_OPTION);
 			if (answer == JOptionPane.YES_OPTION) {
 				stop = true;
