@@ -13,9 +13,17 @@ import Spielobjekte.Mauer;
 import Standard.Bomberman;
 
 public class EditorFeld extends JPanel implements KeyListener {
-
+	/**
+	 * ausgewählte Grafik aus dem Editorfeld
+	 */
 	private int theChosenOne;
+	/**
+	 * ob ein Bomberman gesetzt ist
+	 */
 	private boolean isPlaced = false;
+	/**
+	 * ob der 2.Bomberman im 2 Spielermodus gesetzt ist
+	 */
 	private boolean isPlaced2 = false;
 
 	@Override
@@ -166,7 +174,6 @@ public class EditorFeld extends JPanel implements KeyListener {
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
 	}
 

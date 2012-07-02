@@ -18,11 +18,25 @@ import parser.XMLParser;
 import Standard.OurJFileChooser;
 
 public class MapEditor extends JFrame implements ActionListener {
-
+	/**
+	 * Groesse des Spielfelds, Spalten und Zeilen
+	 */
 	private int sizeX, sizeY, columns, length;
+	/**
+	 * Spielfeldraster
+	 */
 	int[][] raster, raster2;
+	/**
+	 * EditorFeld
+	 */
 	protected EditorFeld ep;
 
+	/**
+	 * Erstellt das Fenster für dem MapEditor
+	 * 
+	 * @param mode
+	 *            ob Einspieler- oder Zweispielermodus
+	 */
 	public MapEditor(int mode) {
 		final int modus = mode;
 		XMLParser xml;
