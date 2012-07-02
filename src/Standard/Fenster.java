@@ -42,7 +42,9 @@ public class Fenster implements ActionListener {
 
 	JLabel scoreLabel;
 	JLabel scoreLabel2;
-	private int[] score;
+	private int highscore1;
+	private int highscore2;
+	private int highscore3;
 
 	/**
 	 * Fenster erstellen
@@ -192,15 +194,42 @@ public class Fenster implements ActionListener {
 				System.exit(0);
 			}
 		});
+
+		JMenuItem highscore = new JMenuItem("Highscore");
+		highscore.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				fc = new JFrame("Highscore");
+				fc.setLocation((f.getWidth() - fc.getSize().width) / 2,
+						(f.getHeight() - fc.getSize().height) / 2);
+				fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				fc.setSize(300, 200);
+				JPanel panel = new JPanel();
+				JLabel namen = new JLabel("<html><body>Highscore:<br>1. "
+						+ highscore1 + "<br>2. " + highscore2 + "<br>3. "
+						+ highscore3 + "</body></html>");
+				panel.add(namen);
+				JButton close = new JButton("Schließen");
+				close.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(
+							java.awt.event.ActionEvent object) {
+						fc.dispose();
+					}
+				});
+				panel.add(close);
+				fc.add(panel);
+				fc.setVisible(true);
+			}
+		});
+
 		JMenuItem start = new JMenuItem("Neues Spiel");
 		start.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				f.dispose();
+				restart(1, false);
 				if (sp.bm2 != null) {
 					sp.bm2.deleteScore();
 				}
 				sp.bm.deleteScore();
-				f.dispose();
-				restart(1, false);
 			}
 		});
 
@@ -345,6 +374,7 @@ public class Fenster implements ActionListener {
 		menue.add(tutorial);
 		menue.add(sound);
 		menue.add(credits);
+		menue.add(highscore);
 		menue.addSeparator();
 		menue.add(beenden);
 		menueLeiste.add(mp);
@@ -379,11 +409,38 @@ public class Fenster implements ActionListener {
 	 * @param mode
 	 */
 	public void restart(int mode, boolean resetScore) {
+		int tmp = 0, tmp2 = 0;
+		if (sp.bm2 != null) {
+			tmp2 = sp.bm2.getScore();
+		}
+		tmp = sp.bm.getScore();
+		if (tmp > highscore1) {
+			highscore3 = highscore2;
+			highscore2 = highscore1;
+			highscore1 = tmp;
+		} else if (tmp > highscore2) {
+			highscore3 = highscore2;
+			highscore2 = tmp;
+		} else if (tmp > highscore3)
+			highscore3 = tmp;
+		if (sp.bm2 != null) {
+			tmp2 = sp.bm2.getScore();
+			if (tmp2 > highscore1) {
+				highscore3 = highscore2;
+				highscore2 = highscore1;
+				highscore1 = tmp2;
+			} else if (tmp2 > highscore2) {
+				highscore3 = highscore2;
+				highscore2 = tmp2;
+			} else if (tmp2 > highscore3)
+				highscore3 = tmp2;
+		}
 		this.mode = mode;
 		sp.bm.removeAllBombsFromList();
 		stop = true;
 		clip.stop();
-		int tmp = 0, tmp2 = 0;
+		tmp = 0;
+		tmp2 = 0;
 		if (!resetScore) {
 			if (sp.bm2 != null) {
 				tmp2 = sp.bm2.getScore();
