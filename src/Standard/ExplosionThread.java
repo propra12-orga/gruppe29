@@ -19,13 +19,20 @@ public class ExplosionThread implements Runnable {
 	private int direction, i, j;
 
 	/**
+	 * Erzeugt ein neues Objekt von ExplosionThread
 	 * 
 	 * @param sp
+	 *            Referenz auf Spielfeld
 	 * @param bomb
+	 *            Referenz auf die explodierte Bombe
 	 * @param man
+	 *            Referenz auf den Bomberman
 	 * @param direction
+	 *            zu prüfende Richtung
 	 * @param i
+	 *            aktuelle Stelle im Explosionsradius
 	 * @param j
+	 *            Position der Bombe in der Liste
 	 */
 	public ExplosionThread(Spielfeld sp, Bomb bomb, Bomberman man,
 			int direction, int i, int j) {
@@ -38,7 +45,9 @@ public class ExplosionThread implements Runnable {
 	}
 
 	/**
-	 * Explosion der Bombe
+	 * Explosion der Bombe, in der angegebenen Richtung wird geprüft, ob eine
+	 * zerstörbare Mauer, eine andere Bombe oder ein Bomberman innerhalb des
+	 * Explosionsradius liegt
 	 */
 	public void run() {
 		switch (direction) {

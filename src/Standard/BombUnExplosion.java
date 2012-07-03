@@ -3,9 +3,7 @@ package Standard;
 import java.util.TimerTask;
 
 public class BombUnExplosion extends TimerTask {
-	/**
-	 * Bomberman
-	 */
+	/** Bomberman */
 	private Bomberman bm;
 	/** Bomb-Objekt */
 	private Bomb bomb;
@@ -13,6 +11,7 @@ public class BombUnExplosion extends TimerTask {
 	private Spielfeld sp;
 
 	/**
+	 * Erzeugt eine neues Objekt von BombUnExplosion.
 	 * 
 	 * @param b
 	 *            Übergabe von zu behandelnder Bombe
@@ -27,7 +26,7 @@ public class BombUnExplosion extends TimerTask {
 
 	@Override
 	/**
-	 * Bombenexplosion ausschalten, Bombe unsichtbar setzen, Raster auf begehbar schalten
+	 * Bombenexplosion ausschalten, Bombe unsichtbar setzen, Raster auf begehbar schalten und schließlcih die Bombe aus der Liste löschen und den entsprechenden Zähler dekrementieren.
 	 */
 	public void run() {
 		bomb.setExploded(false);

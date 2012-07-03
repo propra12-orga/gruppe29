@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Bomb extends JLabel {
+	/** Position der Bombe */
 	private int posX;
 	private int posY;
 	/** Radius der Bombe */
@@ -17,16 +18,18 @@ public class Bomb extends JLabel {
 	private int explosionRadius;
 	/** Sichtbarkeit der Bombe */
 	private boolean visible;
-	/** Bombe explodiert nicht explodiert */
+	/** Bombe ist explodiert oder nicht explodiert */
 	private boolean exploded;
+	/** Timer zum Zeichnen der Explosion und zum abspielen des Sounds */
 	public Timer tExp;
 	public Timer tUnExp;
 	public Timer tSound;
+	/** Besitzer der Bombe */
 	private Bomberman owner;
 
 	/**
 	 * Die Methode Bomb uebernimmt die Parameter und setzt die Bombe auf
-	 * unsichtbar und auf nicht explodiert
+	 * unsichtbar und auf nicht explodiert.
 	 * 
 	 * @param posX
 	 *            x Position der Bombe
@@ -36,6 +39,8 @@ public class Bomb extends JLabel {
 	 *            Radius der Bombe
 	 * @param explosionRadius
 	 *            Explosionsradius der Bombe
+	 * @param owner
+	 *            Bomberman, der die Bombe gelegt hat
 	 * */
 	public Bomb(int posX, int posY, int radius, int explosionRadius,
 			Bomberman owner) {
@@ -53,7 +58,8 @@ public class Bomb extends JLabel {
 	}
 
 	/**
-	 * Die Methode explode erstellt einen Timer t und setzt den Timer
+	 * setzt die Timer und lässt die Bombe explodieren, sowie zeichnen, als auch
+	 * den Sound abspielen
 	 * 
 	 * @param sp
 	 *            uebergibt das Spielfeld
@@ -67,7 +73,8 @@ public class Bomb extends JLabel {
 	}
 
 	/**
-	 * Die Methode explode erstellt einen Timer t und setzt den Timer
+	 * setzt die Timer und lässt die Bombe explodieren, sowie zeichnen, als auch
+	 * den Sound abspielen
 	 * 
 	 * @param sp
 	 *            uebergibt das Spielfeld
@@ -184,12 +191,16 @@ public class Bomb extends JLabel {
 		this.explosionRadius = explosionRadius;
 	}
 
+	/**
+	 * 
+	 * @return Bomberman, der die Bombe gelegt hat
+	 */
 	public Bomberman getOwner() {
 		return this.owner;
 	}
 
 	/**
-	 * zeichnet die Bombe
+	 * zeichnet die Bombe, sowie dort, wo keine Wand ist die Explosion der Bombe
 	 */
 	public void paintObject(Graphics g, Spielfeld sp) {
 		ImageIcon ico = new ImageIcon("img/bombew.png");

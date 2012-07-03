@@ -38,7 +38,6 @@ public class Fenster implements ActionListener {
 	Clip clip;
 	private boolean play;
 	private boolean stop;
-	/** Erstellung eines Spielfeldes sp */
 	private Spielfeld sp;
 	private int width;
 	private int height;
@@ -91,7 +90,7 @@ public class Fenster implements ActionListener {
 		initFrame();
 	}
 
-	/** Frame und Panel erstellen */
+	/** Frame und Panel erzeugen und initialisieren */
 	private void initFrame() {
 		f = new JFrame("Tim VS Küps");
 		f.setResizable(false);
@@ -111,6 +110,9 @@ public class Fenster implements ActionListener {
 		playSound();
 	}
 
+	/**
+	 * wiedergabe der Hintergrundmusik
+	 */
 	private void playSound() {
 		if (play)
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -414,6 +416,10 @@ public class Fenster implements ActionListener {
 		}
 	}
 
+	/**
+	 * Speichert den Highscore in "highscore.txt" bzw. "highscoreMP.txt", falls
+	 * im Mehrspielermodus gespielt wird
+	 */
 	public void saveHighscore() {
 		try {
 			BufferedWriter save;
@@ -445,6 +451,11 @@ public class Fenster implements ActionListener {
 		}
 	}
 
+	/**
+	 * Lässt den Spieler, der einen Highscore erreicht hat seinen Namen eingeben
+	 * 
+	 * @return liefert den eingegebenen Name zurück
+	 */
 	public String getHighscoreName() {
 		String name = JOptionPane
 				.showInputDialog(
@@ -453,6 +464,12 @@ public class Fenster implements ActionListener {
 		return name;
 	}
 
+	/**
+	 * initialisiert das Spielfeld und das Fenster mit allen Werten neu
+	 * 
+	 * @param mode
+	 * @param resetScore
+	 */
 	public void restart(int mode, boolean resetScore) {
 		int tmp = 0, tmp2 = 0;
 		if (sp.bm2 != null) {
@@ -531,6 +548,9 @@ public class Fenster implements ActionListener {
 		initFrame();
 	}
 
+	/**
+	 * aktualisiert die Punkteanzeige
+	 */
 	public void updateScore() {
 		if (sp.bm2 == null)
 			scoreLabel.setText("Du hast:" + sp.bm.getScore() + " Punkte\n");

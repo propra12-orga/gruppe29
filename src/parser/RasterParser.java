@@ -20,6 +20,14 @@ public class RasterParser {
 		return raster;
 	}
 
+	/**
+	 * Wandelt ein Pixelraster wieder in ein Blockraster um
+	 * 
+	 * @param raster
+	 * @param columns
+	 * @param length
+	 * @return
+	 */
 	public int[][] untransform(int[][] raster, int columns, int length) {
 		int[][] raster2 = new int[columns][columns];
 		int sizeX = columns * length;

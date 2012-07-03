@@ -27,6 +27,11 @@ public class BreakableMauer extends JLabel {
 		this.blockLength = blockLength;
 	}
 
+	/**
+	 * Zeichnen der Mauer.
+	 * 
+	 * @param g
+	 */
 	public void paintObject(Graphics g) {
 		Image image = Toolkit.getDefaultToolkit().getImage("img/breakable.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,

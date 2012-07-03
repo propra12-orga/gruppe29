@@ -9,6 +9,11 @@ public class Tutorial implements KeyListener {
 	private int schritte, bomben, stage;
 	private Spielfeld sp;
 
+	/**
+	 * Erzeugt ein neues Tutorial auf dem Spielfeld.
+	 * 
+	 * @param sp
+	 */
 	public Tutorial(Spielfeld sp) {
 		this.sp = sp;
 		schritte = 0;
@@ -16,6 +21,9 @@ public class Tutorial implements KeyListener {
 		stage = 1;
 	}
 
+	/**
+	 * Startet das Tutorial.
+	 */
 	public void run() {
 		int answer = JOptionPane
 				.showConfirmDialog(
@@ -24,6 +32,9 @@ public class Tutorial implements KeyListener {
 						"Hinweis", JOptionPane.DEFAULT_OPTION);
 	}
 
+	/**
+	 * Key-Listener-Erweiterung für das Tutorial.
+	 */
 	public void keyPressed(KeyEvent ke) {
 		switch (ke.getKeyCode()) {
 		case KeyEvent.VK_UP: {

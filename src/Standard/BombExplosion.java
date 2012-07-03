@@ -11,10 +11,14 @@ public class BombExplosion extends TimerTask {
 	Bomberman bm, bm2;
 
 	/**
+	 * Erzeugt ein neues Objekt von BombExplosion.
 	 * 
 	 * @param b
+	 *            explodierte Bombe
 	 * @param sp
+	 *            Referenz auf Spielfeld
 	 * @param man
+	 *            Referenz auf Bomberman
 	 */
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man) {
 		this.bomb = b;
@@ -23,11 +27,16 @@ public class BombExplosion extends TimerTask {
 	}
 
 	/**
+	 * Erzeugt ein neues Objekt von BombExplosion, falls 2 Spieler existieren.
 	 * 
 	 * @param b
+	 *            explodierte Bombe
 	 * @param sp
+	 *            Referenz auf Spielfeld
 	 * @param man
+	 *            Referenz auf Bomberman
 	 * @param man2
+	 *            Referenz auf den zweiten Bomberman
 	 */
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man, Bomberman man2) {
 		this.bomb = b;
@@ -37,7 +46,9 @@ public class BombExplosion extends TimerTask {
 	}
 
 	/**
-	 * Bombe explodieren lassen
+	 * Exoplsion ausführen. Es wird von der Position der Bombe aus in alle
+	 * Richtungen geprüft, ob sich innerhalb des Explosionsradius ein Objekt zu
+	 * Interaktion befindet.
 	 */
 	public void run() {
 		bomb.setExploded(true);
@@ -265,9 +276,11 @@ public class BombExplosion extends TimerTask {
 	 * überprüft, ob der Bomberman im Einzelspielermodus stirbt
 	 * 
 	 * @param man
+	 *            Referenz auf Bomberman
 	 * @param direction
 	 *            übergibt die Richtung in der geprüft wird
 	 * @param i
+	 *            aktuelle Stelle im Explosionsradius
 	 */
 	private void kill(Bomberman man, int direction, int i) {
 		switch (direction) {
@@ -347,13 +360,16 @@ public class BombExplosion extends TimerTask {
 	// Behandlung für Bomberman im Zweispielermodus -----------------------
 	//
 	/**
-	 * überprüft, ob der Bomberman im Zweispielermodus stirbt
+	 * überprüft, ob der Bomberman im Zweispielermodus stirbt.
 	 * 
 	 * @param man
+	 *            Referenz auf Bomberman
 	 * @param man2
+	 *            Referenz auf den zweiten Bomberman
 	 * @param direction
 	 *            übergibt die Richtung in der geprüft wird
 	 * @param i
+	 *            aktuelle Position im Explosionsradius
 	 */
 	private void kill(Bomberman man, Bomberman man2, int direction, int i) {
 		switch (direction) {
@@ -558,15 +574,16 @@ public class BombExplosion extends TimerTask {
 	// Kettenreaktion 1 spieler ----------------------------------------
 	//
 	/**
-	 * Kettenreaktion für Bomberman im Einspielermodus
+	 * Kettenreaktion von Bomben im Einspielermodus.
 	 * 
 	 * @param man
+	 *            Referenz auf Bomberman
 	 * @param direction
 	 *            übergibt die Richtung in der geprüft wird
 	 * @param i
-	 *            Schleifenvaribeln
+	 *            aktuelle Stelle im Explosionsradius
 	 * @param j
-	 *            Schleifenvaribeln
+	 *            Position der Bombe in der Liste
 	 */
 	private void kettenreaktion(Bomberman man, int direction, int i, int j) {
 		ExplosionThread t = new ExplosionThread(sp, bomb, man, direction, i, j);
@@ -580,15 +597,15 @@ public class BombExplosion extends TimerTask {
 	 * Kettenreaktion für Bomberman im Zweispielermodus
 	 * 
 	 * @param man
-	 *            Bomberman 1
+	 *            Referenz auf Bomberman
 	 * @param man2
-	 *            Bomberman 2
+	 *            Referenz auf den zweiten Bomberman
 	 * @param direction
 	 *            übergibt die Richtung in der geprüft wird
 	 * @param i
-	 *            Schleifenvaribeln
+	 *            aktuelle Stelle im Explosionsradius
 	 * @param j
-	 *            Schleifenvaribeln
+	 *            Position der Bombe in der Liste
 	 */
 	private void kettenreaktion(Bomberman man, Bomberman man2, int direction,
 			int i, int j) {

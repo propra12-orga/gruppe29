@@ -14,10 +14,20 @@ public class XMLParser {
 
 	private String filename;
 
+	/**
+	 * Erzeugt einen neuen Parser mit einem Dateinamen.
+	 * 
+	 * @param filename
+	 */
 	public XMLParser(String filename) {
 		this.filename = filename;
 	}
 
+	/**
+	 * liest die Anzahl der Columns aus der XML-Datei aus.
+	 * 
+	 * @return Anzahl der Columns
+	 */
 	public int getColumns() {
 		Document doc = null;
 		try {
@@ -58,6 +68,12 @@ public class XMLParser {
 		return raster;
 	}
 
+	/**
+	 * Schreiben in die XML-Datei
+	 * 
+	 * @param r
+	 * @param columns
+	 */
 	public void writeXML(int[][] r, int columns) {
 		Element root = new Element("Bomberman");
 		Element header = new Element("header");

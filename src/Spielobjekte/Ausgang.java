@@ -15,12 +15,24 @@ public class Ausgang extends JLabel {
 	/** Größe der Blöcke */
 	private int blockLength;
 
+	/**
+	 * Erzeugt einen neuen Ausgang
+	 * 
+	 * @param posX
+	 * @param posY
+	 * @param blockLength
+	 */
 	public Ausgang(int posX, int posY, int blockLength) {
 		this.posX = posX;
 		this.posY = posY;
 		this.blockLength = blockLength;
 	}
 
+	/**
+	 * Zeichnen des Ausgangs
+	 * 
+	 * @param g
+	 */
 	public void paintObject(Graphics g) {
 		Image image = Toolkit.getDefaultToolkit().getImage("img/ausgang.png");
 		g.drawImage(image, this.posX, this.posY, this.blockLength,

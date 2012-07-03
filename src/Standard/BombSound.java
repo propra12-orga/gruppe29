@@ -1,4 +1,5 @@
 package Standard;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.util.TimerTask;
@@ -11,15 +12,14 @@ import javax.sound.sampled.DataLine;
 
 public class BombSound extends TimerTask {
 	/**
-	 * 
-
+	 * Erzeugt ein neues Objekt von BombSound.
 	 */
 	public BombSound() {
 
 	}
 
 	/**
-	 * Bombensound öffnen und abspielen
+	 * Bombensound öffnen und abspielen.
 	 */
 	public void run() {
 		try {
