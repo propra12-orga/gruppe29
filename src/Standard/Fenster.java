@@ -93,7 +93,7 @@ public class Fenster implements ActionListener {
 
 	/** Frame und Panel erstellen */
 	private void initFrame() {
-		f = new JFrame("Bomberman");
+		f = new JFrame("Tim VS Küps");
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(width, height + length);
@@ -387,8 +387,14 @@ public class Fenster implements ActionListener {
 	 */
 	public void getHighscore() {
 		try {
-			BufferedReader input = new BufferedReader(new FileReader(
-					"highscore/highscore.txt"));
+			BufferedReader input;
+			if (mode == 1) {
+				input = new BufferedReader(new FileReader(
+						"highscore/highscore.txt"));
+			} else {
+				input = new BufferedReader(new FileReader(
+						"highscore/highscoreMP.txt"));
+			}
 			String zeile = null;
 			zeile = input.readLine();
 			highscore1 = Integer.parseInt(zeile);
@@ -410,8 +416,14 @@ public class Fenster implements ActionListener {
 
 	public void saveHighscore() {
 		try {
-			BufferedWriter save = new BufferedWriter(new FileWriter(
-					"highscore/highscore.txt"));
+			BufferedWriter save;
+			if (mode == 1) {
+				save = new BufferedWriter(new FileWriter(
+						"highscore/highscore.txt"));
+			} else {
+				save = new BufferedWriter(new FileWriter(
+						"highscore/highscoreMP.txt"));
+			}
 			String string = highscore1 + "";
 			save.write(string);
 			save.newLine();
@@ -473,11 +485,21 @@ public class Fenster implements ActionListener {
 				highscore3 = highscore2;
 				highscore2 = highscore1;
 				highscore1 = tmp2;
+				hsname3 = hsname2;
+				hsname2 = hsname1;
+				name = getHighscoreName();
+				hsname1 = name;
 			} else if (tmp2 > highscore2) {
 				highscore3 = highscore2;
 				highscore2 = tmp2;
-			} else if (tmp2 > highscore3)
+				hsname3 = hsname2;
+				name = getHighscoreName();
+				hsname2 = name;
+			} else if (tmp2 > highscore3) {
 				highscore3 = tmp2;
+				name = getHighscoreName();
+				hsname3 = name;
+			}
 		}
 
 		this.mode = mode;
@@ -505,6 +527,7 @@ public class Fenster implements ActionListener {
 		sp.bm.addScore(tmp);
 		if (sp.bm2 != null)
 			sp.bm2.addScore(tmp2);
+		getHighscore();
 		initFrame();
 	}
 
