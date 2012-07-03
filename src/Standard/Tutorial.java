@@ -62,7 +62,7 @@ public class Tutorial implements KeyListener {
 					int answer = JOptionPane
 							.showConfirmDialog(
 									Main.f.f,
-									"<html><body>&nbsp;&nbsp;&nbsp;&nbsp;Sehr gut. Mit der Leertaste kannst du nun auch Bomben legen.<br>&nbsp;&nbsp;&nbsp;&nbsp;Durch die Explosion von Bombenkönnen zerstörbare Mauern zerstört und ein Bomberman getötet werden.<br>&nbsp;&nbsp;&nbsp;&nbsp;Lege also nun einige Bomben.</body></html>",
+									"<html><body>&nbsp;&nbsp;&nbsp;&nbsp;Sehr gut. Mit der Leertaste kannst du nun auch Bomben legen.<br>&nbsp;&nbsp;&nbsp;&nbsp;Durch die Explosion von Bomben können zerstörbare Mauern zerstört und ein Bomberman getötet werden.<br>&nbsp;&nbsp;&nbsp;&nbsp;Lege also nun einige Bomben.</body></html>",
 									"Hinweis", JOptionPane.DEFAULT_OPTION);
 				}
 			}
@@ -76,7 +76,7 @@ public class Tutorial implements KeyListener {
 					int answer = JOptionPane
 							.showConfirmDialog(
 									Main.f.f,
-									"<html><body>&nbsp;&nbsp;&nbsp;&nbsp;Sehr gut. Mit der Leertaste kannst du nun auch Bomben legen.<br>&nbsp;&nbsp;&nbsp;&nbsp;Durch die Explosion von Bombenkönnen zerstörbare Mauern zerstört und ein Bomberman getötet werden.<br>&nbsp;&nbsp;&nbsp;&nbsp;Lege also nun einige Bomben.</body></html>",
+									"<html><body>&nbsp;&nbsp;&nbsp;&nbsp;Sehr gut. Mit der Leertaste kannst du nun auch Bomben legen.<br>&nbsp;&nbsp;&nbsp;&nbsp;Durch die Explosion von Bomben können zerstörbare Mauern zerstört und ein Bomberman getötet werden.<br>&nbsp;&nbsp;&nbsp;&nbsp;Lege also nun einige Bomben.</body></html>",
 									"Hinweis", JOptionPane.DEFAULT_OPTION);
 				}
 			}
