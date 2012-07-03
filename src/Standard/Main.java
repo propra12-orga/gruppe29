@@ -42,7 +42,7 @@ public class Main {
 		raster2 = xml.readXML(columns);
 		raster = rp.transform(raster2, columns, length);
 		f = new Fenster(sizeX, sizeY, columns, length);
-
+		f.getHighscore();
 	}
 
 }

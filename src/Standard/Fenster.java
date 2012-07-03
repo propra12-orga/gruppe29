@@ -3,7 +3,12 @@ package Standard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -45,6 +50,9 @@ public class Fenster implements ActionListener {
 	private int highscore1;
 	private int highscore2;
 	private int highscore3;
+	private String hsname1;
+	private String hsname2;
+	private String hsname3;
 
 	/**
 	 * Fenster erstellen
@@ -99,7 +107,6 @@ public class Fenster implements ActionListener {
 		p.setSize(width, height);
 		initMenue();
 		f.setVisible(true);
-
 		playSound();
 	}
 
@@ -191,6 +198,7 @@ public class Fenster implements ActionListener {
 		JMenuItem beenden = new JMenuItem("Beenden");
 		beenden.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
+				saveHighscore();
 				System.exit(0);
 			}
 		});
@@ -205,7 +213,8 @@ public class Fenster implements ActionListener {
 				fc.setSize(300, 200);
 				JPanel panel = new JPanel();
 				JLabel namen = new JLabel("<html><body>Highscore:<br>1. "
-						+ highscore1 + "<br>2. " + highscore2 + "<br>3. "
+						+ hsname1 + " " + highscore1 + "<br>2. " + hsname2
+						+ " " + highscore2 + "<br>3. " + hsname3 + " "
 						+ highscore3 + "</body></html>");
 				panel.add(namen);
 				JButton close = new JButton("Schließen");
@@ -374,21 +383,88 @@ public class Fenster implements ActionListener {
 	 * 
 	 * @param mode
 	 */
+	public void getHighscore() {
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(
+					"highscore/highscore.txt"));
+			String zeile = null;
+			zeile = input.readLine();
+			highscore1 = Integer.parseInt(zeile);
+			zeile = input.readLine();
+			highscore2 = Integer.parseInt(zeile);
+			zeile = input.readLine();
+			highscore3 = Integer.parseInt(zeile);
+			zeile = input.readLine();
+			hsname1 = zeile;
+			zeile = input.readLine();
+			hsname2 = zeile;
+			zeile = input.readLine();
+			hsname3 = zeile;
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void saveHighscore() {
+		try {
+			BufferedWriter save = new BufferedWriter(new FileWriter(
+					"highscore/highscore.txt"));
+			String string = highscore1 + "";
+			save.write(string);
+			save.newLine();
+			string = highscore2 + "";
+			save.write(string);
+			save.newLine();
+			string = highscore3 + "";
+			save.write(string);
+			save.newLine();
+			save.write(hsname1);
+			save.newLine();
+			save.write(hsname2);
+			save.newLine();
+			save.write(hsname3);
+			save.flush();
+			save.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getHighscoreName() {
+		String name = JOptionPane
+				.showInputDialog(
+						null,
+						"<html><body>Herzlichen Glückwunsch!<br>Du bist einer der Besten Drei in diesem Spiel!<br>Bitte gebe deinen Namen ein.</body></html>");
+		return name;
+	}
+
 	public void restart(int mode, boolean resetScore) {
 		int tmp = 0, tmp2 = 0;
 		if (sp.bm2 != null) {
 			tmp2 = sp.bm2.getScore();
 		}
 		tmp = sp.bm.getScore();
+		String name = "";
 		if (tmp > highscore1) {
 			highscore3 = highscore2;
 			highscore2 = highscore1;
 			highscore1 = tmp;
+			hsname3 = hsname2;
+			hsname2 = hsname1;
+			name = getHighscoreName();
+			hsname1 = name;
 		} else if (tmp > highscore2) {
 			highscore3 = highscore2;
 			highscore2 = tmp;
-		} else if (tmp > highscore3)
+			hsname3 = hsname2;
+			name = getHighscoreName();
+			hsname2 = name;
+		} else if (tmp > highscore3) {
 			highscore3 = tmp;
+			name = getHighscoreName();
+			hsname3 = name;
+		}
 		if (sp.bm2 != null) {
 			tmp2 = sp.bm2.getScore();
 			if (tmp2 > highscore1) {
@@ -401,6 +477,7 @@ public class Fenster implements ActionListener {
 			} else if (tmp2 > highscore3)
 				highscore3 = tmp2;
 		}
+
 		this.mode = mode;
 		sp.bm.removeAllBombsFromList();
 		stop = true;
