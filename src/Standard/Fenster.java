@@ -1,5 +1,6 @@
 package Standard;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -207,10 +208,11 @@ public class Fenster implements ActionListener {
 		highscore.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				fc = new JFrame("Highscore");
+				fc.setLayout(new BorderLayout());
 				fc.setLocation((f.getWidth() - fc.getSize().width) / 2,
 						(f.getHeight() - fc.getSize().height) / 2);
 				fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				fc.setSize(300, 200);
+				fc.setSize(300, 150);
 				JPanel panel = new JPanel();
 				JLabel namen = new JLabel("<html><body>Highscore:<br>1. "
 						+ hsname1 + " " + highscore1 + "<br>2. " + hsname2
@@ -224,8 +226,8 @@ public class Fenster implements ActionListener {
 						fc.dispose();
 					}
 				});
-				panel.add(close);
 				fc.add(panel);
+				fc.add(close, BorderLayout.SOUTH);
 				fc.setVisible(true);
 			}
 		});
