@@ -2,25 +2,56 @@ package server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class BMServer {
+public class BMServer implements Runnable {
 
-	public static void main(String[] args) throws Exception {
-		ServerSocket server = new ServerSocket(3143);
+	private Socket client;
+	private ServerSocket server;
 
+	public boolean flag;
+
+	public int counter;
+
+	public BMServer() throws Exception {
+		server = new ServerSocket(3145);
+		flag = false;
+		counter = 0;
+
+	}
+
+	public void writeToClient(int message) throws Exception {
+		DataOutputStream out = new DataOutputStream(client.getOutputStream());
+
+		out.writeInt(message);
+		System.out.println("Senden zum Client");
+
+	}
+
+	public void readFromClient(Socket client) throws Exception {
+		DataInputStream in = new DataInputStream(client.getInputStream());
+
+		int i = in.readInt();
+		if (i != -1) {
+			System.out.println("Message empfangen");
+			System.out.println(i);
+			counter = i;
+		}
+	}
+
+	@Override
+	public void run() {
 		while (true) {
-			Socket client = null;
+			client = null;
 
 			try {
 				client = server.accept();
 				// FUNKTION
-				serverAction(client);
-			} catch (IOException e) {
+				this.readFromClient(client);
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				if (client != null)
@@ -31,38 +62,5 @@ public class BMServer {
 					}
 			}
 		}
-	}
-
-	private static void serverAction(Socket client) throws Exception {
-		DataInputStream in = new DataInputStream(client.getInputStream());
-		DataOutputStream out = new DataOutputStream(client.getOutputStream());
-
-		System.out.println("Einlesen..");
-		String xmlin = in.readUTF();
-
-		// SPEICHERN
-		FileOutputStream fos = new FileOutputStream("maps/temp.xml");
-		for (int i = 0; i < xmlin.length(); i++) {
-			fos.write((byte) xmlin.charAt(i));
-		}
-		fos.close();
-
-		System.out.println("Datei gespeichert");
-
-		// LESEN UND ZURÜCKSCHICKEN
-		byte character;
-		String xmlout = "";
-		System.out.println("Datei lesen...");
-		FileInputStream fis = new FileInputStream("maps/temp.xml");
-		do {
-			character = (byte) fis.read();
-			System.out.print("CHAR: " + (char) character);
-			if (character != -1)
-				xmlout += (char) character;
-		} while (character != -1);
-		fis.close();
-		System.out.println("Datei gelesen");
-		out.writeUTF(xmlout);
-		System.out.println("Ausgabe an Client");
 	}
 }

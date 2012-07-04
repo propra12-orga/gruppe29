@@ -2,64 +2,50 @@ package server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.net.Socket;
+import java.util.List;
 
-public class BMClient {
+public class BMClient implements Runnable {
 
-	public static void main(String[] args) {
-		Socket server = null;
-		String xml = "";
-		byte character;
-		File f = new File("maps/Default.xml");
+	private Socket server;
+	public int[][] raster;
+	public boolean flag;
 
-		try {
-			System.out.println("Datei lesen...");
-			FileInputStream fis = new FileInputStream(f);
+	public List<Integer> befehle;
+	public int counter;
 
-			do {
-				character = (byte) fis.read();
-				System.out.println("CHAR: " + (char) character);
-				if (character != -1)
-					xml += (char) character;
-			} while (character != -1);
+	public BMClient() throws Exception {
+		server = new Socket("134.99.36.224", 3145);
+		flag = false;
+		counter = 0;
+	}
 
-			fis.close();
+	public void sendToServer(int message) throws Exception {
+		DataOutputStream out = new DataOutputStream(server.getOutputStream());
 
-			System.out.println("Datei gelesen");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		out.write(message);
+		System.out.println("Message geschickt");
+	}
+
+	public void readFromServer() throws Exception {
+		DataInputStream in = new DataInputStream(server.getInputStream());
+
+		int i = in.read();
+		if (i != -1) {
+			System.out.println("Message empfangen");
+			befehle.add(i);
+			counter++;
 		}
 
-		try {
-			server = new Socket("134.99.38.235", 3143);
-			DataInputStream in = new DataInputStream(server.getInputStream());
-			DataOutputStream out = new DataOutputStream(
-					server.getOutputStream());
+	}
 
-			out.writeUTF(xml);
-			System.out.println("Abgabe an Server");
-			String xmlin = in.readUTF();
-
-			// VOM SERVER LESEN UND SPEICHERN
-			FileOutputStream fos = new FileOutputStream("maps/temp.xml");
-			for (int i = 0; i < xml.length(); i++) {
-				fos.write((byte) xmlin.charAt(i));
+	public void run() {
+		while (true) {
+			try {
+				this.readFromServer();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			fos.close();
-			System.out.println("Datei gespeichert");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (server != null)
-				try {
-					server.close();
-				} catch (Exception e) {
-				}
 		}
 	}
 }
