@@ -92,7 +92,7 @@ public class Fenster implements ActionListener {
 
 	/** Frame und Panel erzeugen und initialisieren */
 	private void initFrame() {
-		f = new JFrame("Tim VS Küps");
+		f = new JFrame("Bomberman");
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(width, height + length);
@@ -423,10 +423,8 @@ public class Fenster implements ActionListener {
 	public void saveHighscore() {
 		try {
 			BufferedWriter save;
-			if (mode == 1) {
-				save = new BufferedWriter(new FileWriter(
-						"highscore/highscore.txt"));
-			} else {
+			save = new BufferedWriter(new FileWriter("highscore/highscore.txt"));
+			if (mode != 1) {
 				save = new BufferedWriter(new FileWriter(
 						"highscore/highscoreMP.txt"));
 			}
@@ -544,7 +542,7 @@ public class Fenster implements ActionListener {
 		sp.bm.addScore(tmp);
 		if (sp.bm2 != null)
 			sp.bm2.addScore(tmp2);
-		getHighscore();
+
 		initFrame();
 	}
 
