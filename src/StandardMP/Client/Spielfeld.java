@@ -247,34 +247,67 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 			@Override
 			public void run() {
-				int c = 0;
 				while (true) {
-
-					int tmp;
-					if ((tmp = client.counter) > c) {
-						System.out.println("FLAG!");
-						int erg = tmp - c;
-						for (int i = 0; i < erg; i++) {
-							switch (client.befehle.get(c + i)) {
-							case 1:
-								bm2.moveUp();
-								break;
-							case 2:
-								bm2.moveDown();
-								break;
-							case 3:
-								bm2.moveLeft();
-								break;
-							case 4:
-								bm2.moveRight();
-								break;
-							}
-						}
-						// BOMBERMAN BEWEGEN
+					switch (client.counter) {
+					case 1: {
+						// OBEN
+						int[][] r = getRaster();
+						if (r[bm2.getPosX()][bm2.getPosY() - bm2.getSteps()] <= 0)
+							bm2.moveUp();
+						client.counter = 0;
 						repaint();
-						c = tmp;
+					}
+						break;
+					case 2: {
+						// UNTEN
+						int[][] r = getRaster();
+						if (r[bm2.getPosX()][bm2.getPosY() + bm2.getSteps()] <= 0)
+							bm2.moveDown();
+						client.counter = 0;
+						repaint();
+					}
+						break;
+					case 3: {
+						// LINKS
+						int[][] r = getRaster();
+						if (r[bm2.getPosX() - bm2.getSteps()][bm2.getPosY()] <= 0)
+							bm2.moveLeft();
+						client.counter = 0;
+						repaint();
+					}
+						break;
+					case 4: {
+						// RECHTS
+						int[][] r = getRaster();
+						if (r[bm2.getPosX() + bm2.getSteps()][bm2.getPosY()] <= 0)
+							bm2.moveRight();
+						client.counter = 0;
+						repaint();
+					}
+						break;
+					case 5: {
+						// BOMBE
+						int[][] r = getRaster();
+						int n = bm2.getNewBombIndex();
+						if (r[bm2.bombs.get(n).getPosX()][bm2.bombs.get(n)
+								.getPosY()] != 3) {
+							bm2.incBombs();
+							r[bm2.bombs.get(n).getPosX()][bm2.bombs.get(n)
+									.getPosY()] = 3;
+							bm2.bombs.get(n).setVisible(true);
+							add(bm2.bombs.get(n));
+							repaint();
+							if (two_player)
+								bm2.bombs.get(n).explode(Main.f.sp, bm, bm2);
+							else
+								bm2.bombs.get(n).explode(Main.f.sp, bm2);
+							repaint();
+						}
+						break;
+					}
 					}
 				}
+
 			}
 		});
 		empfangen.start();
@@ -283,6 +316,10 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 	public void setRaster(int[][] raster) {
 		this.raster = raster;
+	}
+
+	public int[][] getRaster() {
+		return this.raster;
 	}
 
 	/**
