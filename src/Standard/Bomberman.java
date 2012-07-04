@@ -25,6 +25,9 @@ public class Bomberman extends JLabel {
 	public int counter;
 	private int score;
 
+	private int amountOfBombs;
+	private int placedBombs;
+
 	/**
 	 * Erstellt einen neuen Bomberman und initialisiert die Werte. Moeglichkeit
 	 * die Farbe des Bomberman zu ändern.
@@ -48,6 +51,8 @@ public class Bomberman extends JLabel {
 		this.bombs = new ArrayList<Bomb>();
 		this.counter = 0;
 		this.score = 0;
+		this.amountOfBombs = 1;
+		this.placedBombs = 0;
 		String path_to_Image;
 		if (color > 1) // Bomberman Farbwahl
 			path_to_Image = "img/Bomberman2.png";
@@ -220,14 +225,6 @@ public class Bomberman extends JLabel {
 
 	/**
 	 * 
-	 * @return gibt den Counter zurück
-	 */
-	public int getCounter() {
-		return counter;
-	}
-
-	/**
-	 * 
 	 * @param counter
 	 *            setzt den Counter der Bomben
 	 */
@@ -247,5 +244,29 @@ public class Bomberman extends JLabel {
 	 */
 	public void decBombs() {
 		this.counter--;
+	}
+
+	public int getAmountOfBombs() {
+		return amountOfBombs;
+	}
+
+	public void incAmountOfBombs() {
+		amountOfBombs++;
+	}
+
+	public void decAmountOfBombs() {
+		amountOfBombs--;
+	}
+
+	public void resetAmountOfBombs() {
+		amountOfBombs = 1;
+	}
+
+	public int getPlacedBombs() {
+		return counter;
+	}
+
+	public void incExpRad() {
+		expRad += this.radius;
 	}
 }

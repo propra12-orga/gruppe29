@@ -63,7 +63,9 @@ public class BombExplosion extends TimerTask {
 			switch (this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
 					* this.bomb.getRadius()]) {
 			case -2: { // PowerUp zerstören
-
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+						* this.bomb.getRadius()] = 0;
+				this.sp.decNumbOfPowerUps();
 			}
 				break;
 			case 1: { // unzerstoerbare mauer stoppt explosion
@@ -78,12 +80,12 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 3: { // Kettenreaktion
 				if (bm2 != null) {
-					for (int j = 0; j < Math.max(bm.getCounter(),
-							bm2.getCounter()); j++) {
+					for (int j = 0; j < Math.max(bm.getPlacedBombs(),
+							bm2.getPlacedBombs()); j++) {
 						kettenreaktion(bm, bm2, 1, i, j);
 					}
 				} else {
-					for (int j = 0; j < bm.getCounter(); j++) {
+					for (int j = 0; j < bm.getPlacedBombs(); j++) {
 						kettenreaktion(bm, 1, i, j);
 					}
 				}
@@ -113,6 +115,9 @@ public class BombExplosion extends TimerTask {
 					* this.bomb.getRadius()]) {
 			case -2: {
 				// PowerUp zerstören
+				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+						* this.bomb.getRadius()] = 0;
+				this.sp.decNumbOfPowerUps();
 			}
 				break;
 			case 1: { // unzerstoerbare mauer stoppt explosion
@@ -127,12 +132,12 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 3: { // Kettenreaktion
 				if (bm2 != null) {
-					for (int j = 0; j < Math.max(bm.getCounter(),
-							bm2.getCounter()); j++) {
+					for (int j = 0; j < Math.max(bm.getPlacedBombs(),
+							bm2.getPlacedBombs()); j++) {
 						kettenreaktion(bm, bm2, 3, i, j);
 					}
 				} else {
-					for (int j = 0; j < bm.getCounter(); j++) {
+					for (int j = 0; j < bm.getPlacedBombs(); j++) {
 						kettenreaktion(bm, 3, i, j);
 					}
 				}
@@ -164,6 +169,9 @@ public class BombExplosion extends TimerTask {
 					* this.bomb.getRadius()][this.bomb.getPosY()]) {
 			case -2: {
 				// PowerUp zerstören
+				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = 0;
+				this.sp.decNumbOfPowerUps();
 			}
 				break;
 			case 1: { // unzerstoerbare mauer stoppt explosion
@@ -178,12 +186,12 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 3: {
 				if (bm2 != null) {
-					for (int j = 0; j < Math.max(bm.getCounter(),
-							bm2.getCounter()); j++) {
+					for (int j = 0; j < Math.max(bm.getPlacedBombs(),
+							bm2.getPlacedBombs()); j++) {
 						kettenreaktion(bm, bm2, 4, i, j);
 					}
 				} else {
-					for (int j = 0; j < bm.getCounter(); j++) {
+					for (int j = 0; j < bm.getPlacedBombs(); j++) {
 						kettenreaktion(bm, 4, i, j);
 					}
 				}
@@ -208,6 +216,9 @@ public class BombExplosion extends TimerTask {
 					* this.bomb.getRadius()][this.bomb.getPosY()]) {
 			case -2: {
 				// PowerUp zerstören
+				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
+						.getPosY()] = 0;
+				this.sp.decNumbOfPowerUps();
 			}
 				break;
 			case 1: { // unzerstoerbare mauer stoppt explosion
@@ -222,12 +233,12 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 3: {
 				if (bm2 != null) {
-					for (int j = 0; j < Math.max(bm.getCounter(),
-							bm2.getCounter()); j++) {
+					for (int j = 0; j < Math.max(bm.getPlacedBombs(),
+							bm2.getPlacedBombs()); j++) {
 						kettenreaktion(bm, bm2, 2, i, j);
 					}
 				} else {
-					for (int j = 0; j < bm.getCounter(); j++) {
+					for (int j = 0; j < bm.getPlacedBombs(); j++) {
 						kettenreaktion(bm, 2, i, j);
 					}
 				}
@@ -609,9 +620,9 @@ public class BombExplosion extends TimerTask {
 	 */
 	private void kettenreaktion(Bomberman man, Bomberman man2, int direction,
 			int i, int j) {
-		if ((man.getCounter() < j) || (man.getCounter() == 0)) {
+		if ((man.getPlacedBombs() < j) || (man.getPlacedBombs() == 0)) {
 			kettenreaktion(man2, direction, i, j);
-		} else if ((man2.getCounter() < j) || (man2.getCounter() == 0)) {
+		} else if ((man2.getPlacedBombs() < j) || (man2.getPlacedBombs() == 0)) {
 			kettenreaktion(man, direction, i, j);
 		} else {
 			switch (direction) {
