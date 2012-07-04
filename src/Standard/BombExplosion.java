@@ -2,6 +2,8 @@ package Standard;
 
 import java.util.TimerTask;
 
+import Spielobjekte.PowerUp;
+
 public class BombExplosion extends TimerTask {
 	/** Bombe */
 	private Bomb bomb;
@@ -66,6 +68,14 @@ public class BombExplosion extends TimerTask {
 				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
 						* this.bomb.getRadius()] = 0;
 				this.sp.decNumbOfPowerUps();
+				for (int j = 0; j < this.sp.powerups.size(); j++)
+					if ((this.bomb.getPosX() == this.sp.powerups.get(j)
+							.getPosX())
+							&& (this.bomb.getPosY() - i * this.bomb.getRadius() == this.sp.powerups
+									.get(j).getPosY())) {
+						this.sp.powerups.remove(j);
+						break;
+					}
 			}
 				break;
 			case 1: { // unzerstoerbare mauer stoppt explosion
@@ -74,8 +84,27 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 2: { // zerstörbare mauer kapputt machen
 				bomb.getOwner().addScore(1);
-				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
-						* this.bomb.getRadius()] = 0;
+				double n = Math.random();
+				if (n < 0.2) {
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+							* this.bomb.getRadius()] = -2;
+					PowerUp powerup;
+					n = Math.random();
+					if (n <= 0.4)
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() - i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "bombep");
+					else
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() - i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "expRadp");
+					this.sp.incNumbOfPowerUps();
+					this.sp.powerups.add(powerup);
+				} else
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() - i
+							* this.bomb.getRadius()] = 0;
 			}
 				break;
 			case 3: { // Kettenreaktion
@@ -117,6 +146,14 @@ public class BombExplosion extends TimerTask {
 				// PowerUp zerstören
 				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
 						* this.bomb.getRadius()] = 0;
+				for (int j = 0; j < this.sp.powerups.size(); j++)
+					if ((this.bomb.getPosX() == this.sp.powerups.get(j)
+							.getPosX())
+							&& (this.bomb.getPosY() + i * this.bomb.getRadius() == this.sp.powerups
+									.get(j).getPosY())) {
+						this.sp.powerups.remove(j);
+						break;
+					}
 				this.sp.decNumbOfPowerUps();
 			}
 				break;
@@ -126,8 +163,27 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 2: { // zerstörbare mauer kapputt machen
 				bomb.getOwner().addScore(1);
-				this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
-						* this.bomb.getRadius()] = 0;
+				double n = Math.random();
+				if (n < 0.2) {
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+							* this.bomb.getRadius()] = -2;
+					n = Math.random();
+					PowerUp powerup;
+					if (n <= 0.4)
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() + i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "bombep");
+					else
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() + i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "expRadp");
+					this.sp.incNumbOfPowerUps();
+					this.sp.powerups.add(powerup);
+				} else
+					this.sp.raster[this.bomb.getPosX()][this.bomb.getPosY() + i
+							* this.bomb.getRadius()] = 0;
 			}
 				break;
 			case 3: { // Kettenreaktion
@@ -171,6 +227,14 @@ public class BombExplosion extends TimerTask {
 				// PowerUp zerstören
 				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
 						.getPosY()] = 0;
+				for (int j = 0; j < this.sp.powerups.size(); j++)
+					if ((this.bomb.getPosX() - i * this.bomb.getRadius() == this.sp.powerups
+							.get(j).getPosX())
+							&& (this.bomb.getPosY() == this.sp.powerups.get(j)
+									.getPosY())) {
+						this.sp.powerups.remove(j);
+						break;
+					}
 				this.sp.decNumbOfPowerUps();
 			}
 				break;
@@ -180,8 +244,25 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 2: {
 				bomb.getOwner().addScore(1);
-				this.sp.raster[this.bomb.getPosX() - i * this.bomb.getRadius()][this.bomb
-						.getPosY()] = 0;
+				double n = Math.random();
+				if (n < 0.2) {
+					this.sp.raster[this.bomb.getPosX() - i
+							* this.bomb.getRadius()][this.bomb.getPosY()] = -2;
+					n = Math.random();
+					PowerUp powerup;
+					if (n <= 0.4)
+						powerup = new PowerUp(this.bomb.getPosX() - i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "bombep");
+					else
+						powerup = new PowerUp(this.bomb.getPosX() - i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "expRadp");
+					this.sp.incNumbOfPowerUps();
+					this.sp.powerups.add(powerup);
+				} else
+					this.sp.raster[this.bomb.getPosX() - i
+							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
 			}
 				break;
 			case 3: {
@@ -218,6 +299,14 @@ public class BombExplosion extends TimerTask {
 				// PowerUp zerstören
 				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
 						.getPosY()] = 0;
+				for (int j = 0; j < this.sp.powerups.size(); j++)
+					if ((this.bomb.getPosX() + i * this.bomb.getRadius() == this.sp.powerups
+							.get(j).getPosX())
+							&& (this.bomb.getPosY() == this.sp.powerups.get(j)
+									.getPosY())) {
+						this.sp.powerups.remove(j);
+						break;
+					}
 				this.sp.decNumbOfPowerUps();
 			}
 				break;
@@ -227,8 +316,26 @@ public class BombExplosion extends TimerTask {
 				break;
 			case 2: {
 				bomb.getOwner().addScore(1);
-				this.sp.raster[this.bomb.getPosX() + i * this.bomb.getRadius()][this.bomb
-						.getPosY()] = 0;
+				double n = Math.random();
+				if (n < 0.2) {
+					this.sp.raster[this.bomb.getPosX() + i
+							* this.bomb.getRadius()][this.bomb.getPosY()] = -2;
+					n = Math.random();
+					PowerUp powerup;
+					if (n <= 0.4)
+						powerup = new PowerUp(this.bomb.getPosX() + i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "bombep");
+					else
+						powerup = new PowerUp(this.bomb.getPosX() + i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "expRadp");
+
+					this.sp.incNumbOfPowerUps();
+					this.sp.powerups.add(powerup);
+				} else
+					this.sp.raster[this.bomb.getPosX() + i
+							* this.bomb.getRadius()][this.bomb.getPosY()] = 0;
 			}
 				break;
 			case 3: {

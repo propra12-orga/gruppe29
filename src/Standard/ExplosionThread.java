@@ -55,7 +55,6 @@ public class ExplosionThread implements Runnable {
 			if ((man.bombs.get(j).getPosY() == this.bomb.getPosY() - i
 					* this.bomb.getRadius())
 					&& (man.bombs.get(j).getPosX() == this.bomb.getPosX())) {
-				System.out.println("Bombe gefunden");
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
@@ -73,7 +72,6 @@ public class ExplosionThread implements Runnable {
 			if ((man.bombs.get(j).getPosX() == this.bomb.getPosX() + i
 					* this.bomb.getRadius())
 					&& (man.bombs.get(j).getPosY() == this.bomb.getPosY())) {
-				System.out.println("Bombe gefunden");
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
@@ -91,7 +89,6 @@ public class ExplosionThread implements Runnable {
 			if ((man.bombs.get(j).getPosY() == this.bomb.getPosY() + i
 					* this.bomb.getRadius())
 					&& (man.bombs.get(j).getPosX() == this.bomb.getPosX())) {
-				System.out.println("Bombe gefunden");
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(
@@ -109,7 +106,6 @@ public class ExplosionThread implements Runnable {
 			if ((man.bombs.get(j).getPosX() == this.bomb.getPosX() - i
 					* this.bomb.getRadius())
 					&& (man.bombs.get(j).getPosY() == this.bomb.getPosY())) {
-				System.out.println("Bombe gefunden");
 				man.bombs.get(j).tExp.schedule(
 						new BombExplosion(man.bombs.get(j), sp, man), 0);
 				man.bombs.get(j).tUnExp.schedule(

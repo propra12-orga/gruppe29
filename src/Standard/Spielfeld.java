@@ -34,7 +34,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 			case -2: {
 				this.bm.moveUp();
-				for (int i = 0; i < numbOfPowerUps; i++) {
+				for (int i = 0; i < powerups.size(); i++) {
 					if ((this.powerups.get(i).getPosX() == this.bm.getPosX())
 							&& (this.powerups.get(i).getPosY() == this.bm
 									.getPosY())) {
@@ -63,8 +63,8 @@ public class Spielfeld extends JPanel implements KeyListener {
 				break;
 
 			}
-			break;
 		}
+			break;
 		case KeyEvent.VK_DOWN: {
 			switch (this.raster[this.bm.getPosX()][this.bm.getPosY()
 					+ this.bm.getSteps()]) {
@@ -77,7 +77,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 			case -2: {
 				this.bm.moveDown();
-				for (int i = 0; i < numbOfPowerUps; i++) {
+				for (int i = 0; i < powerups.size(); i++) {
 					if ((this.powerups.get(i).getPosX() == this.bm.getPosX())
 							&& (this.powerups.get(i).getPosY() == this.bm
 									.getPosY())) {
@@ -121,7 +121,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 			case -2: {
 				this.bm.moveLeft();
-				for (int i = 0; i < numbOfPowerUps; i++) {
+				for (int i = 0; i < powerups.size(); i++) {
 					if ((this.powerups.get(i).getPosX() == this.bm.getPosX())
 							&& (this.powerups.get(i).getPosY() == this.bm
 									.getPosY())) {
@@ -166,7 +166,7 @@ public class Spielfeld extends JPanel implements KeyListener {
 
 			case -2: {
 				this.bm.moveRight();
-				for (int i = 0; i < numbOfPowerUps; i++) {
+				for (int i = 0; i < powerups.size(); i++) {
 					if ((this.powerups.get(i).getPosX() == this.bm.getPosX())
 							&& (this.powerups.get(i).getPosY() == this.bm
 									.getPosY())) {
@@ -531,18 +531,10 @@ public class Spielfeld extends JPanel implements KeyListener {
 				}
 					break;
 				case -2: {
-					// double n = Math.random() * 1.0;
-					// PowerUp powerup;
-					// if (n <= 0.4)
-					// powerup = new PowerUp(i, j, blockLength, this, "bombep");
-					// else
-					// powerup = new PowerUp(i, j, blockLength, this,
-					// "expRadp");
-					PowerUp powerup = new PowerUp(i, j, blockLength, this,
-							"bombep");
-					incNumbOfPowerUps();
-					powerups.add(powerup);
-					powerup.paintObject(g);
+					for (int k = 0; k < powerups.size(); k++)
+						if ((powerups.get(k).getPosX() == i)
+								&& (powerups.get(k).getPosY() == j))
+							powerups.get(k).paintObject(g);
 				}
 					break;
 				}

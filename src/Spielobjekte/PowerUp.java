@@ -41,7 +41,6 @@ public class PowerUp extends GraphicObject {
 		sp.raster[posX][posY] = 0;
 		if (type.equals("bombep")) {
 			bm.incAmountOfBombs();
-			System.out.println("b+1");
 		} else if (type.equals("expRadp")) {
 			bm.incExpRad();
 		}
