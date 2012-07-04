@@ -54,6 +54,8 @@ public class Fenster implements ActionListener {
 	private String hsname2;
 	private String hsname3;
 
+	private String ip;
+
 	/**
 	 * Fenster erstellen
 	 * 
@@ -291,19 +293,19 @@ public class Fenster implements ActionListener {
 				fc.setVisible(true);
 			}
 		});
-		JMenu mp = new JMenu("2-Spieler-Modus");
+		JMenu mp = new JMenu("Spiel-Modus");
 		JMenuItem mehrspieler;
 		if (this.mode == 2)
-			mehrspieler = new JMenuItem("Neues Spiel");
+			mehrspieler = new JMenuItem("2-Spieler-Modus Neues Spiel");
 		else
-			mehrspieler = new JMenuItem("Starten");
+			mehrspieler = new JMenuItem("2-Spieler-Modus Starten");
 		mehrspieler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				f.dispose();
 				restart(2, true);
 			}
 		});
-		JMenuItem mehrspielerExit = new JMenuItem("Beenden");
+		JMenuItem mehrspielerExit = new JMenuItem("2-Spieler-Modus-Beenden");
 		mehrspielerExit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent object) {
 				if (mode == 2) {
@@ -312,6 +314,20 @@ public class Fenster implements ActionListener {
 				}
 			}
 		});
+		JMenuItem netzwerk = new JMenuItem("Netzwerkmodus-Server");
+		netzwerk.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				// Main von Server aufrufen
+			}
+		});
+		JMenuItem netzwerkip = new JMenuItem("Netzwerkmodus-Client");
+		netzwerkip.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent object) {
+				ip = getIP();
+				// Main von CLient aufrufen
+			}
+		});
+
 		JMenu editor = new JMenu("Editor");
 		JMenuItem editstart = new JMenuItem("Einzelspieler");
 		editstart.addActionListener(new java.awt.event.ActionListener() {
@@ -359,10 +375,18 @@ public class Fenster implements ActionListener {
 		menueLeiste.add(mp);
 		mp.add(mehrspieler);
 		mp.add(mehrspielerExit);
+		mp.add(netzwerk);
+		mp.add(netzwerkip);
 		menueLeiste.add(editor);
 		editor.add(editstart);
 		editor.add(editstartMP);
 		f.setJMenuBar(menueLeiste);
+	}
+
+	public String getIP() {
+		String ip = JOptionPane.showInputDialog(null,
+				"Geben Sie die IP vom Server an.");
+		return ip;
 	}
 
 	/** getter and setter */
