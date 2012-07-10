@@ -12,6 +12,8 @@ public class BombExplosion extends TimerTask {
 	/** Bombermänner */
 	Bomberman bm, bm2;
 
+	private double pExpRadp, pBombep;
+
 	/**
 	 * Erzeugt ein neues Objekt von BombExplosion.
 	 * 
@@ -26,6 +28,8 @@ public class BombExplosion extends TimerTask {
 		this.bomb = b;
 		this.sp = sp;
 		this.bm = man;
+		this.pExpRadp = 0.2;
+		this.pBombep = 0.8;
 	}
 
 	/**
@@ -41,9 +45,7 @@ public class BombExplosion extends TimerTask {
 	 *            Referenz auf den zweiten Bomberman
 	 */
 	public BombExplosion(Bomb b, Spielfeld sp, Bomberman man, Bomberman man2) {
-		this.bomb = b;
-		this.sp = sp;
-		this.bm = man;
+		this(b, sp, man);
 		this.bm2 = man2;
 	}
 
@@ -90,16 +92,16 @@ public class BombExplosion extends TimerTask {
 							* this.bomb.getRadius()] = -2;
 					PowerUp powerup;
 					n = Math.random();
-					if (n <= 0.4)
-						powerup = new PowerUp(
-								this.bomb.getPosX(),
-								this.bomb.getPosY() - i * this.bomb.getRadius(),
-								this.bomb.getRadius(), this.sp, "bombep");
-					else
+					if (n <= pExpRadp)
 						powerup = new PowerUp(
 								this.bomb.getPosX(),
 								this.bomb.getPosY() - i * this.bomb.getRadius(),
 								this.bomb.getRadius(), this.sp, "expRadp");
+					else
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() - i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "bombep");
 					this.sp.incNumbOfPowerUps();
 					this.sp.powerups.add(powerup);
 				} else
@@ -169,16 +171,16 @@ public class BombExplosion extends TimerTask {
 							* this.bomb.getRadius()] = -2;
 					n = Math.random();
 					PowerUp powerup;
-					if (n <= 0.4)
-						powerup = new PowerUp(
-								this.bomb.getPosX(),
-								this.bomb.getPosY() + i * this.bomb.getRadius(),
-								this.bomb.getRadius(), this.sp, "bombep");
-					else
+					if (n <= pExpRadp)
 						powerup = new PowerUp(
 								this.bomb.getPosX(),
 								this.bomb.getPosY() + i * this.bomb.getRadius(),
 								this.bomb.getRadius(), this.sp, "expRadp");
+					else
+						powerup = new PowerUp(
+								this.bomb.getPosX(),
+								this.bomb.getPosY() + i * this.bomb.getRadius(),
+								this.bomb.getRadius(), this.sp, "bombep");
 					this.sp.incNumbOfPowerUps();
 					this.sp.powerups.add(powerup);
 				} else
@@ -250,14 +252,14 @@ public class BombExplosion extends TimerTask {
 							* this.bomb.getRadius()][this.bomb.getPosY()] = -2;
 					n = Math.random();
 					PowerUp powerup;
-					if (n <= 0.4)
-						powerup = new PowerUp(this.bomb.getPosX() - i
-								* this.bomb.getRadius(), this.bomb.getPosY(),
-								this.bomb.getRadius(), this.sp, "bombep");
-					else
+					if (n <= pExpRadp)
 						powerup = new PowerUp(this.bomb.getPosX() - i
 								* this.bomb.getRadius(), this.bomb.getPosY(),
 								this.bomb.getRadius(), this.sp, "expRadp");
+					else
+						powerup = new PowerUp(this.bomb.getPosX() - i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "bombep");
 					this.sp.incNumbOfPowerUps();
 					this.sp.powerups.add(powerup);
 				} else
@@ -322,14 +324,14 @@ public class BombExplosion extends TimerTask {
 							* this.bomb.getRadius()][this.bomb.getPosY()] = -2;
 					n = Math.random();
 					PowerUp powerup;
-					if (n <= 0.4)
-						powerup = new PowerUp(this.bomb.getPosX() + i
-								* this.bomb.getRadius(), this.bomb.getPosY(),
-								this.bomb.getRadius(), this.sp, "bombep");
-					else
+					if (n <= pExpRadp)
 						powerup = new PowerUp(this.bomb.getPosX() + i
 								* this.bomb.getRadius(), this.bomb.getPosY(),
 								this.bomb.getRadius(), this.sp, "expRadp");
+					else
+						powerup = new PowerUp(this.bomb.getPosX() + i
+								* this.bomb.getRadius(), this.bomb.getPosY(),
+								this.bomb.getRadius(), this.sp, "bombep");
 
 					this.sp.incNumbOfPowerUps();
 					this.sp.powerups.add(powerup);

@@ -375,8 +375,8 @@ public class Fenster implements ActionListener {
 		menueLeiste.add(mp);
 		mp.add(mehrspieler);
 		mp.add(mehrspielerExit);
-		mp.add(netzwerk);
-		mp.add(netzwerkip);
+		// mp.add(netzwerk);
+		// mp.add(netzwerkip);
 		menueLeiste.add(editor);
 		editor.add(editstart);
 		editor.add(editstartMP);
